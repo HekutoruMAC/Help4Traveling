@@ -181,8 +181,9 @@
 
 
                     <%
-                        con = new Consultas();
-                        List<DtPromocion> promociones = con.listarPromocionesProveedor(nick);
+                        //con = new Consultas();
+                        Fabrica fab = Fabrica.getInstance();
+                        List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
                         if (!promociones.isEmpty()) {
                             Iterator<DtPromocion> ipromo = promociones.iterator(); %>
                     <div id="promociones" class="tab-pane fade">

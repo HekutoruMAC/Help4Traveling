@@ -120,7 +120,7 @@ public class ManejadorProveedor {
         return p;
         //return ((Proveedor) proveedoresNK.get(nickname));
     }
-    
+
     public DtUsuario getDtProveedor(String nickname) {
         ResultSet rsUsu, rsProv, rsImg;
         DtUsuario nuevo = null;
@@ -136,19 +136,20 @@ public class ManejadorProveedor {
             if (rsUsu.next() && rsProv.next()) {
                 String nombre = rsUsu.getString("nombre");
                 String apellido = rsUsu.getString("apellido");
-                String correo = rsUsu.getString("email");      
+                String correo = rsUsu.getString("email");
                 Date fecha = new Date(rsUsu.getString("fechaNac"));
                 String imagen = null;
                 stImg = con.createStatement();
                 sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
                 rsImg = stImg.executeQuery(sql);
-                if (rsImg.next())
+                if (rsImg.next()) {
                     imagen = rsImg.getString("imagen");
+                }
                 rsImg.close();
                 stImg.close();
                 String empresa = rsProv.getString("empresa");
                 String enlace = rsProv.getString("link");
-                nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "Proveedor", empresa, enlace);                            
+                nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "Proveedor", empresa, enlace);
             }
             rsProv.close();
             stProv.close();
@@ -156,12 +157,11 @@ public class ManejadorProveedor {
             stUsu.close();
             con.close();
             System.out.println("Se obtuvo Proveedor :)");
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("No obtuve Proveedor :(");
             System.err.println(e.getMessage());
         }
-        return nuevo;        
+        return nuevo;
     }
 
     public ArrayList<DtUsuario> listarProveedores() {
@@ -262,6 +262,58 @@ public class ManejadorProveedor {
             mensaje = "ERROR: El Nickname ingresado ya existe.";
         }
         return mensaje;
+    }
+
+    // Servidor Central ========================================================
+    public Boolean existeProveedor(String nickname) {
+        Boolean esProv = false;
+        ResultSet rs;
+        Statement st;
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            sql = "SELECT * FROM help4traveling.proveedores WHERE nickname='" + nickname + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                esProv = true;
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener Proveedor :(");
+        }
+        return esProv;
+    }
+
+    public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        ResultSet rs;
+        sql = "SELECT * FROM help4traveling.promociones WHERE proveedor= '" + prov + "'";
+        ArrayList<DtPromocion> promociones = new ArrayList<DtPromocion>();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            DtPromocion prom;
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String proveedor = rs.getString("proveedor");
+                String descuento = rs.getString("descuento");
+                String total = rs.getString("total");
+                prom = new DtPromocion(nombre, proveedor, descuento, total);
+                promociones.add(prom);
+            }
+            rs.close();
+            con.close();
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("No se encontraron promociones.");
+            System.out.println(e.getMessage());
+        }
+        return promociones;
     }
 
 }

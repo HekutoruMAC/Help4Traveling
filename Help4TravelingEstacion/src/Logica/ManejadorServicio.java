@@ -63,12 +63,12 @@ public class ManejadorServicio {
             con.close();
             st.close();
         } catch (SQLException e) {
-            System.out.println("No exite servicio :(");
+            System.out.println("No se sabe si existe Servicio :(");
         }
         if (existe) {
             System.out.println("Existe Servicio");
         } else {
-            System.out.println("NO Existe Servico");
+            System.out.println("No existe Servicio");
         }
         return existe;
         //return serviciosNom.containsKey(nombre);
@@ -183,26 +183,25 @@ public class ManejadorServicio {
                 }
                 rsImg.close();
                 stImg.close();
-                Map<String,DtCategoria> categorias = new HashMap<String,DtCategoria>();
+                Map<String, DtCategoria> categorias = new HashMap<String, DtCategoria>();
                 sql = "SELECT * FROM help4traveling.servicioscategorias WHERE servicio='" + nombre + "' AND proveedorServicio='" + proveedor + "'";
                 stCat = con.createStatement();
                 rsCat = stCat.executeQuery(sql);
                 while (rsCat.next()) {
-                    DtCategoria dtCat = new DtCategoria(rsCat.getString("categoria"),rsCat.getString("categoriaPadre"));
-                    categorias.put(rsCat.getString("categoria"),dtCat);
+                    DtCategoria dtCat = new DtCategoria(rsCat.getString("categoria"), rsCat.getString("categoriaPadre"));
+                    categorias.put(rsCat.getString("categoria"), dtCat);
                 }
                 rsCat.close();
                 stCat.close();
-                nuevo = new DtServicio(nombre, proveedor, descripcion, imagenes, categorias, valor, origen, destino);                
+                nuevo = new DtServicio(nombre, proveedor, descripcion, imagenes, categorias, valor, origen, destino);
             }
             rsServ.close();
             con.close();
-            stServ.close();            
-        } 
-        catch (SQLException e) {
-            System.out.println("No pude crear DtServicio :(");            
+            stServ.close();
+        } catch (SQLException e) {
+            System.out.println("No pude crear DtServicio :(");
         }
-        return nuevo;        
+        return nuevo;
     }
 
     public List<DtServicio> listarServicios() {
@@ -228,8 +227,9 @@ public class ManejadorServicio {
                 sqlImagenes = "SELECT * FROM help4traveling.serviciosimagenes WHERE servicio = '" + nombre + "'";
                 sti = con.createStatement();
                 rsServImagenes = sti.executeQuery(sqlImagenes);
-                while (rsServImagenes.next())                    
+                while (rsServImagenes.next()) {
                     listaImagenes.add(rsServImagenes.getString("imagen"));
+                }
                 rsServImagenes.close();
                 sti.close();
                 sqlCategorias = "SELECT * FROM help4traveling.servicioscategorias WHERE servicio = '" + nombre + "'";
@@ -246,7 +246,7 @@ public class ManejadorServicio {
                 DtServicio nuevo = new DtServicio(nombre, proveedor, descripcion, listaImagenes, listaCategorias, Float.parseFloat(precio), origen, destino);
                 listaServicios.add(nuevo);
             }
-            rsServicios.close();            
+            rsServicios.close();
             st.close();
             con.close();
             System.out.println("Servicios cargados :)");
@@ -310,7 +310,6 @@ public class ManejadorServicio {
         return listaServicios;
     }
 
-    
     public List<DtServicio> getDtServicios() {
         List<DtServicio> listaDtServ = new LinkedList<DtServicio>();
         Iterator<Servicio> iter = this.serviciosNom.values().iterator();
@@ -322,7 +321,6 @@ public class ManejadorServicio {
         return listaDtServ;
     }
 
-    
     public List<DtServicio> listarServiciosPromocion(DtPromocion promo) {
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
@@ -355,7 +353,7 @@ public class ManejadorServicio {
     public List<DtPromocion> listarPromociones() {
         List<DtPromocion> promociones = null;
         ResultSet rs;
-        Statement st;        
+        Statement st;
         try {
             Connection con = Conexion.getInstance().getConnection();
             st = con.createStatement();
@@ -431,7 +429,7 @@ public class ManejadorServicio {
         }
         return listaResult;
     }
-    
+
     public String persistirServicio(DtServicio serv) {
         //conexion = new Conexion();
         Connection con = Conexion.getInstance().getConnection();
@@ -453,8 +451,9 @@ public class ManejadorServicio {
                 System.out.println("No pude INSERTAR :(");
             }
             String ciudestino = serv.getNomCiuDestino();
-            if (ciudestino != null)
+            if (ciudestino != null) {
                 ciudestino = "'" + ciudestino + "'";
+            }
             sql = "INSERT INTO help4traveling.servicios (nombre,proveedor,descripcion,precio,origen,destino) "
                     + "VALUES ('" + serv.getNombre() + "','" + serv.getNkProveedor() + "','" + serv.getDescripcion() + "'," + (double) serv.getPrecio() + ",'" + serv.getNomCiuOrigen() + "'," + ciudestino + ")";
             System.out.println(sql);
@@ -655,5 +654,5 @@ public class ManejadorServicio {
         return mensaje;
 
     }
-    
+
 }

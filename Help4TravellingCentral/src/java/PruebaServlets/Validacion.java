@@ -5,6 +5,7 @@
  */
 package PruebaServlets;
 
+import Logica.Fabrica;
 import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -52,9 +53,10 @@ public class Validacion extends HttpServlet {
         if (con.Autenticacion(sesion)) {
             sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
 
-            Boolean esProv = con.esProveedor(nickname);
+            Fabrica fab = Fabrica.getInstance();
+            Boolean esProv = fab.getIControladorUsuario().existeProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
-    
+
             if (!(request.getParameter("Recordarme") == null)) {
                 if (recordar.equals("on")) {
                     Cookie Galleta = new Cookie("nick", nickname);

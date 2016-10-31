@@ -145,4 +145,7 @@ public class ControladorServicio implements IControladorServicio {
         return ManejadorServicio.getInstance().obtenerServicio(nk);
     }
 
+    public boolean existeServicio(String nombre) {
+        return ManejadorServicio.getInstance().existeServicio(nombre);
+    }
 }

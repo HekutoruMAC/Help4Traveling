@@ -7,18 +7,14 @@ package PruebaModelo;
 
 import Logica.Conexion;
 import Logica.Date;
-import Logica.DtItemReserva;
-import Logica.DtPromocion;
 import Logica.DtUsuario;
+import Logica.Fabrica;
 import Logica.ItemReserva;
-import Logica.Proveedor;
 import Logica.Reserva;
-import Logica.Servicio;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -180,91 +176,6 @@ public class Consultas {
         return usuarios;
     }
 
-    public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st;
-        ResultSet rs;
-        String sql = "SELECT * FROM help4traveling.promociones WHERE proveedor= '" + prov + "'";
-        ArrayList<DtPromocion> promociones = new ArrayList<DtPromocion>();
-        try {
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-
-            DtPromocion prom;
-            while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String proveedor = rs.getString("proveedor");
-                String descuento = rs.getString("descuento");
-                String total = rs.getString("total");
-                prom = new DtPromocion(nombre, proveedor, descuento, total);
-                promociones.add(prom);
-            }
-            rs.close();
-            con.close();
-            st.close();
-
-        } catch (SQLException e) {
-            System.out.println("No se encontraron promociones.");
-            System.out.println(e.getMessage());
-        }
-        return promociones;
-    }
-
-    public List<DtItemReserva> listarItems(Integer reserva) {
-        List<DtItemReserva> items = new ArrayList<DtItemReserva>();
-        ResultSet rs;
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st;
-        String sql;
-        sql = "SELECT * FROM help4traveling.reservasitems WHERE reserva='" + reserva + "'";
-        try {
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                String oferta = rs.getString("oferta");
-                String proveedorOferta = rs.getString("proveedorOferta");
-                String inicio = rs.getString("inicio");
-                String fin = rs.getString("fin");
-                String cantidad = rs.getString("cantidad");
-                Date iniciodate = new Date(inicio);
-                Date findate = new Date(fin);
-                Proveedor prov = new Proveedor(proveedorOferta);
-                Servicio ofertatype = new Servicio(oferta, prov, null, null, 0, null);
-
-                DtItemReserva item = new DtItemReserva(reserva, Integer.parseInt(cantidad), iniciodate, findate, ofertatype);
-
-                items.add(item);
-            }
-            rs.close();
-            st.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("No pude obtener categorias :(");
-        }
-        return items;
-    }
-
-    public Boolean esProveedor(String nickname) {
-        Boolean esProv = false;
-        ResultSet rs;
-        Statement st;
-        try {
-            Connection con = Conexion.getInstance().getConnection();
-            String sql = "SELECT * FROM help4traveling.proveedores WHERE nickname='" + nickname + "'";
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            if (rs.next()) {
-                esProv = true;
-            }
-            rs.close();
-            st.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("No pude obtener Proveedor :(");
-        }
-        return esProv;
-    }
-
     public String getNkProveedorServicio(String servicio) {
         String prov = null;
         ResultSet rs;
@@ -388,7 +299,8 @@ public class Consultas {
                             ItemReserva key = entry.getValue();
                             String oferta = key.getOferta().getNombre();
                             String proveedor = "";
-                            if (esservicio(oferta)) {
+                            Fabrica fab = Fabrica.getInstance();
+                            if (fab.getIControladorServicio().existeServicio(oferta)) {
                                 proveedor = getNkProveedorServicio(oferta);
                             } else {
                                 proveedor = getNkProveedorPromocion(oferta);
@@ -417,30 +329,6 @@ public class Consultas {
             System.out.println("No se pudo crear reserva :(");
             System.err.println(e);
         }
-    }
-
-    public boolean esservicio(String nombre) {
-        boolean es = false;
-        ResultSet rs;
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st;
-        String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + nombre + "'";
-        try {
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            if (rs.next()) {
-                es = true;
-            }
-            rs.close();
-            st.close();
-            con.close();
-            System.out.println("consula servicio realizada :)");
-            System.out.println(es);
-        } catch (SQLException e) {
-            System.out.println("consula servicio NO realizada :(");
-        }
-        return es;
-
     }
 
 }

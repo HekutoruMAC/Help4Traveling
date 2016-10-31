@@ -140,6 +140,39 @@ public class ManejadorReserva {
     }
 
     public List<DtItemReserva> listarItems(Integer reserva) {
+        List<DtItemReserva> items = new ArrayList<DtItemReserva>();
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        sql = "SELECT * FROM help4traveling.reservasitems WHERE reserva='" + reserva + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String oferta = rs.getString("oferta");
+                String proveedorOferta = rs.getString("proveedorOferta");
+                String inicio = rs.getString("inicio");
+                String fin = rs.getString("fin");
+                String cantidad = rs.getString("cantidad");
+                Date iniciodate = new Date(inicio);
+                Date findate = new Date(fin);
+                Proveedor prov = new Proveedor(proveedorOferta);
+                Servicio ofertatype = new Servicio(oferta, prov, null, null, 0, null);
+
+                DtItemReserva item = new DtItemReserva(reserva, Integer.parseInt(cantidad), iniciodate, findate, ofertatype);
+
+                items.add(item);
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener categorias :(");
+        }
+        return items;
+    }
+
+    public List<DtItemReserva> listarItemsReserva(Integer reserva) {
         List<DtItemReserva> listaItems = new ArrayList<>();
         List<ItemReserva> itemsReserva = this.itemsId.get(reserva);
 

@@ -5,6 +5,7 @@
  */
 package PruebaServlets;
 
+import Logica.Fabrica;
 import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -45,9 +46,10 @@ public class Comprobacion extends HttpServlet {
         Consultas con = new Consultas();
         if (con.Comprobacion(nickname, email)) {
 
-            Boolean esProv = con.esProveedor(nickname);
+            Fabrica fab = Fabrica.getInstance();
+            Boolean esProv = fab.getIControladorUsuario().existeProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
-            
+
             response.sendRedirect("InicioSesion.jsp");
 
         } else {

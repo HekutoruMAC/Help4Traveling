@@ -5,10 +5,9 @@
  */
 package PruebaServlets;
 
+import Logica.Fabrica;
 import PruebaModelo.Consultas;
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +33,14 @@ public class Buscar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String oferta = (String) request.getParameter("buscar");
         Consultas con = new Consultas();
-        if (con.esservicio(oferta)) {
+        Fabrica fab = Fabrica.getInstance();
+
+        if (fab.getIControladorServicio().existeServicio(oferta)) {
             String proveedor = con.getNkProveedorServicio(oferta);
-            response.sendRedirect("Servicio.jsp?nombre="+oferta+"&proveedor="+proveedor+"&categoria="); 
+            response.sendRedirect("Servicio.jsp?nombre=" + oferta + "&proveedor=" + proveedor + "&categoria=");
         } else {
             String proveedor = con.getNkProveedorPromocion(oferta);
-            response.sendRedirect("Promocion.jsp?nombre="+oferta+"&proveedor="+proveedor); 
+            response.sendRedirect("Promocion.jsp?nombre=" + oferta + "&proveedor=" + proveedor);
         }
     }
 

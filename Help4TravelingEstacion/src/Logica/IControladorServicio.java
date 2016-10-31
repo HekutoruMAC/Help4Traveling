@@ -38,4 +38,6 @@ public interface IControladorServicio {
 
     public abstract Servicio obtenerServicio(String nk);
 
+    public boolean existeServicio(String nombre);
+
 }
