@@ -4,8 +4,11 @@
 */nbdist/*
 */.nb-gradle/*
 
-Help4TravelingEstacion/build/*
-/Help4TravelingEstacion/build/
-/Help4TravelingEstacion/build/*
+build
+build/
+build/*
+/build
+/build/
+/build/*
 
 *.class
