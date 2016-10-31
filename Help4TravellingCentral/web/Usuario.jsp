@@ -217,8 +217,8 @@
                         <table class="default table table-bordered table-hover table-striped">
                             <thead>
                                 <tr class="default">
-                                    <td class="default" width="100" align="center"><b>Nombre</b></td>
-                                    <td class="default" width="300" align="center"><b>Proveedor</b></td>
+                                    <td class="default" width="200" align="center"><b>Nombre</b></td>
+                                    <td class="default" width="100" align="center"><b>Proveedor</b></td>
                                     <td class="default" width="100" align="center"><b>Descuento</b></td>
                                     <td class="default" width="100" align="center"><b>Total</b></td>
                                 </tr>
@@ -231,8 +231,8 @@
                                         String descuento = dtPromo.getDescuento();
                                         String total = dtPromo.getPrecio();  %>
                                 <tr class="default">
-                                    <td class="default" align="center" width="100" id="nombre"><a href="Promocion.jsp?nombre=<% out.print(promocion); %>&proveedor=<% out.print(nick);%>" target="_blank"><%=promocion%></a></td>
-                                    <td class="default" align="center" width="300" id="proveedor"><%=proveedor%></td>
+                                    <td class="default" align="center" width="200" id="nombre"><a href="Promocion.jsp?nombre=<% out.print(promocion); %>&proveedor=<% out.print(nick);%>" target="_blank"><%=promocion%></a></td>
+                                    <td class="default" align="center" width="100" id="proveedor"><%=proveedor%></td>
                                     <td class="default" align="center" width="100" id="descuento"><%=descuento%></td>
                                     <td class="default" align="center" width="100" id="total"><%=total%></td>
                                 </tr>
@@ -258,15 +258,15 @@
                         <table class="default table table-bordered table-hover table-striped">
                             <tbody>
                                 <tr class="default">
-                                    <td class="default" width="20" align="center"><b>Número</b></td>
-                                    <td class="default" width="20" align="center"><b>Reserva</b></td>
+                                    <td class="default" width="50" align="center"><b>Número</b></td>
+                                    <td class="default" width="50" align="center"><b>Reserva</b></td>
                                     <% if (esProv) { %>
                                     <td class="default" width="100" align="center"><b>Cliente</b></td>
                                     <% } %>
-                                    <td class="default" width="200" align="center"><b>Fecha</b></td>
-                                    <td class="default" width="200" align="center"><b>Estado</b></td>
-                                    <td class="default" width="200" align="center"><b>Total</b></td>
-                                    <td class="default" width="200" align="center"><b>Acciones</b></td>
+                                    <td class="default" width="100" align="center"><b>Fecha</b></td>
+                                    <td class="default" width="100" align="center"><b>Estado</b></td>
+                                    <td class="default" width="100" align="center"><b>Total</b></td>
+                                    <td class="default" width="100" align="center"><b>Acciones</b></td>
 
                                 </tr>
                                 <% DtReserva dtRes = null;
@@ -305,15 +305,15 @@
                                         String total = String.valueOf(dtRes.getTotal());%>
 
                                 <tr class="default" style="height:50px">
-                                    <td class="default" align="center" width="20" id="numero" style="vertical-align: middle"><%=numero%></td>
-                                    <td class="default" align="center" width="20" id="reserva" style="vertical-align: middle"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
+                                    <td class="default" align="center" width="50" id="numero" style="vertical-align: middle"><%=numero%></td>
+                                    <td class="default" align="center" width="50" id="reserva" style="vertical-align: middle"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
                                         <% if (esProv) {%>
                                     <td class="default" align="center" width="100" id="cliente" style="vertical-align: middle"><%=cliente%></td>
                                     <% }%>
-                                    <td class="default" align="center" width="200" id="fecha" style="vertical-align: middle"><%=creada%></td>
+                                    <td class="default" align="center" width="100" id="fecha" style="vertical-align: middle"><%=creada%></td>
                                     <td class="default" align="center" width="100" id="estado" style="vertical-align: middle"><%=estado%></td>
                                     <td class="default" align="center" width="100" id="total" style="vertical-align: middle"><%=total%></td>
-                                    <td class="default" align="center" width="200">
+                                    <td class="default" align="center" width="100">
                                         <% if (estado == "FACTURADA") {%>
                                         <form role="form" action='' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
