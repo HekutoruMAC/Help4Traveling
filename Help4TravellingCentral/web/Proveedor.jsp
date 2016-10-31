@@ -4,6 +4,7 @@
     Author     : HP Usuario
 --%>
 
+<%@page import="Logica.DtPromocion"%>
 <%@page import="Logica.Fabrica"%>
 <%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.LinkedList"%>
@@ -113,6 +114,7 @@
                     <li class="active">
                         <a data-toggle="tab" href="#Datos">Datos personales</a></li>
                     <li><a data-toggle="tab" href="#reservas">Servicios</a></li>
+                    <li><a data-toggle="tab" href="#promociones">Promociones</a></li>
 
                 </ul>
 
@@ -176,6 +178,54 @@
                         <% }%>
                         <ul class="list-group"></ul>
                     </div>
+
+
+                    <%
+                        con = new Consultas();
+                        List<DtPromocion> promociones = con.listarPromocionesProveedor(nick);
+                        if (!promociones.isEmpty()) {
+                            Iterator<DtPromocion> ipromo = promociones.iterator(); %>
+                    <div id="promociones" class="tab-pane fade">
+                        <table class="default table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr class="default">
+                                    <td class="default" width="200" align="center"><b>Nombre</b></td>
+                                    <td class="default" width="100" align="center"><b>Proveedor</b></td>
+                                    <td class="default" width="100" align="center"><b>Descuento</b></td>
+                                    <td class="default" width="100" align="center"><b>Total</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% while (ipromo.hasNext()) {
+                                        DtPromocion dtPromo = ipromo.next();
+                                        String promocion = dtPromo.getNombre();
+                                        String proveedor = dtPromo.getProveedor();
+                                        String descuento = dtPromo.getDescuento();
+                                        String total = dtPromo.getPrecio();  %>
+                                <tr class="default">
+                                    <td class="default" align="center" width="200" id="nombre"><a href="Promocion.jsp?nombre=<% out.print(promocion); %>&proveedor=<% out.print(nick);%>" target="_blank"><%=promocion%></a></td>
+                                    <td class="default" align="center" width="100" id="proveedor"><%=proveedor%></td>
+                                    <td class="default" align="center" width="100" id="descuento"><%=descuento%></td>
+                                    <td class="default" align="center" width="100" id="total"><%=total%></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                        <table class="default table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>El proveedor seleccionado no tiene promociones asociadas.</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul class="list-group"></ul>
+                        <% }%>
+                    </div>
+
+
                 </div>
             </div>
         </div>
