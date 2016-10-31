@@ -4,6 +4,7 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Logica.Fabrica"%>
 <%@page import="PruebaModelo.Consultas"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.Iterator"%>
@@ -35,6 +36,7 @@
             <%  //DtServicio dtServ = null;
                 List<DtServicio> servicios = new LinkedList<DtServicio>();
                 String categoria = (String) request.getParameter("categoria");
+                Fabrica fab = Fabrica.getInstance();
                 if (!categoria.equals("null")) {
                     List<String> nombres = new LinkedList<String>();
                     nombres = ManejadorServicio.getInstance().listarServiciosCategoria(categoria);
@@ -43,7 +45,7 @@
                         while (inom.hasNext()) {
                             Consultas con = new Consultas();
                             String nombre = inom.next();
-                            String proveedor = con.getNkProveedorServicio(nombre);
+                            String proveedor = fab.getIControladorServicio().getNkProveedorServicio(nombre);
                             DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
                             servicios.add(dtServ);
                         }
@@ -71,7 +73,7 @@
                             String proveedor = dtServ.getNkProveedor();
                             String descripcion = dtServ.getDescripcion();
                             float precio = dtServ.getPrecio();
-                                    String origen = dtServ.getNomCiuOrigen();  %>
+                            String origen = dtServ.getNomCiuOrigen();  %>
                     <tr class="default">
                         <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>&categoria=<% out.print(categoria);%>" target="_blank"><%=nombre%></a></td>
                         <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>

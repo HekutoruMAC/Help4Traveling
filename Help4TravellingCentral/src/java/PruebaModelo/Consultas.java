@@ -47,48 +47,6 @@ public class Consultas {
         return false;
     }
 
-    public String getNkProveedorServicio(String servicio) {
-        String prov = null;
-        ResultSet rs;
-        Statement st;
-        try {
-            Connection con = Conexion.getInstance().getConnection();
-            String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + servicio + "'";
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                prov = rs.getString("proveedor");
-            }
-            rs.close();
-            st.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("No pude obtener Proveedor :(");
-        }
-        return prov;
-    }
-
-    public String getNkProveedorPromocion(String promocion) {
-        String prov = null;
-        ResultSet rs;
-        Statement st;
-        try {
-            Connection con = Conexion.getInstance().getConnection();
-            String sql = "SELECT * FROM help4traveling.promociones WHERE nombre='" + promocion + "'";
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                prov = rs.getString("proveedor");
-            }
-            rs.close();
-            st.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("No pude obtener Proveedor :(");
-        }
-        return prov;
-    }
-
     public List<String> listarServiciosDePromociones(String nombre, String prov) {
         List<String> listaServicios = new LinkedList<String>();
         ResultSet rs;
@@ -172,9 +130,9 @@ public class Consultas {
                             String proveedor = "";
                             Fabrica fab = Fabrica.getInstance();
                             if (fab.getIControladorServicio().existeServicio(oferta)) {
-                                proveedor = getNkProveedorServicio(oferta);
+                                proveedor = fab.getIControladorServicio().getNkProveedorServicio(oferta);
                             } else {
-                                proveedor = getNkProveedorPromocion(oferta);
+                                proveedor = fab.getIControladorServicio().getNkProveedorPromocion(oferta);
                             }
                             String cantidad = String.valueOf(key.getCantidad());
                             String inicio = key.getInicio().getAno() + "-" + key.getInicio().getMes() + "-" + key.getInicio().getDia();

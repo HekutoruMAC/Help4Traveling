@@ -36,10 +36,10 @@ public class Buscar extends HttpServlet {
         Fabrica fab = Fabrica.getInstance();
 
         if (fab.getIControladorServicio().existeServicio(oferta)) {
-            String proveedor = con.getNkProveedorServicio(oferta);
+            String proveedor = fab.getIControladorServicio().getNkProveedorServicio(oferta);
             response.sendRedirect("Servicio.jsp?nombre=" + oferta + "&proveedor=" + proveedor + "&categoria=");
         } else {
-            String proveedor = con.getNkProveedorPromocion(oferta);
+            String proveedor = fab.getIControladorServicio().getNkProveedorPromocion(oferta);
             response.sendRedirect("Promocion.jsp?nombre=" + oferta + "&proveedor=" + proveedor);
         }
     }

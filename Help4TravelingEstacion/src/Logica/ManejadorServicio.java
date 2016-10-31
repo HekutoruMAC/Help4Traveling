@@ -655,4 +655,47 @@ public class ManejadorServicio {
 
     }
 
+    // Servidor Central ========================================================
+    public String getNkProveedorServicio(String servicio) {
+        String prov = null;
+        ResultSet rs;
+        Statement st;
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + servicio + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                prov = rs.getString("proveedor");
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener Proveedor :(");
+        }
+        return prov;
+    }
+
+    public String getNkProveedorPromocion(String promocion) {
+        String prov = null;
+        ResultSet rs;
+        Statement st;
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            String sql = "SELECT * FROM help4traveling.promociones WHERE nombre='" + promocion + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                prov = rs.getString("proveedor");
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener Proveedor :(");
+        }
+        return prov;
+    }
+
 }
