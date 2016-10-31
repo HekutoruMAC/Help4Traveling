@@ -44,7 +44,6 @@ public class Validacion extends HttpServlet {
 
         System.out.println(nickname + "   " + password + "  " + recordar);
         Consultas con = new Consultas();
-        //System.out.println(con.Autenticacion(usuario, contrasena));
         HttpSession sesion = request.getSession();
         sesion.setAttribute("nickname", nickname);
         sesion.setAttribute("password", password);

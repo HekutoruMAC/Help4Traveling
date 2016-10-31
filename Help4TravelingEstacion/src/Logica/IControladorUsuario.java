@@ -1,6 +1,8 @@
 package Logica;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 // Comentario para que me reconozca los cambios y pueda comitear...
 
 /**
@@ -35,4 +37,12 @@ public interface IControladorUsuario {
     public Boolean existeProveedor(String nickname);
 
     public ArrayList<DtPromocion> listarPromocionesProveedor(String prov);
+
+    public boolean Comprobacion(String nickname, String email) throws SQLException;
+
+    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) throws SQLException;
+
+    public DtUsuario getDtUsuario(String nickname);
+
+    public List<DtUsuario> listarUsuariosSistema() throws SQLException;
 }

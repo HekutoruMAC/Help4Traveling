@@ -6,7 +6,6 @@
 package PruebaServlets;
 
 import Logica.Fabrica;
-import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -43,10 +42,9 @@ public class Comprobacion extends HttpServlet {
         sesion.setAttribute("email", email);
         sesion.setAttribute("registra", "true");
         //System.out.println(nickname+ "   "+email);
-        Consultas con = new Consultas();
-        if (con.Comprobacion(nickname, email)) {
+        Fabrica fab = Fabrica.getInstance();
+        if (fab.getIControladorUsuario().Comprobacion(nickname, email)) {
 
-            Fabrica fab = Fabrica.getInstance();
             Boolean esProv = fab.getIControladorUsuario().existeProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 

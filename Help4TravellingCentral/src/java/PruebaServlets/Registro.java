@@ -5,7 +5,7 @@
  */
 package PruebaServlets;
 
-import PruebaModelo.Consultas;
+import Logica.Fabrica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -44,8 +44,10 @@ public class Registro extends HttpServlet {
         String contrasenia = (String) request.getParameter("password_in");
         String imagen = (String) request.getParameter("imagen_registro");
         System.out.println(imagen);
-        Consultas con = new Consultas();
-        if (con.Registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
+
+        Fabrica fab = Fabrica.getInstance();
+
+        if (fab.getIControladorUsuario().Registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
             sesion.setAttribute("nombre", nombre);
             sesion.setAttribute("email", mail);
             sesion.setAttribute("apellido", apellido);

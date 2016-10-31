@@ -5,7 +5,9 @@
  */
 package Logica;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 // Comentario para que me reconozca los cambios y pueda comitear...
 
 /**
@@ -156,4 +158,21 @@ public class ControladorUsuario implements IControladorUsuario {
     public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
         return ManejadorProveedor.getInstance().listarPromocionesProveedor(prov);
     }
+
+    public boolean Comprobacion(String nickname, String email) throws SQLException {
+        return ManejadorCliente.getInstance().Comprobacion(nickname, email);
+    }
+
+    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) throws SQLException {
+        return ManejadorCliente.getInstance().Registrar(nickname, nombre, apellido, password, email, imagen, fecha);
+    }
+
+    public DtUsuario getDtUsuario(String nickname) {
+        return ManejadorCliente.getInstance().getDtUsuario(nickname);
+    }
+
+    public List<DtUsuario> listarUsuariosSistema() throws SQLException {
+        return ManejadorCliente.getInstance().listarUsuariosSistema();
+    }
+
 }
