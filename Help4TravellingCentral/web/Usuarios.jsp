@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="js/jquery-3.1.0.min.js"></script>
+        <script src="js/jquery-3.1.1.js"></script>
         <script src="js/includes.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <link type="text/css" href="css/jquery-ui.css" rel="Stylesheet" />

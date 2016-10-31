@@ -23,7 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="js/jquery-3.1.0.min.js"></script>
+        <script src="js/jquery-3.1.1.js"></script>
         <script src="js/includes.js"></script>
         <script type="text/javascript" src="calendario/calendario_dw/calendario_dw.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -119,8 +119,8 @@
                                 <% List<String> imagenes = dtServ.getImagenes();
                                     int cantimgs = imagenes.size();
                                     System.out.println(cantimgs);
-                    if (cantimgs > 0)
-                        if (cantimgs == 1) { %>
+                                    if (cantimgs > 0)
+                                        if (cantimgs == 1) { %>
                                 <div class="col-md-6">
                                     <a href="#"><img src="<% out.print(imagenes.get(0)); %>" class="img-responsive"></a>
                                     <hr>
@@ -165,9 +165,9 @@
                                                         <% String nickname = dtServ.getNkProveedor();
                                                             DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(nickname);
                                                         %>
-                                                        <td id="nomprov"><% out.print(prov.getNombre());
-                              out.print(" ");
-                              out.print(prov.getApellido());%></td>
+                                                            <td id="nomprov"><% out.print(prov.getNombre());
+                                                            out.print(" ");
+                                                            out.print(prov.getApellido());%></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="default" width="200">Origen</td>
@@ -226,8 +226,8 @@
                                                     <hr>
                                                     <h3>Categorías</h3>
                                                     <% Map<String, DtCategoria> categorias = dtServ.getDtCategorias();
-                     Iterator<DtCategoria> iter = categorias.values().iterator();
-                     if (iter.hasNext()) {%>
+                                                        Iterator<DtCategoria> iter = categorias.values().iterator();
+                                                        if (iter.hasNext()) {%>
                                                     <h4 class="lead"><%=iter.next().getNombre()%>
                                                         <% while (iter.hasNext()) {%>
                                                         | <%=iter.next().getNombre()%>
