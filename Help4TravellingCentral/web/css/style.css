@@ -1,0 +1,148 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16/09/2016, 09:09:52 AM
+    Author     : yaman
+*/
+body
+{
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial,Helvetica,Sans,Sans-Serif,Sans Serif;
+    background-color: #f1f1f1;
+}
+
+header {
+    padding-top: 10px;
+    background-color: white;
+    margin-bottom: 30px; 
+}
+
+.logo {
+    display: inline-block;
+    width: 100%;
+    height: 70px;
+    margin: 0px;
+    text-align: center;
+}
+
+.logoImg {
+   display: inline-block;
+   margin: 0px;
+}
+
+.buscador {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background-color: #0F5B75;
+    padding: 15px 0px;
+}
+
+.user {
+    display: inline-block;
+    width: 15%;
+    height: 100px;
+    position: absolute;
+    margin: 0 30%;
+}
+.logoUsuario {
+    margin: 0px;
+    border-left: solid;
+    border-color: gray;
+}
+
+#nombreUsuario {
+    display: inline-block;
+    float: right;
+    margin-top: 25px;
+    margin-right: 20%;
+}
+
+#txtBuscar {
+    width: 75%;
+    height: 34px;
+    font-size: 20px;
+    top: 0;
+}
+
+#btnBuscar {
+    border: none;
+    width: 20%;
+    height: 40px;
+    float: right;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);    font-size: 20px;
+
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0px;
+    font-family: Arial;
+    color: #ffffff;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+#btnBuscar:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+/*Barra de navegacion*/
+.dBuscador {
+    width: 40%;
+    margin-left: 30%;
+    text-align: left;
+}
+
+nav {
+    padding-top: 5px;
+}
+
+#proveedores {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+#proveedores:hover {
+    color: gray;
+}
+
+/*Servicios contenido general*/
+article.opciones {
+    background-color: aqua;
+}
+
+section.servicios {
+    display: inline-block;
+    width: 80%;
+    background-color: blue;
+    float: right;
+}
+
+/*Barra lateral ARBOL */
+aside {
+    display: inline-block;
+    width: 20%;
+    background-color: yellow;
+}
+
+/*Pie de pagina*/
+footer {
+    background-color: red;
+    
+}
