@@ -1,13 +1,13 @@
-Help4TravelingEstacion/nbproject/private/
-Help4TravelingEstacion/build/
-Help4TravelingEstacion/nbbuild/
-Help4TravelingEstacion/nbdist/
-Help4TravelingEstacion/.nb-gradle/
+*/nbproject/private/
+*/build/
+*/nbbuild/
+*/nbdist/
+*/.nb-gradle/
 
-Help4TravelingCentral/nbproject/private/
-Help4TravelingCentral/build/
-Help4TravelingCentral/nbbuild/
-Help4TravelingCentral/nbdist/
-Help4TravelingCentral/.nb-gradle/
+*\nbproject\private\
+*\build\
+*\nbbuild\
+*\nbdist\
+*\.nb-gradle\
 
 *.class
