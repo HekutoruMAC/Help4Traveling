@@ -107,9 +107,8 @@
                                     <tbody>
                                         <%  float total = 0;
                                             List<String> nomsServProm = new LinkedList<String>();
-                                            Consultas conlsdp = new Consultas();
                                             Fabrica fab = Fabrica.getInstance();
-                                            nomsServProm = conlsdp.listarServiciosDePromociones(nombre, proveedor);
+                                            nomsServProm = fab.getIControladorServicio().listarServiciosDePromociones(nombre, proveedor);
                                             if (!nomsServProm.isEmpty()) {
                                                 List<DtServicio> serviciosProm = new LinkedList<DtServicio>();
                                                 Iterator<String> itnomserv = nomsServProm.iterator();

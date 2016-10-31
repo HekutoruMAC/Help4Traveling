@@ -44,4 +44,5 @@ public interface IControladorReserva {
 
     public List<DtReserva> listarReservasProveedor(String prov) throws SQLException;
 
+    public void altaReservaWeb(Reserva nueva);
 }

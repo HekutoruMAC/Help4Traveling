@@ -157,4 +157,8 @@ public class ControladorServicio implements IControladorServicio {
     public String getNkProveedorPromocion(String promocion) {
         return ManejadorServicio.getInstance().getNkProveedorPromocion(promocion);
     }
+
+    public List<String> listarServiciosDePromociones(String nombpro, String proev) {
+        return ManejadorServicio.getInstance().listarServiciosDePromociones(nombpro, proev);
+    }
 }

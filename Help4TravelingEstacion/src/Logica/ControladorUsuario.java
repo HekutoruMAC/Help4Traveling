@@ -175,4 +175,8 @@ public class ControladorUsuario implements IControladorUsuario {
         return ManejadorCliente.getInstance().listarUsuariosSistema();
     }
 
+    public String imagenPerfilUsuario(String nickname) {
+        return ManejadorCliente.getInstance().imagenPerfilUsuario(nickname);
+    }
+
 }

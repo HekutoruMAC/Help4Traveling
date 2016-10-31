@@ -340,4 +340,29 @@ public class ManejadorCliente {
         return usuarios;
     }
 
+    public String imagenPerfilUsuario(String nickname) {
+        String imagen = null;
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                imagen = rs.getString("imagen");
+            }
+            if ((imagen.equals(null)) || (imagen.equals(""))) {
+                imagen = "../img/user.png";
+            }
+            rs.close();
+            st.close();
+            con.close();
+            System.out.println("Imagenes cargadas :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar Imagenes :(");
+        }
+        return imagen;
+    }
+
 }

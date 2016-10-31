@@ -80,4 +80,8 @@ public class ControladorReserva implements IControladorReserva {
         return mr.listarReservasProveedor(prov);
     }
 
+    public void altaReservaWeb(Reserva nueva) {
+        ManejadorReserva.getInstance().altaReservaWeb(nueva);
+    }
+
 }

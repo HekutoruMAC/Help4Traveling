@@ -44,4 +44,6 @@ public interface IControladorServicio {
     public String getNkProveedorServicio(String servicio);
 
     public String getNkProveedorPromocion(String promocion);
+
+    public List<String> listarServiciosDePromociones(String nombpro, String proev);
 }

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -473,6 +474,70 @@ public class ManejadorReserva {
             System.out.println("No pude cargar reservas :(");
         }
         return ReservaxProveedor;
+    }
+
+    public void altaReservaWeb(Reserva nueva) {
+        //conexion = new Conexion();
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        ResultSet rsId;
+        String sid;
+        Calendar c = Calendar.getInstance();
+        int dia = c.get(Calendar.DATE);
+        int mes = c.get(Calendar.MONTH) + 1;
+        int anio = c.get(Calendar.YEAR);
+        String creada = Integer.toString(anio) + "-" + Integer.toString(mes) + "-" + Integer.toString(dia);
+        String sql = "INSERT INTO help4traveling.reservas (fecha,total,estado,cliente) "
+                + "VALUES ('" + creada + "'," + nueva.getTotal() + ",'" + nueva.getEstado() + "','" + nueva.getCliente() + "')";
+
+        try {
+            st = con.createStatement();
+            st.executeUpdate(sql);
+
+            try {
+                sql = "SELECT MAX(numero) AS id FROM help4traveling.reservas";
+                rsId = st.executeQuery(sql);
+                rsId.next();
+                sid = rsId.getString("id");
+
+                try {
+                    if (nueva.getItems().size() > 0) {
+                        System.out.println("entre al if 1");
+                        for (Map.Entry<Integer, ItemReserva> entry : nueva.getItems().entrySet()) {
+                            System.out.println("entre al for 1");
+                            ItemReserva key = entry.getValue();
+                            String oferta = key.getOferta().getNombre();
+                            String proveedor = "";
+                            Fabrica fab = Fabrica.getInstance();
+                            if (fab.getIControladorServicio().existeServicio(oferta)) {
+                                proveedor = fab.getIControladorServicio().getNkProveedorServicio(oferta);
+                            } else {
+                                proveedor = fab.getIControladorServicio().getNkProveedorPromocion(oferta);
+                            }
+                            String cantidad = String.valueOf(key.getCantidad());
+                            String inicio = key.getInicio().getAno() + "-" + key.getInicio().getMes() + "-" + key.getInicio().getDia();
+                            String fin = key.getFin().getAno() + "-" + key.getFin().getMes() + "-" + key.getFin().getDia();
+                            System.out.println(sid + " " + oferta + " " + proveedor + " " + cantidad + " " + inicio + " " + fin);
+                            sql = "INSERT INTO help4traveling.reservasitems (reserva, oferta, proveedorOferta, cantidad, inicio, fin) "
+                                    + "VALUES (" + sid + ",'" + oferta + "','" + proveedor + "'," + cantidad + ",'" + inicio + "','" + fin + "')";
+
+                            st.executeUpdate(sql);
+                        }
+                        con.close();
+                        st.close();
+                        System.out.println("Reserva creada con exito :)");
+                    }
+                } catch (SQLException e) {
+                    System.out.println("No se pudo insertar item reserva :(");
+                    System.err.println(e);
+                }
+            } catch (SQLException e) {
+                System.out.println("No se pudo obtener id :(");
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo crear reserva :(");
+            System.err.println(e);
+        }
     }
 
 }

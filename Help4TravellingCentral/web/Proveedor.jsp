@@ -85,8 +85,8 @@
             String enlace = dtProv.getLink();
             Date fechanac = dtProv.getNacimiento();
             String nacimiento = String.valueOf(fechanac.getDia()) + "/" + String.valueOf(fechanac.getMes()) + "/" + String.valueOf(fechanac.getAno());
-            Consultas con1 = new Consultas();
-            String imagen = con1.imagenPerfilUsuario(nick);
+            Fabrica fab = Fabrica.getInstance();
+            String imagen = fab.getIControladorUsuario().imagenPerfilUsuario(nick);
             out.print(dtProv.getNombre());
         %>
         <br>
@@ -182,7 +182,6 @@
 
                     <%
                         //con = new Consultas();
-                        Fabrica fab = Fabrica.getInstance();
                         List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
                         if (!promociones.isEmpty()) {
                             Iterator<DtPromocion> ipromo = promociones.iterator(); %>

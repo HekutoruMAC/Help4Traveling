@@ -45,4 +45,6 @@ public interface IControladorUsuario {
     public DtUsuario getDtUsuario(String nickname);
 
     public List<DtUsuario> listarUsuariosSistema() throws SQLException;
+
+    public String imagenPerfilUsuario(String nickname);
 }

@@ -405,31 +405,6 @@ public class ManejadorServicio {
         return nuevo;
     }
 
-    public List<String> listarServiciosDePromociones(String nombpro, String proev) {
-        List<String> listaResult = new LinkedList<String>();
-        ResultSet rsPromociones;
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st;
-        sql = "SELECT * FROM help4traveling.promocionesservicios WHERE promocion='" + nombpro + "' and proveedorPromocion='" + proev + "'";
-        try {
-            st = con.createStatement();
-            rsPromociones = st.executeQuery(sql);
-            while (rsPromociones.next()) {
-                String nombre = rsPromociones.getString("servicio");
-                String proveedor = rsPromociones.getString("proveedorServicio");
-                String resultado = nombre + "," + proveedor;
-                listaResult.add(resultado);
-            }
-            rsPromociones.close();
-            con.close();
-            st.close();
-            System.out.println("promociones  cargadas :)");
-        } catch (SQLException e) {
-            System.out.println("No pude cargar promociones :(");
-        }
-        return listaResult;
-    }
-
     public String persistirServicio(DtServicio serv) {
         //conexion = new Conexion();
         Connection con = Conexion.getInstance().getConnection();
@@ -696,6 +671,31 @@ public class ManejadorServicio {
             System.out.println("No pude obtener Proveedor :(");
         }
         return prov;
+    }
+
+    public List<String> listarServiciosDePromociones(String nombpro, String proev) {
+        List<String> listaResult = new LinkedList<String>();
+        ResultSet rsPromociones;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        sql = "SELECT * FROM help4traveling.promocionesservicios WHERE promocion='" + nombpro + "' and proveedorPromocion='" + proev + "'";
+        try {
+            st = con.createStatement();
+            rsPromociones = st.executeQuery(sql);
+            while (rsPromociones.next()) {
+                String nombre = rsPromociones.getString("servicio");
+                String proveedor = rsPromociones.getString("proveedorServicio");
+                String resultado = nombre + "," + proveedor;
+                listaResult.add(resultado);
+            }
+            rsPromociones.close();
+            con.close();
+            st.close();
+            System.out.println("promociones  cargadas :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar promociones :(");
+        }
+        return listaResult;
     }
 
 }

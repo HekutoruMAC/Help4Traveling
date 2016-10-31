@@ -98,8 +98,8 @@
             String partes[] = fecha.split("-");
 
             fecha = partes[2] + "/" + partes[1] + "/" + partes[0];
-            Consultas con1 = new Consultas();
-            String imagen = con1.imagenPerfilUsuario(nick);
+            Fabrica fab = Fabrica.getInstance();
+            String imagen = fab.getIControladorUsuario().imagenPerfilUsuario(nick);
             //System.out.println(mierda1) ;
             /*Date fecha1 = new Date(10, 11, 2012);
             Cliente usu = new Cliente("juan", "Perez", "Juanpe", "contrasenia", "alfalfa@gmail.com", fecha1, "aca la imagen");
@@ -210,7 +210,6 @@
 
 
                     <%
-                        Fabrica fab = Fabrica.getInstance();
                         List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
                         if (!promociones.isEmpty()) {
                             Iterator<DtPromocion> ipromo = promociones.iterator(); %>
@@ -272,7 +271,6 @@
                                 </tr>
                                 <% DtReserva dtRes = null;
                                     List<DtReserva> reservas;
-                                    Fabrica fab = Fabrica.getInstance();
                                     if (esProv) {
                                         reservas = fab.getIControladorReserva().listarReservasProveedor(nick);
                                     } else {
