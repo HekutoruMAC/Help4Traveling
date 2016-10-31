@@ -673,29 +673,28 @@ public class ManejadorServicio {
         return prov;
     }
 
-    public List<String> listarServiciosDePromociones(String nombpro, String proev) {
-        List<String> listaResult = new LinkedList<String>();
-        ResultSet rsPromociones;
+    public List<String> listarServiciosDePromociones(String nombre, String prov) {
+        List<String> listaServicios = new LinkedList<String>();
+        ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
-        sql = "SELECT * FROM help4traveling.promocionesservicios WHERE promocion='" + nombpro + "' and proveedorPromocion='" + proev + "'";
+        String sql = "SELECT * FROM help4traveling.promocionesservicios WHERE promocion='" + nombre + "' AND proveedorPromocion='" + prov + "'";
         try {
             st = con.createStatement();
-            rsPromociones = st.executeQuery(sql);
-            while (rsPromociones.next()) {
-                String nombre = rsPromociones.getString("servicio");
-                String proveedor = rsPromociones.getString("proveedorServicio");
-                String resultado = nombre + "," + proveedor;
-                listaResult.add(resultado);
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String servicio = rs.getString("servicio");
+                //String proveedor = rs.getString("proveedorServicio");
+                listaServicios.add(servicio);
             }
-            rsPromociones.close();
-            con.close();
+            rs.close();
             st.close();
-            System.out.println("promociones  cargadas :)");
+            con.close();
+            System.out.println("servicios cargados :)");
         } catch (SQLException e) {
-            System.out.println("No pude cargar promociones :(");
+            System.out.println("No pude cargar servicios :(");
         }
-        return listaResult;
+        return listaServicios;
     }
 
 }

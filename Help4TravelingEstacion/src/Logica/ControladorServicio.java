@@ -149,6 +149,10 @@ public class ControladorServicio implements IControladorServicio {
         return ManejadorServicio.getInstance().existeServicio(nombre);
     }
 
+    public DtServicio getDtServicio(String nombre, String proveedor) {
+        return ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
+    }
+
     // Servidor Central ========================================================
     public String getNkProveedorServicio(String servicio) {
         return ManejadorServicio.getInstance().getNkProveedorServicio(servicio);
@@ -158,7 +162,7 @@ public class ControladorServicio implements IControladorServicio {
         return ManejadorServicio.getInstance().getNkProveedorPromocion(promocion);
     }
 
-    public List<String> listarServiciosDePromociones(String nombpro, String proev) {
-        return ManejadorServicio.getInstance().listarServiciosDePromociones(nombpro, proev);
+    public List<String> listarServiciosDePromociones(String nombre, String prov) {
+        return ManejadorServicio.getInstance().listarServiciosDePromociones(nombre, prov);
     }
 }

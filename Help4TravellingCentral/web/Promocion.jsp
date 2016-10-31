@@ -114,9 +114,8 @@
                                                 Iterator<String> itnomserv = nomsServProm.iterator();
                                                 while (itnomserv.hasNext()) {
                                                     String servprom = itnomserv.next();
-                                                    Consultas congps = new Consultas();
                                                     String provserv = fab.getIControladorServicio().getNkProveedorServicio(servprom);
-                                                    DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(servprom, provserv);
+                                                    DtServicio dtServ = fab.getIControladorServicio().getDtServicio(servprom, provserv);
                                                     serviciosProm.add(dtServ);
                                                 }
                                                 if (!serviciosProm.isEmpty()) {

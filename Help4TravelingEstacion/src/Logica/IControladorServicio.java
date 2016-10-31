@@ -40,10 +40,12 @@ public interface IControladorServicio {
 
     public boolean existeServicio(String nombre);
 
+    public DtServicio getDtServicio(String nombre, String proveedor);
+
     // Servidor Central ========================================================
     public String getNkProveedorServicio(String servicio);
 
     public String getNkProveedorPromocion(String promocion);
 
-    public List<String> listarServiciosDePromociones(String nombpro, String proev);
+    public List<String> listarServiciosDePromociones(String nombre, String prov);
 }

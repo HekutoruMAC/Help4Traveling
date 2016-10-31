@@ -4,6 +4,7 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Logica.Fabrica"%>
 <%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
@@ -71,14 +72,15 @@
                                         </tr-->
                                         <% DtPromocion dtProm = null;
                                             List<DtPromocion> promos;
-                                            promos = ManejadorServicio.getInstance().listarPromociones();
+                                            Fabrica fab = Fabrica.getInstance();
+                                            promos = fab.getIControladorServicio().listarPromociones();
                                             Iterator<DtPromocion> iter = promos.iterator();
                                             while (iter.hasNext()) {
                                                 dtProm = iter.next();
                                                 String nombre = dtProm.getNombre();
                                                 String proveedor = dtProm.getProveedor();
                                                 String descuento = dtProm.getPrecio();
-                                    String total = dtProm.getDescuento();  %>
+                                                String total = dtProm.getDescuento();  %>
                                         <tr class="default">
                                             <td class="default" align="center" width="200" id="nombre"><a href="Promocion.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor);%>" target="_blank"><%=nombre%></a></td>
                                             <td class="default" align="center" width="200" id="proveedor"><%=proveedor%></td>
