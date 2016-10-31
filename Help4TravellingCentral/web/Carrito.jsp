@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : Carrito
     Created on : 05-oct-2016, 11:33:26
     Author     : yaman
@@ -7,7 +7,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="PruebaModelo.Consultas"%>
 <%@page import="Logica.DtUsuario"%>
 <%@page import="PruebaServlets.Reserva"%>
 
@@ -21,7 +20,7 @@
     <script src="js/jquery-3.1.1.js"></script>
     <script src="js/includes.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
-        <link type="text/css" href="css/jquery-ui.css" rel="Stylesheet" />
+    <link type="text/css" href="css/jquery-ui.css" rel="Stylesheet" />
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
     <script>
@@ -86,13 +85,13 @@
                                         + "</thead>"
                                         + "<tbody>"
                                         + "<tr>");
-                                
+
                                 while (iter.hasNext()) {
                                     reserva = iter.next();
                                     String partesini[] = reserva.getFechaini().split("-");
-                                    String fechaini = partesini[2]+"/"+partesini[1]+"/"+partesini[0];
+                                    String fechaini = partesini[2] + "/" + partesini[1] + "/" + partesini[0];
                                     String partesfin[] = reserva.getFechafin().split("-");
-                                    String fechafin = partesfin[2]+"/"+partesfin[1]+"/"+partesfin[0];
+                                    String fechafin = partesfin[2] + "/" + partesfin[1] + "/" + partesfin[0];
                                     out.println("<td><h3>" + reserva.getServicio() + "</h3></td>"
                                             + "<td><h3>" + reserva.getPrecio() + "</h3></td>"
                                             + "<td><h3>" + reserva.getCantidad() + "</h3></td>"
@@ -104,7 +103,6 @@
                                             //+ "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></td>"
                                             + "<td width='80' align='center'>"
                                             + "<input type='hidden' id='servicio_in' name='servicio_in' value='" + reserva.getServicio() + "'>"
-                                            
                                             + "<input type='submit' name='eliminar' id='eliminar' value='Eliminar del Carrito' align='center' width='80' class='active btn btn-info btn-lg'></a></td>"
                                             + "</tr>"
                                             + "</form>");
@@ -115,7 +113,6 @@
                                         + "<td><h2> U$U " + sesion.getAttribute("preciototal") + "</h2></td>"
                                         + "<form action='eliminarCarrito' method=post>"
                                         + "<td width='80' align='center'>"
-                                        
                                         + "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></a></td>"
                                         + "</tr>"
                                         + " </form>"
@@ -131,15 +128,15 @@
                             }
 
 
-                        %>                       
+                        %>
                         </tbody>
                         </table>
                         <ul class="list-group"></ul>
-                    </div>                  
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>    
+</div>
 <footer class="section section-primary" id="footer"></footer>

@@ -1,6 +1,5 @@
 
 
-<%@page import="PruebaModelo.Consultas"%>
 <%@page import="Logica.ManejadorReserva"%>
 <%@page import="Logica.Proveedor"%>
 <%@page import="Logica.Date"%>
@@ -90,8 +89,7 @@
 
 
                                             </tr>
-                                            <%                            //Consultas con = new Consultas();
-                                                ///declaraciones
+                                            <%                                                ///declaraciones
                                                 Iterator<DtItemReserva> iter = fab.getIControladorReserva().listarItems(Integer.parseInt(IdReserva)).iterator();
                                                 System.out.println("cargue el iter");
 

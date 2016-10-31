@@ -3,7 +3,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="PruebaModelo.Consultas"%>
 <%@page import="Logica.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
