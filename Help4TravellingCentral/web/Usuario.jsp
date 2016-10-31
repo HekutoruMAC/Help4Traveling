@@ -4,6 +4,7 @@
     Author     : HP Usuario
 --%>
 
+<%@page import="Logica.Fabrica"%>
 <%@page import="Logica.ManejadorServicio"%>
 <%@page import="Logica.DtServicio"%>
 <%@page import="Logica.ManejadorProveedor"%>
@@ -271,11 +272,11 @@
                                 </tr>
                                 <% DtReserva dtRes = null;
                                     List<DtReserva> reservas;
-                                    Consultas con = new Consultas();
+                                    Fabrica fab = Fabrica.getInstance();
                                     if (esProv) {
-                                        reservas = con.listarReservasProveedor(nick);
+                                        reservas = fab.getIControladorReserva().listarReservasProveedor(nick);
                                     } else {
-                                        reservas = con.listarReservasUsuario(nick);
+                                        reservas = fab.getIControladorReserva().listarReservasUsuario(nick);
                                     }
                                     Iterator<DtReserva> iter = reservas.iterator();
                                     Integer i = 0;

@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ControladorReserva implements IControladorReserva {
@@ -67,4 +68,16 @@ public class ControladorReserva implements IControladorReserva {
         ManejadorReserva mr = ManejadorReserva.getInstance();
         mr.setItemsDB();
     }
+
+    // Servidor Central ========================================================
+    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
+        ManejadorReserva mr = ManejadorReserva.getInstance();
+        return mr.listarReservasUsuario(cli);
+    }
+
+    public List<DtReserva> listarReservasProveedor(String prov) throws SQLException {
+        ManejadorReserva mr = ManejadorReserva.getInstance();
+        return mr.listarReservasProveedor(prov);
+    }
+
 }

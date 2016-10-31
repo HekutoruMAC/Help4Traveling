@@ -218,53 +218,6 @@ public class ManejadorReserva {
         return listaDtItems;
     }
 
-    public ArrayList<DtReserva> listarReservasCliente(DtUsuario user) {
-        //conexion = new Conexion();
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st;
-        ResultSet rsReservasCliente;
-        sql = "SELECT * FROM help4traveling.reservas WHERE cliente='" + user.getNickname() + "'";
-
-        try {
-            st = con.createStatement();
-            rsReservasCliente = st.executeQuery(sql);
-            while (rsReservasCliente.next()) {
-                String id = rsReservasCliente.getString("numero");
-                String estado = rsReservasCliente.getString("estado");
-                String fecha = rsReservasCliente.getString("fecha");
-                String cliente = rsReservasCliente.getString("cliente");
-                String precio = rsReservasCliente.getString("total");
-
-                long idint = Integer.parseInt(id);
-                double precioint = Integer.parseInt(precio);
-                Reserva nueva = new Reserva(/*idint,"REGISTRADA", cliente,null*/);
-                nueva.setCliente(cliente);
-                nueva.setId(idint);
-                nueva.setEstado(Reserva.eEstado.REGISTRADA);
-                nueva.setTotal(precioint);
-                this.reservasId.put(idint, nueva);
-
-            }
-            rsReservasCliente.close();
-            con.close();
-            st.close();
-
-        } catch (SQLException e) {
-            System.out.println("No hubo resultado");
-        }
-
-        ArrayList<DtReserva> listaReservasCliente = new ArrayList<>();
-        Iterator<Reserva> iter = this.reservasId.values().iterator();
-        while (iter.hasNext()) {
-            Reserva res = iter.next();
-            listaReservasCliente.add(res.getDtReserva());
-        }
-
-        reservasId.values().clear();
-        return listaReservasCliente;
-
-    }
-
     public void setReservasDB() {
         ResultSet rsReservas;
 
@@ -368,4 +321,125 @@ public class ManejadorReserva {
         }
 
     }
+
+    public ArrayList<DtReserva> listarReservasCliente(DtUsuario user) {
+        //conexion = new Conexion();
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        ResultSet rsReservasCliente;
+        sql = "SELECT * FROM help4traveling.reservas WHERE cliente='" + user.getNickname() + "'";
+
+        try {
+            st = con.createStatement();
+            rsReservasCliente = st.executeQuery(sql);
+            while (rsReservasCliente.next()) {
+                String id = rsReservasCliente.getString("numero");
+                String estado = rsReservasCliente.getString("estado");
+                String fecha = rsReservasCliente.getString("fecha");
+                String cliente = rsReservasCliente.getString("cliente");
+                String precio = rsReservasCliente.getString("total");
+
+                long idint = Integer.parseInt(id);
+                double precioint = Integer.parseInt(precio);
+                Reserva nueva = new Reserva(/*idint,"REGISTRADA", cliente,null*/);
+                nueva.setCliente(cliente);
+                nueva.setId(idint);
+
+                //nueva.setEstado(Reserva.eEstado.REGISTRADA);
+                nueva.setEstado(Reserva.eEstado.valueOf(estado));
+
+                nueva.setTotal(precioint);
+                this.reservasId.put(idint, nueva);
+
+            }
+            rsReservasCliente.close();
+            con.close();
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("No hubo resultado");
+        }
+
+        ArrayList<DtReserva> listaReservasCliente = new ArrayList<>();
+        Iterator<Reserva> iter = this.reservasId.values().iterator();
+        while (iter.hasNext()) {
+            Reserva res = iter.next();
+            listaReservasCliente.add(res.getDtReserva());
+        }
+
+        reservasId.values().clear();
+        return listaReservasCliente;
+
+    }
+
+    // Servidor Central ========================================================
+    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
+        List<DtReserva> ReservaxUsuario = null;
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        sql = "SELECT * FROM help4traveling.reservas where cliente ='" + cli + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            ReservaxUsuario = new LinkedList<DtReserva>();
+            while (rs.next()) {
+                String numero = rs.getString("numero");
+                String fecha1 = rs.getString("fecha");
+                String total = rs.getString("total");
+                String estado = rs.getString("estado");
+
+                String partes[] = fecha1.split("-");
+
+                Date fecha = new Date(Integer.valueOf(partes[2]), Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
+                Map<Integer, ItemReserva> items = null;
+
+                DtReserva nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.valueOf(estado), Double.parseDouble(total), cli, items);
+                ReservaxUsuario.add(nueva);
+            }
+            rs.close();
+            con.close();
+            st.close();
+            System.out.println("usuarios  cargados :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar usuarios :(");
+        }
+        return ReservaxUsuario;
+    }
+
+    public List<DtReserva> listarReservasProveedor(String prov) throws SQLException {
+        List<DtReserva> ReservaxProveedor = null;
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        sql = "SELECT * FROM help4traveling.reservas WHERE numero IN (SELECT reserva FROM help4traveling.reservasitems WHERE proveedorOferta ='" + prov + "')";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            ReservaxProveedor = new LinkedList<DtReserva>();
+            while (rs.next()) {
+                String numero = rs.getString("numero");
+                String fecha1 = rs.getString("fecha");
+                String total = rs.getString("total");
+                String estado = rs.getString("estado");
+                String cliente = rs.getString("cliente");
+
+                String partes[] = fecha1.split("-");
+
+                Date fecha = new Date(Integer.valueOf(partes[2]), Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
+                Map<Integer, ItemReserva> items = null;
+
+                DtReserva nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.valueOf(estado), Double.parseDouble(total), prov, items);
+                ReservaxProveedor.add(nueva);
+            }
+            rs.close();
+            con.close();
+            st.close();
+            System.out.println("Reservas  cargadas :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar reservas :(");
+        }
+        return ReservaxProveedor;
+    }
+
 }

@@ -9,8 +9,6 @@ import Logica.Conexion;
 import Logica.Date;
 import Logica.DtItemReserva;
 import Logica.DtPromocion;
-import Logica.DtProveedor;
-import Logica.DtReserva;
 import Logica.DtUsuario;
 import Logica.ItemReserva;
 import Logica.Proveedor;
@@ -180,105 +178,6 @@ public class Consultas {
             System.out.println("No pude cargar Usuarios :(");
         }
         return usuarios;
-    }
-
-    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
-        List<DtReserva> ReservaxUsuario = null;
-        ResultSet rs;
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st;
-        String sql = "SELECT * FROM help4traveling.reservas where cliente ='" + cli + "'";
-        try {
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            ReservaxUsuario = new LinkedList<DtReserva>();
-            while (rs.next()) {
-                String numero = rs.getString("numero");
-                String fecha1 = rs.getString("fecha");
-                String total = rs.getString("total");
-                String estado = rs.getString("estado");
-
-                String partes[] = fecha1.split("-");
-
-                Date fecha = new Date(Integer.valueOf(partes[2]), Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
-                Map<Integer, ItemReserva> items = null;
-
-                DtReserva nueva = null;
-                switch (estado) {
-                    case "REGISTRADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.REGISTRADA, Double.parseDouble(total), cli, items);
-                        break;
-                    case "CANCELADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.CANCELADA, Double.parseDouble(total), cli, items);
-                        break;
-                    case "FACTURADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.FACTURADA, Double.parseDouble(total), cli, items);
-                        break;
-                    case "PAGADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.PAGADA, Double.parseDouble(total), cli, items);
-                        break;
-                }
-
-                ReservaxUsuario.add(nueva);
-            }
-            rs.close();
-            con.close();
-            st.close();
-            System.out.println("usuarios  cargados :)");
-        } catch (SQLException e) {
-            System.out.println("No pude cargar usuarios :(");
-        }
-        return ReservaxUsuario;
-    }
-
-    public List<DtReserva> listarReservasProveedor(String prov) throws SQLException {
-        List<DtReserva> ReservaxProveedor = null;
-        ResultSet rs;
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st;
-        String sql = "SELECT * FROM help4traveling.reservas WHERE numero IN (SELECT reserva FROM help4traveling.reservasitems WHERE proveedorOferta ='" + prov + "')";
-        try {
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            ReservaxProveedor = new LinkedList<DtReserva>();
-            while (rs.next()) {
-                String numero = rs.getString("numero");
-                String fecha1 = rs.getString("fecha");
-                String total = rs.getString("total");
-                String estado = rs.getString("estado");
-                String cliente = rs.getString("cliente");
-
-                String partes[] = fecha1.split("-");
-
-                Date fecha = new Date(Integer.valueOf(partes[2]), Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
-                Map<Integer, ItemReserva> items = null;
-
-                DtReserva nueva = null;
-                switch (estado) {
-                    case "REGISTRADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.REGISTRADA, Double.parseDouble(total), cliente, items);
-                        break;
-                    case "CANCELADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.CANCELADA, Double.parseDouble(total), cliente, items);
-                        break;
-                    case "FACTURADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.FACTURADA, Double.parseDouble(total), cliente, items);
-                        break;
-                    case "PAGADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.PAGADA, Double.parseDouble(total), cliente, items);
-                        break;
-                }
-
-                ReservaxProveedor.add(nueva);
-            }
-            rs.close();
-            con.close();
-            st.close();
-            System.out.println("Reservas  cargadas :)");
-        } catch (SQLException e) {
-            System.out.println("No pude cargar reservas :(");
-        }
-        return ReservaxProveedor;
     }
 
     public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
@@ -543,5 +442,5 @@ public class Consultas {
         return es;
 
     }
-    
+
 }

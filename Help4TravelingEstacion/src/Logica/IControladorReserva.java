@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -37,5 +38,10 @@ public interface IControladorReserva {
     public abstract void setReservasDB();
 
     public abstract void setItemsDB();
+
+    // Servidor Central ========================================================
+    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException;
+
+    public List<DtReserva> listarReservasProveedor(String prov) throws SQLException;
 
 }
