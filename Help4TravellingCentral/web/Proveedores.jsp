@@ -73,7 +73,7 @@
                                                     String nacimiento = String.valueOf(fechanac.getDia()) + "/" + String.valueOf(fechanac.getMes()) + "/" + String.valueOf(fechanac.getAno());
                                             %>
                                             <tr class="default">
-                                                <td class="default" align="center" width="200" id="nickname"><a href="Proveedor.jsp?nick=<% out.print(nick);%>" target="_blank"><%=nick%></a></td>
+                                                <td class="default" align="center" width="200" id="nickname"><a href="Proveedor.jsp?nick=<% out.print(nick);%>"><%=nick%></a></td>
                                                 <td class="default" align="center" width="200" id="nombre"><%=nombre%></td>
                                                 <td class="default" align="center" width="200" id="apellido"><%=apellido%></td>
                                                 <td class="default" align="center" width="200" id="correo"><a href="mailto:<% out.print(correo);%>"><%=correo%></a></td>
