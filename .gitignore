@@ -4,10 +4,4 @@
 */nbdist/*
 */.nb-gradle/*
 
-*\nbproject\private\*
-*\build\*
-*\nbbuild\*
-*\nbdist\*
-*\.nb-gradle\*
-
 *.class
