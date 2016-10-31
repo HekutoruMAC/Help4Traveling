@@ -116,7 +116,7 @@
                                                 while (itnomserv.hasNext()) {
                                                     String servprom = itnomserv.next();
                                                     Consultas congps = new Consultas();
-                                                    String provserv = fab.getIControladorUsuario().getNkProveedorServicio(servprom);
+                                                    String provserv = fab.getIControladorServicio().getNkProveedorServicio(servprom);
                                                     DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(servprom, provserv);
                                                     serviciosProm.add(dtServ);
                                                 }
@@ -139,8 +139,8 @@
                                             <td class="default" align="center" width="100" id="origen"><%=origen%></td>
                                         </tr>
                                         <%  }
-                                            }
-                                        }%>
+                                                }
+                                            }%>
                                     </tbody>
                                 </table>
                                 <ul class="list-group"></ul>
@@ -148,18 +148,18 @@
                             <div class="col-md-6">
                                 <h1><%=nombre%></h1>
                                 <h3><% DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(proveedor);
-                        out.print(prov.getNombre());
-                        out.print(" ");
-                        out.print(prov.getApellido()); %></h3>
+                                    out.print(prov.getNombre());
+                                    out.print(" ");
+                                    out.print(prov.getApellido()); %></h3>
                                 <hr>
                                 <%  float descuento = Float.parseFloat(dtProm.getPrecio());
-                        if (descuento > 0) {%>
+                                    if (descuento > 0) {%>
                                 <h3><%=descuento%>% de Descuento</h3>
                                 <% } %>
                                 <hr>
                                 <% if (descuento > 0) {
-                            total = total - (total * descuento / 100);
-                        }%>
+                                        total = total - (total * descuento / 100);
+                                    }%>
                                 <h3>U$D <%=total%><% if (descuento > 0) { %> (con Descuento aplicado) <% }%></h3>
                                 <hr>
                                 <form id="frmAgregar" class="form-horizontal" role="form" action="agregarCarrito" method="post">
