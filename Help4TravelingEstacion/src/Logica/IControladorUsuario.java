@@ -3,6 +3,7 @@ package Logica;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 // Comentario para que me reconozca los cambios y pueda comitear...
 
 /**
@@ -47,4 +48,7 @@ public interface IControladorUsuario {
     public List<DtUsuario> listarUsuariosSistema() throws SQLException;
 
     public String imagenPerfilUsuario(String nickname);
+
+    public boolean Autenticacion(HttpSession sesion) throws SQLException;
+
 }

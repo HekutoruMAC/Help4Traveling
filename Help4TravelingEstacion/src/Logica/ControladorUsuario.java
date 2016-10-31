@@ -8,6 +8,7 @@ package Logica;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 // Comentario para que me reconozca los cambios y pueda comitear...
 
 /**
@@ -177,6 +178,10 @@ public class ControladorUsuario implements IControladorUsuario {
 
     public String imagenPerfilUsuario(String nickname) {
         return ManejadorCliente.getInstance().imagenPerfilUsuario(nickname);
+    }
+
+    public boolean Autenticacion(HttpSession sesion) throws SQLException {
+        return ManejadorCliente.getInstance().Autenticacion(sesion);
     }
 
 }

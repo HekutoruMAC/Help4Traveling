@@ -6,7 +6,6 @@
 package PruebaServlets;
 
 import Logica.Fabrica;
-import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -43,16 +42,16 @@ public class Validacion extends HttpServlet {
         String recordar = request.getParameter("Recordarme");
 
         System.out.println(nickname + "   " + password + "  " + recordar);
-        Consultas con = new Consultas();
         HttpSession sesion = request.getSession();
         sesion.setAttribute("nickname", nickname);
         sesion.setAttribute("password", password);
         sesion.setAttribute("inicia", "true");
 
-        if (con.Autenticacion(sesion)) {
+        Fabrica fab = Fabrica.getInstance();
+
+        if (fab.getIControladorUsuario().Autenticacion(sesion)) {
             sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
 
-            Fabrica fab = Fabrica.getInstance();
             Boolean esProv = fab.getIControladorUsuario().existeProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 
