@@ -9,3 +9,4 @@
 /Help4TravelingCentral/nbbuild/
 /Help4TravelingCentral/nbdist/
 /Help4TravelingCentral/.nb-gradle/
+*.class
