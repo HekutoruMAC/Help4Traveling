@@ -352,9 +352,8 @@ public class ManejadorCliente {
             rs = st.executeQuery(sql);
             if (rs.next()) {
                 imagen = rs.getString("imagen");
-            }
-            if ((imagen.equals(null)) || (imagen.equals(""))) {
-                imagen = "../img/user.png";
+            } else {
+                imagen = "img/user.png";
             }
             rs.close();
             st.close();

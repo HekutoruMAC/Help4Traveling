@@ -12,10 +12,13 @@ import Logica.IControladorUsuario;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -251,12 +254,14 @@ public class VerInfoClienteTabla extends javax.swing.JInternalFrame {
 
         while (i.hasNext()) {
             DtUsuario u = i.next();
+            String imagen = this.IControlador.imagenPerfilUsuario(u.getNickname());
             Object[] fila = {
                 u.getNickname(),
                 u.getNombre(),
                 u.getApellido(),
                 u.getNacimiento().getFecha("-"),
-                u.getImagen()
+                imagen
+            //u.getImagen()
             };
             modeloClientes.addRow(fila);
         }
@@ -297,18 +302,24 @@ public class VerInfoClienteTabla extends javax.swing.JInternalFrame {
         Integer index = Clientes.getSelectedRow();
         if (index > -1) {
             DtUsuario u = listaClientes.get(index);
-            String ruta = u.getImagen();
+            String nick = u.getNickname();
+            //String ruta = u.getImagen();
+            String ruta = this.IControlador.imagenPerfilUsuario(nick);
             if (ruta != null) {
                 File imagen = new File(ruta);
                 if (imagen.exists() && (imagen.isFile()) && (imagen.canRead())) {
-                    //System.out.println("Fichero: " + imagen);
                     mostrarImagen(extraerImagen(imagen));
                 } else {
-                    jpImagen.repaint();
+                    URL url;
+                    try {
+                        url = new URL(ruta);
+                        mostrarImagen(descargarImagen(url));
+                    } catch (MalformedURLException ex) {
+                        mostrarImagen(new ImageIcon(getClass().getResource("/Iconos/user.png")).getImage());
+                    }
                 }
             } else {
-                jpImagen.repaint();
-                //mostrarImagen(new ImageIcon(getClass().getResource("/Iconos/user.png")).getImage());
+                mostrarImagen(new ImageIcon(getClass().getResource("/Iconos/user.png")).getImage());
             }
         }
     }
@@ -318,13 +329,21 @@ public class VerInfoClienteTabla extends javax.swing.JInternalFrame {
         try {
             img = ImageIO.read(imagen).getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         } catch (IOException e) {
-            e.printStackTrace();
+        }
+        return img;
+    }
+
+    public Image descargarImagen(URL imagen) {
+        Image img = null;
+        try {
+            img = ImageIO.read(imagen).getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
         }
         return img;
     }
 
     public void mostrarImagen(Image img) {
-        jpImagen.getGraphics().drawImage(img, 2, 2, 100, 100, java.awt.Color.BLACK, null);
+        jpImagen.getGraphics().drawImage(img, 2, 2, 100, 100, java.awt.Color.WHITE, null);
     }
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
@@ -350,6 +369,8 @@ public class VerInfoClienteTabla extends javax.swing.JInternalFrame {
         if (Clientes.getSelectedRowCount() > 0) {
             refrescarImagen();
             refrescarReservas();
+        } else {
+            jpImagen.repaint();
         }
     }//GEN-LAST:event_ClientesKeyReleased
 
@@ -357,6 +378,8 @@ public class VerInfoClienteTabla extends javax.swing.JInternalFrame {
         if (Clientes.getSelectedRowCount() > 0) {
             refrescarImagen();
             refrescarReservas();
+        } else {
+            jpImagen.repaint();
         }
     }//GEN-LAST:event_ClientesMouseReleased
 
