@@ -17,7 +17,6 @@
 <%@page import="java.util.List"%>
 <%@page import="Logica.ManejadorCategoria"%>
 <%@page import="Logica.DtServicio"%>
-<%@page import="PruebaModelo.Consultas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

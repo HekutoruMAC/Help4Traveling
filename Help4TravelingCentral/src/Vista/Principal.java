@@ -208,7 +208,7 @@ public class Principal extends javax.swing.JFrame {
         fc_seleccionar_archivo.setOpaque(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Help4Traveling");
+        setTitle("Help4Traveling Central");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Iconos/logo-icon.png")).getImage());
         setMinimumSize(new java.awt.Dimension(640, 360));
 

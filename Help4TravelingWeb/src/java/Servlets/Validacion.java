@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PruebaServlets;
+package Servlets;
 
 import Logica.Fabrica;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author yaman
  */
-public class Registro extends HttpServlet {
+public class Validacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,36 +31,46 @@ public class Registro extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession sesion = request.getSession();
 
-        String nickname = (String) sesion.getAttribute("nickname");
-        String mail = (String) sesion.getAttribute("email");
-        String nombre = (String) request.getParameter("nombre_in");
-        String apellido = (String) request.getParameter("apellido_in");
-        String fecha = (String) request.getParameter("fecha");
-        String contrasenia = (String) request.getParameter("password_in");
-        String imagen = (String) request.getParameter("imagen_registro");
-        System.out.println(imagen);
+        String nickname = request.getParameter("nickname_ingreso");
+        String password = request.getParameter("password_ingreso");
+        String recordar = request.getParameter("Recordarme");
+
+        System.out.println(nickname + "   " + password + "  " + recordar);
+        HttpSession sesion = request.getSession();
+        sesion.setAttribute("nickname", nickname);
+        sesion.setAttribute("password", password);
+        sesion.setAttribute("inicia", "true");
 
         Fabrica fab = Fabrica.getInstance();
 
-        if (fab.getIControladorUsuario().Registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
-            sesion.setAttribute("nombre", nombre);
-            sesion.setAttribute("email", mail);
-            sesion.setAttribute("apellido", apellido);
-            sesion.setAttribute("fechaNac", fecha);
-            sesion.setAttribute("esProv", false);
+        if (fab.getIControladorUsuario().Autenticacion(sesion)) {
+            sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
+
+            Boolean esProv = fab.getIControladorUsuario().existeProveedor(nickname);
+            sesion.setAttribute("esProv", esProv);
+
+            if (!(request.getParameter("Recordarme") == null)) {
+                if (recordar.equals("on")) {
+                    Cookie Galleta = new Cookie("nick", nickname);
+                    Galleta.setMaxAge(60 * 60 * 24 * 7);
+                    response.addCookie(Galleta);
+                    System.out.println("se cre la galleta con nombre " + Galleta.getName());
+                    System.out.println("entre al recordar");
+                    //falta terminar la gestion de las cookies
+                }
+            }
+            response.sendRedirect("index.jsp");
         } else {
-            sesion.invalidate();
+            sesion.setAttribute("mensaje", "Usuario o contraseña incorrectos");
+            response.sendRedirect("InicioSesion.jsp");
         }
-
-        /* DEBO CARGARLE TODOS LOS ATRIBUTOS A SESION*/
-        response.sendRedirect("index.jsp");
-
+        //response.sendRedirect("InicioSesion.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,7 +88,7 @@ public class Registro extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -95,7 +106,7 @@ public class Registro extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

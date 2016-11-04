@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PruebaServlets;
+package Servlets;
 
 import Logica.Fabrica;
-import PruebaModelo.Consultas;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author yaman
  */
-public class Buscar extends HttpServlet {
+public class CancelarReserva extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +31,15 @@ public class Buscar extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String oferta = (String) request.getParameter("buscar");
-        Consultas con = new Consultas();
-        Fabrica fab = Fabrica.getInstance();
+            throws ServletException, IOException, SQLException {
 
-        if (fab.getIControladorServicio().existeServicio(oferta)) {
-            String proveedor = fab.getIControladorServicio().getNkProveedorServicio(oferta);
-            response.sendRedirect("Servicio.jsp?nombre=" + oferta + "&proveedor=" + proveedor + "&categoria=");
-        } else {
-            String proveedor = fab.getIControladorServicio().getNkProveedorPromocion(oferta);
-            response.sendRedirect("Promocion.jsp?nombre=" + oferta + "&proveedor=" + proveedor);
-        }
+        response.setContentType("text/html;charset=UTF-8");
+        Integer reserva = Integer.parseInt(request.getParameter("reserva"));
+
+        Fabrica fab = Fabrica.getInstance();
+        fab.getIControladorReserva().actualizarEstadoDeReserva(reserva, "CANCELADA");
+
+        response.sendRedirect("Usuario.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +54,11 @@ public class Buscar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Comprobacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,7 +72,11 @@ public class Buscar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Comprobacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="Logica.Fabrica"%>
-<%@page import="PruebaModelo.Consultas"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="Logica.ManejadorServicio"%>

@@ -14,7 +14,6 @@
 <%@page import="Logica.DtUsuario"%>
 <%@page import="Logica.Reserva"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="PruebaModelo.Consultas"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.DtReserva"%>
 <%@page import="Logica.Cliente" %>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PruebaServlets;
+package Servlets;
 
 import Logica.Fabrica;
 import java.io.IOException;
