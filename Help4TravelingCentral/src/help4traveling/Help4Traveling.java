@@ -6,6 +6,7 @@
 package help4traveling;
 
 import Logica.*;
+import ServidorPublicador.Publicador;
 import Vista.Principal;
 
 public class Help4Traveling {
@@ -22,33 +23,10 @@ public class Help4Traveling {
         Principal p = new Principal();
         p.setLocationRelativeTo(null);
         p.setVisible(true);
+        
+        Publicador pub = new Publicador();        
+        pub.publicar();
 
-        pruebas();
-    }
-
-    public static void pruebas() {
-        /*
-        //Reserva r = fab.getIControladorReserva().nuevaRserva("santiago", 0);
-        //fab.getIControladorUsuario().listarClientes();
-        //fab.getIControladorServicio().altaDeCategoria("ariel1", null);
-        //fab.getIControladorServicio().altaDeCategoria("msrtin1", "ariel1");
-        //fab.getIControladorServicio().listarCategorias();
-        ///Date a = new Date(12,12,2016);
-        //Date b = new Date(12,12,2017);
-        //Servicio s = new Servicio();
-        //System.out.println("C ......");
-        //fab.getIControladorReserva().agregarItem(r,1,a,b,s);
-        //fab.getIControladorReserva().verReserva();
-        //fab.getIControladorReserva().altaReserva(r);
-        //System.out.println("Antes de guardar a la base de datos ......");
-        //fab.getIControladorUsuario().listarReservasCliente();
-        //ManejadorReserva a;
-        //a = new ManejadorReserva();
-        //a.altaReserva();
-        //private date a;
-        //a = new ManejadorReserva();
-         */
-
-    }
+    }    
 
 }

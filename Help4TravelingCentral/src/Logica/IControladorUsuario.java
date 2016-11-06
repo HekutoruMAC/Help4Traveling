@@ -41,7 +41,7 @@ public interface IControladorUsuario {
 
     public boolean Comprobacion(String nickname, String email) throws SQLException;
 
-    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) throws SQLException;
+    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha);
 
     public DtUsuario getDtUsuario(String nickname);
 

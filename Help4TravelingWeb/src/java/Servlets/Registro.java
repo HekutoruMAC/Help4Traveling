@@ -45,9 +45,11 @@ public class Registro extends HttpServlet {
         String imagen = (String) request.getParameter("imagen_registro");
         System.out.println(imagen);
 
-        Fabrica fab = Fabrica.getInstance();
-
-        if (fab.getIControladorUsuario().Registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
+        //Fabrica fab = Fabrica.getInstance();
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        if (port.registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {        
+        //if (fab.getIControladorUsuario().Registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
             sesion.setAttribute("nombre", nombre);
             sesion.setAttribute("email", mail);
             sesion.setAttribute("apellido", apellido);
