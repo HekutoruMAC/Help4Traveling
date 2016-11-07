@@ -214,10 +214,12 @@ public class ManejadorCliente {
     }
 
     // Servidor Central ========================================================
-    public boolean Comprobacion(String nickname, String email) throws SQLException {
+    public boolean Comprobacion(String nickname, String email) {
+        try{
         Connection con = Conexion.getInstance().getConnection();
-        try (Statement st = con.createStatement()) {
+        Statement st = con.createStatement();
             ResultSet rs = null;
+            boolean es = true;
             String Consulta = "SELECT * FROM usuarios";
             rs = st.executeQuery(Consulta);
             while (rs.next()) {
@@ -228,11 +230,13 @@ public class ManejadorCliente {
                 }
             }
             rs.close();
-        }
+            return true;
+        }catch(SQLException e){
         return true;
+        }
     }
 
-    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) throws SQLException {
+    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha)  {
         Statement st;
         if (imagen != null) {
             imagen = "'" + imagen + "'";
@@ -365,26 +369,33 @@ public class ManejadorCliente {
         return imagen;
     }
 
-    public boolean Autenticacion(HttpSession sesion) throws SQLException {
-        Connection con = Conexion.getInstance().getConnection();
-        try (Statement st = con.createStatement()) {
+       public boolean Autenticacion(String nickname, String password){
+        
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            Statement st = con.createStatement();
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
             rs = st.executeQuery(Consulta);
+            boolean es = false;
             while (rs.next()) {
-                if (sesion.getAttribute("nickname").equals(rs.getString("nickname")) && sesion.getAttribute("password").equals(rs.getString("password"))) {
-                    sesion.setAttribute("nombre", rs.getString("nombre"));
-                    sesion.setAttribute("apellido", rs.getString("apellido"));
-                    sesion.setAttribute("email", rs.getString("email"));
-                    sesion.setAttribute("fechaNac", rs.getString("fechaNac"));
+                if (nickname.equals(rs.getString("nickname")) && password.equals(rs.getString("password"))) {
+                    //sesion.setAttribute("nombre", rs.getString("nombre"));
+                    //sesion.setAttribute("apellido", rs.getString("apellido"));
+                    //sesion.setAttribute("email", rs.getString("email"));
+                    //sesion.setAttribute("fechaNac", rs.getString("fechaNac"));
                     rs.close();
                     st.close();
                     return true;
                 }
+                
             }
             rs.close();
+            return false;
+        }catch(SQLException e){
+           return false;
         }
-        return false;
+       
     }
 
 }

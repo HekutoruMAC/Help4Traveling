@@ -4,6 +4,38 @@
 <xsd:import namespace="http://ServidorPublicador/" schemaLocation="http://localhost:9128/publicador?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="Registrar">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:string"></part>
+<part name="arg5" type="xsd:string"></part>
+<part name="arg6" type="xsd:string"></part>
+</message>
+<message name="RegistrarResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="existeProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="existeProveedorResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="Autenticacion">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="AutenticacionResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="Comprobacion">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="ComprobacionResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="devolverUsuario">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -11,6 +43,22 @@
 <part name="return" type="tns:dtUsuario"></part>
 </message>
 <portType name="Publicador">
+<operation name="Registrar" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6">
+<input wsam:Action="http://ServidorPublicador/Publicador/RegistrarRequest" message="tns:Registrar"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/RegistrarResponse" message="tns:RegistrarResponse"></output>
+</operation>
+<operation name="existeProveedor">
+<input wsam:Action="http://ServidorPublicador/Publicador/existeProveedorRequest" message="tns:existeProveedor"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/existeProveedorResponse" message="tns:existeProveedorResponse"></output>
+</operation>
+<operation name="Autenticacion" parameterOrder="arg0 arg1">
+<input wsam:Action="http://ServidorPublicador/Publicador/AutenticacionRequest" message="tns:Autenticacion"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/AutenticacionResponse" message="tns:AutenticacionResponse"></output>
+</operation>
+<operation name="Comprobacion" parameterOrder="arg0 arg1">
+<input wsam:Action="http://ServidorPublicador/Publicador/ComprobacionRequest" message="tns:Comprobacion"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/ComprobacionResponse" message="tns:ComprobacionResponse"></output>
+</operation>
 <operation name="devolverUsuario">
 <input wsam:Action="http://ServidorPublicador/Publicador/devolverUsuarioRequest" message="tns:devolverUsuario"></input>
 <output wsam:Action="http://ServidorPublicador/Publicador/devolverUsuarioResponse" message="tns:devolverUsuarioResponse"></output>
@@ -18,6 +66,42 @@
 </portType>
 <binding name="PublicadorPortBinding" type="tns:Publicador">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="Registrar">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="existeProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="Autenticacion">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="Comprobacion">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
 <operation name="devolverUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>

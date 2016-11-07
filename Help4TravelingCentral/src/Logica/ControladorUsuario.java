@@ -160,11 +160,11 @@ public class ControladorUsuario implements IControladorUsuario {
         return ManejadorProveedor.getInstance().listarPromocionesProveedor(prov);
     }
 
-    public boolean Comprobacion(String nickname, String email) throws SQLException {
+    public boolean Comprobacion(String nickname, String email)  {
         return ManejadorCliente.getInstance().Comprobacion(nickname, email);
     }
 
-    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) throws SQLException {
+    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha){
         return ManejadorCliente.getInstance().Registrar(nickname, nombre, apellido, password, email, imagen, fecha);
     }
 
@@ -180,8 +180,8 @@ public class ControladorUsuario implements IControladorUsuario {
         return ManejadorCliente.getInstance().imagenPerfilUsuario(nickname);
     }
 
-    public boolean Autenticacion(HttpSession sesion) throws SQLException {
-        return ManejadorCliente.getInstance().Autenticacion(sesion);
+     public boolean Autenticacion(String nickname,String password)  {
+        return ManejadorCliente.getInstance().Autenticacion(nickname,password);
     }
 
 }

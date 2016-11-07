@@ -39,7 +39,7 @@ public interface IControladorUsuario {
 
     public ArrayList<DtPromocion> listarPromocionesProveedor(String prov);
 
-    public boolean Comprobacion(String nickname, String email) throws SQLException;
+    public boolean Comprobacion(String nickname, String email)  ;
 
     public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha);
 
@@ -49,6 +49,6 @@ public interface IControladorUsuario {
 
     public String imagenPerfilUsuario(String nickname);
 
-    public boolean Autenticacion(HttpSession sesion) throws SQLException;
+    public boolean Autenticacion(String nickname,String password)  ;
 
 }

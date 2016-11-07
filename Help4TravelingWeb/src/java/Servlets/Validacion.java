@@ -47,12 +47,14 @@ public class Validacion extends HttpServlet {
         sesion.setAttribute("password", password);
         sesion.setAttribute("inicia", "true");
 
-        Fabrica fab = Fabrica.getInstance();
-
-        if (fab.getIControladorUsuario().Autenticacion(sesion)) {
+        //Fabrica fab = Fabrica.getInstance();
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        if (port.autenticacion(nickname,password)){
+       // if (fab.getIControladorUsuario().Autenticacion(sesion)) {
             sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
 
-            Boolean esProv = fab.getIControladorUsuario().existeProveedor(nickname);
+            boolean esProv = port.existeProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 
             if (!(request.getParameter("Recordarme") == null)) {

@@ -42,10 +42,11 @@ public class Comprobacion extends HttpServlet {
         sesion.setAttribute("email", email);
         sesion.setAttribute("registra", "true");
         //System.out.println(nickname+ "   "+email);
-        Fabrica fab = Fabrica.getInstance();
-        if (fab.getIControladorUsuario().Comprobacion(nickname, email)) {
+           servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        if (port.comprobacion(nickname, email)) {
 
-            Boolean esProv = fab.getIControladorUsuario().existeProveedor(nickname);
+            boolean esProv = port.existeProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 
             response.sendRedirect("InicioSesion.jsp");

@@ -43,10 +43,24 @@ public class Publicador {
         return u;
     }
     
-            
-    @WebMethod
+     @WebMethod
     public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) {
         return Fabrica.getInstance().getIControladorUsuario().Registrar(nickname, nombre, apellido, password, email, imagen, fecha);
+    }
+
+    @WebMethod
+    public boolean Autenticacion(String nickname, String password) {
+        return Fabrica.getInstance().getIControladorUsuario().Autenticacion(nickname, password);
+    }
+
+    @WebMethod
+    public boolean existeProveedor(String nickname) {
+        return Fabrica.getInstance().getIControladorUsuario().existeProveedor(nickname);
+    }
+
+    @WebMethod
+    public boolean Comprobacion(String nickname, String password) {
+        return Fabrica.getInstance().getIControladorUsuario().Comprobacion(nickname, password);
     }
 
 }
