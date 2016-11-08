@@ -41,7 +41,7 @@
                     if (!nombres.isEmpty()) {
                         Iterator<String> inom = nombres.iterator();
                         while (inom.hasNext()) {
-                            Consultas con = new Consultas();
+                           // Consultas con = new Consultas();
                             String nombre = inom.next();
                             String proveedor = fab.getIControladorServicio().getNkProveedorServicio(nombre);
                             DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
