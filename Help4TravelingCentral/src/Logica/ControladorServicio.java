@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +117,7 @@ public class ControladorServicio implements IControladorServicio {
         return ManejadorServicio.getInstance().listarServicios();
     }
 
-    public List<DtPromocion> listarPromociones() {
+    public ArrayList<DtPromocion> listarPromociones() {
         return ManejadorServicio.getInstance().listarPromociones();
     }
 
@@ -162,7 +163,7 @@ public class ControladorServicio implements IControladorServicio {
         return ManejadorServicio.getInstance().getNkProveedorPromocion(promocion);
     }
 
-    public List<String> listarServiciosDePromociones(String nombre, String prov) {
+    public ArrayList<String> listarServiciosDePromociones(String nombre, String prov) {
         return ManejadorServicio.getInstance().listarServiciosDePromociones(nombre, prov);
     }
 }

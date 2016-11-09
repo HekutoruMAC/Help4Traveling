@@ -152,7 +152,7 @@ public class ControladorUsuario implements IControladorUsuario {
         return mc.obtenerCliente(nick);
     }*/
     // Servidor Central ========================================================
-    public Boolean existeProveedor(String nickname) {
+    public boolean existeProveedor(String nickname) {
         return ManejadorProveedor.getInstance().existeProveedor(nickname);
     }
 
@@ -172,7 +172,7 @@ public class ControladorUsuario implements IControladorUsuario {
         return ManejadorCliente.getInstance().getDtUsuario(nickname);
     }
 
-    public List<DtUsuario> listarUsuariosSistema() throws SQLException {
+    public ArrayList<DtUsuario> listarUsuariosSistema() {
         return ManejadorCliente.getInstance().listarUsuariosSistema();
     }
 
@@ -180,8 +180,9 @@ public class ControladorUsuario implements IControladorUsuario {
         return ManejadorCliente.getInstance().imagenPerfilUsuario(nickname);
     }
 
-     public boolean Autenticacion(String nickname,String password)  {
-        return ManejadorCliente.getInstance().Autenticacion(nickname,password);
+    public DtUsuario Autenticacion(String nickname,String password) {
+    //public boolean Autenticacion(String nickname,String password) {
+        return ManejadorCliente.getInstance().Autenticacion(nickname, password);
     }
 
 }

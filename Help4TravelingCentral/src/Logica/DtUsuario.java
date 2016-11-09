@@ -10,13 +10,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+
 
 /**
  *
  * @author Leonardo
  */
-public class DtUsuario {
 
+@XmlAccessorType(XmlAccessType.FIELD)
+public class DtUsuario {
     private String nombre;
     private String apellido;
     private String nickname;
@@ -27,6 +32,10 @@ public class DtUsuario {
     private String tipo;
     private String empresa;
     private String link;    
+    
+    public DtUsuario(){
+        this.nickname = "null";
+    }
 
     public DtUsuario(String nombre, String apellido, String nickname, String password, String correo, Date nacimiento, String imagen, String tipo, String empresa, String link) {
         this.nombre = nombre;
@@ -49,10 +58,6 @@ public class DtUsuario {
         this.nacimiento = nacimiento;
         this.imagen = imagen;
         this.tipo = tipo;
-    }
-
-    public DtUsuario() {
-
     }
 
     public String getNombre() {

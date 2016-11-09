@@ -7,7 +7,7 @@ package ServidorPublicador;
 import Logica.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -46,40 +46,40 @@ public class Publicador {
     }
 
     @WebMethod
-    public DtUsuario devolverUsuario(String nickname) {
-        DtUsuario u = mcli.getDtUsuario(nickname);
-        return u;
+    public DtUsuario getDtUsuario(String nickname) {
+        return mcli.getDtUsuario(nickname);
     }
 
     @WebMethod
     public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) {
-        return Fabrica.getInstance().getIControladorUsuario().Registrar(nickname, nombre, apellido, password, email, imagen, fecha);
+        return fab.getIControladorUsuario().Registrar(nickname, nombre, apellido, password, email, imagen, fecha);
     }
 
     @WebMethod
-    public boolean Autenticacion(String nickname, String password) {
-        return Fabrica.getInstance().getIControladorUsuario().Autenticacion(nickname, password);
+    public DtUsuario Autenticacion(String nickname, String password) {
+    //public boolean Autenticacion(String nickname, String password) {
+        return fab.getIControladorUsuario().Autenticacion(nickname, password);
     }
 
     @WebMethod
     public boolean existeProveedor(String nickname) {
-        return Fabrica.getInstance().getIControladorUsuario().existeProveedor(nickname);
+        return fab.getIControladorUsuario().existeProveedor(nickname);
     }
 
     @WebMethod
     public boolean Comprobacion(String nickname, String password) {
-        return Fabrica.getInstance().getIControladorUsuario().Comprobacion(nickname, password);
+        return fab.getIControladorUsuario().Comprobacion(nickname, password);
     }
 
     // Categorías.jsp
     @WebMethod
-    public List<String> obtenerCategoriasHijas(String padre) {
+    public ArrayList<String> obtenerCategoriasHijas(String padre) {
         return mcat.obtenerCategoriasHijas(padre);
     }
 
     // ListarServicios.jsp
     @WebMethod
-    public List<String> listarServiciosCategoria(String categoria) {
+    public ArrayList<String> listarServiciosCategoria(String categoria) {
         return mser.listarServiciosCategoria(categoria);
     }
 
@@ -97,7 +97,7 @@ public class Publicador {
 
     // Promocion.jsp
     @WebMethod
-    public List<String> listarServiciosDePromociones(String nombre, String prov) {
+    public ArrayList<String> listarServiciosDePromociones(String nombre, String prov) {
         return fab.getIControladorServicio().listarServiciosDePromociones(nombre, prov);
     }
 
@@ -115,7 +115,7 @@ public class Publicador {
 
     // Promociones.jsp
     @WebMethod
-    public List<DtPromocion> listarPromociones() {
+    public ArrayList<DtPromocion> listarPromociones() {
         return fab.getIControladorServicio().listarPromociones();
     }
 
@@ -139,7 +139,7 @@ public class Publicador {
 
     // Reserva.jsp
     @WebMethod
-    public List<DtItemReserva> listarItems(Integer reserva) {
+    public ArrayList<DtItemReserva> listarItems(Integer reserva) {
         return fab.getIControladorReserva().listarItems(reserva);
     }
 
@@ -163,7 +163,7 @@ public class Publicador {
 
     // Usuarios.jsp
     @WebMethod
-    public List listarUsuariosSistema() throws SQLException {
+    public ArrayList<DtUsuario> listarUsuariosSistema() {
         return fab.getIControladorUsuario().listarUsuariosSistema();
     }
 

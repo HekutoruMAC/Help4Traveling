@@ -140,8 +140,8 @@ public class ManejadorReserva {
         return listares;
     }
 
-    public List<DtItemReserva> listarItems(Integer reserva) {
-        List<DtItemReserva> items = new ArrayList<DtItemReserva>();
+    public ArrayList<DtItemReserva> listarItems(Integer reserva) {
+        ArrayList<DtItemReserva> items = new ArrayList<DtItemReserva>();
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;

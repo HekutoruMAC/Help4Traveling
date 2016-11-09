@@ -219,9 +219,8 @@ public class ManejadorCliente {
         Connection con = Conexion.getInstance().getConnection();
         Statement st = con.createStatement();
             ResultSet rs = null;
-            boolean es = true;
-            String Consulta = "SELECT * FROM usuarios";
-            rs = st.executeQuery(Consulta);
+            String sql = "SELECT * FROM usuarios";
+            rs = st.executeQuery(sql);
             while (rs.next()) {
                 if (nickname.equals(rs.getString("nickname")) || email.equals(rs.getString("email"))) {
                     rs.close();
@@ -307,8 +306,8 @@ public class ManejadorCliente {
         return nuevo;
     }
 
-    public List<DtUsuario> listarUsuariosSistema() throws SQLException {
-        List<DtUsuario> usuarios = null;
+    public ArrayList<DtUsuario> listarUsuariosSistema() {
+        ArrayList<DtUsuario> usuarios = null;
         ResultSet rsUsu, rsImg;
         Statement stUsu, stImg;
         try {
@@ -316,7 +315,7 @@ public class ManejadorCliente {
             stUsu = con.createStatement();
             String sql = "SELECT * FROM help4traveling.usuarios";
             rsUsu = stUsu.executeQuery(sql);
-            usuarios = new LinkedList<DtUsuario>();
+            usuarios = new ArrayList<DtUsuario>();
             while (rsUsu.next()) {
                 String nickname = rsUsu.getString("nickname");
                 String nombre = rsUsu.getString("nombre");
@@ -369,15 +368,13 @@ public class ManejadorCliente {
         return imagen;
     }
 
-       public boolean Autenticacion(String nickname, String password){
-        
+    /*public boolean Autenticacion(String nickname, String password) {        
         try {
             Connection con = Conexion.getInstance().getConnection();
             Statement st = con.createStatement();
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
             rs = st.executeQuery(Consulta);
-            boolean es = false;
             while (rs.next()) {
                 if (nickname.equals(rs.getString("nickname")) && password.equals(rs.getString("password"))) {
                     //sesion.setAttribute("nombre", rs.getString("nombre"));
@@ -394,8 +391,31 @@ public class ManejadorCliente {
             return false;
         }catch(SQLException e){
            return false;
-        }
-       
+        }       
+    }*/
+    
+    public DtUsuario Autenticacion(String nickname, String password) {
+        ResultSet rs = null;
+        DtUsuario dtu = new DtUsuario();
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM usuarios";
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                if (nickname.equals(rs.getString("nickname")) && password.equals(rs.getString("password"))) {                    
+                    Date fecha = new Date(rs.getString("fechaNac"));
+                    dtu = new DtUsuario(rs.getString("nombre"), rs.getString("apellido"), nickname, password, rs.getString("email"), fecha, null, null, null, null);
+                }                
+            }
+            rs.close();
+            st.close();
+            con.close();           
+        } catch (SQLException e) {
+            System.out.println("No obtuve DtUsuario :(");
+            System.err.println(e.getMessage());
+        } 
+        return dtu;
     }
 
 }

@@ -256,13 +256,13 @@ public class ManejadorServicio {
         return listaServicios;
     }
 
-    public List<String> listarServiciosCategoria(String categoria) {
+    public ArrayList<String> listarServiciosCategoria(String categoria) {
         ResultSet rsServicios;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
         String sql;
 
-        List<String> listaServicios = new LinkedList<String>();
+        ArrayList<String> listaServicios = new ArrayList<String>();
         sql = "SELECT * FROM help4traveling.servicioscategorias WHERE categoria='" + categoria + "'";
         System.out.println("entre al listar servicios");
         try {
@@ -350,8 +350,8 @@ public class ManejadorServicio {
         return listaServicios;
     }
 
-    public List<DtPromocion> listarPromociones() {
-        List<DtPromocion> promociones = null;
+    public ArrayList<DtPromocion> listarPromociones() {
+        ArrayList<DtPromocion> promociones = null;
         ResultSet rs;
         Statement st;
         try {
@@ -359,7 +359,7 @@ public class ManejadorServicio {
             st = con.createStatement();
             String sql = "SELECT * FROM help4traveling.promociones";
             rs = st.executeQuery(sql);
-            promociones = new LinkedList<DtPromocion>();
+            promociones = new ArrayList<DtPromocion>();
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String proveedor = rs.getString("proveedor");
@@ -673,8 +673,8 @@ public class ManejadorServicio {
         return prov;
     }
 
-    public List<String> listarServiciosDePromociones(String nombre, String prov) {
-        List<String> listaServicios = new LinkedList<String>();
+    public ArrayList<String> listarServiciosDePromociones(String nombre, String prov) {
+        ArrayList<String> listaServicios = new ArrayList<String>();
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;

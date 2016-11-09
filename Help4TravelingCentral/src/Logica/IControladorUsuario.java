@@ -35,7 +35,7 @@ public interface IControladorUsuario {
     //public abstract ArrayList<DtUsuario> setProveedoresDB();
 
     // Servidor Central =====================================================
-    public Boolean existeProveedor(String nickname);
+    public boolean existeProveedor(String nickname);
 
     public ArrayList<DtPromocion> listarPromocionesProveedor(String prov);
 
@@ -45,10 +45,12 @@ public interface IControladorUsuario {
 
     public DtUsuario getDtUsuario(String nickname);
 
-    public List<DtUsuario> listarUsuariosSistema() throws SQLException;
+    public ArrayList<DtUsuario> listarUsuariosSistema();
 
     public String imagenPerfilUsuario(String nickname);
+    
+    //public boolean Autenticacion(String nickname, String password);
 
-    public boolean Autenticacion(String nickname,String password)  ;
+    public DtUsuario Autenticacion(String nickname, String password);
 
 }

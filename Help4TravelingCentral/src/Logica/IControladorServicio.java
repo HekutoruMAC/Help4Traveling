@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.List;
 // Comentario para que me reconozca los cambios y pueda comitear...
 
@@ -22,7 +23,7 @@ public interface IControladorServicio {
 
     public abstract List<DtServicio> listarServicios();
 
-    public abstract List<DtPromocion> listarPromociones();
+    public abstract ArrayList<DtPromocion> listarPromociones();
 
     public abstract List<DtServicio> listarServiciosPromocion(DtPromocion dtp);
 
@@ -43,9 +44,10 @@ public interface IControladorServicio {
     public DtServicio getDtServicio(String nombre, String proveedor);
 
     // Servidor Central ========================================================
+    
     public String getNkProveedorServicio(String servicio);
 
     public String getNkProveedorPromocion(String promocion);
 
-    public List<String> listarServiciosDePromociones(String nombre, String prov);
+    public ArrayList<String> listarServiciosDePromociones(String nombre, String prov);
 }

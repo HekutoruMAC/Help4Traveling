@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -203,8 +204,8 @@ public class ManejadorCategoria {
         return listaCat;
     }
 
-    public List<String> obtenerCategoriasHijas(String padre) {
-        List<String> listaCat = new LinkedList<String>();
+    public ArrayList<String> obtenerCategoriasHijas(String padre) {
+        ArrayList<String> listaCat = new ArrayList<String>();
         ResultSet rsCategorias;
         //Conexion conexion = new Conexion();
         Connection con = Conexion.getInstance().getConnection();

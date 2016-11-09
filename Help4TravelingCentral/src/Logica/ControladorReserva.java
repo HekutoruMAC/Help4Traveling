@@ -6,6 +6,7 @@
 package Logica;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorReserva implements IControladorReserva {
@@ -54,7 +55,7 @@ public class ControladorReserva implements IControladorReserva {
         return mr.listarReservas();
     }
 
-    public List<DtItemReserva> listarItems(Integer reserva) {
+    public ArrayList<DtItemReserva> listarItems(Integer reserva) {
         ManejadorReserva mr = ManejadorReserva.getInstance();
         return mr.listarItems(reserva);
     }

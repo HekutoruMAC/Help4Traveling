@@ -64,6 +64,9 @@
                                                 List<DtUsuario> usuarios;
                                                 Fabrica fab = Fabrica.getInstance();
                                                 usuarios = fab.getIControladorUsuario().listarUsuariosSistema();
+                                                //servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+                                                //servidorpublicador.Publicador port = service.getPublicadorPort();
+                                                //usuarios = port.listarUsuariosSistema();
                                                 Iterator<DtUsuario> iter = usuarios.iterator();
                                                 while (iter.hasNext()) {
                                                     dtUsu = iter.next();

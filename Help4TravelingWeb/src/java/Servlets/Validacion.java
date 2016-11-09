@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -50,10 +49,16 @@ public class Validacion extends HttpServlet {
         //Fabrica fab = Fabrica.getInstance();
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
-        if (port.autenticacion(nickname,password)){
+        servidorpublicador.DtUsuario dtu = port.autenticacion(nickname, password);       
+        if (!dtu.getNickname().equals("null")) {        
+        //if (port.autenticacion(nickname, password)) {
        // if (fab.getIControladorUsuario().Autenticacion(sesion)) {
             sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
-
+            sesion.setAttribute("nombre", dtu.getNombre());
+            sesion.setAttribute("apellido", dtu.getApellido());
+            sesion.setAttribute("email", dtu.getCorreo());
+            String fecha = String.valueOf(dtu.getNacimiento().getAno()) + "-" + String.valueOf(dtu.getNacimiento().getMes()) + "-" + String.valueOf(dtu.getNacimiento().getDia());
+            sesion.setAttribute("fechaNac", fecha);
             boolean esProv = port.existeProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 
@@ -121,5 +126,6 @@ public class Validacion extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+      
 
 }

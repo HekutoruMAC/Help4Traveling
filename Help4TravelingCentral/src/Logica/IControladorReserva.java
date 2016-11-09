@@ -6,6 +6,7 @@
 package Logica;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public interface IControladorReserva {
 
     public abstract List<DtReserva> listarReservas();
 
-    public abstract List<DtItemReserva> listarItems(Integer reserva);
+    public abstract ArrayList<DtItemReserva> listarItems(Integer reserva);
 
     public abstract void altaDeReserva();
 
@@ -40,6 +41,7 @@ public interface IControladorReserva {
     public abstract void setItemsDB();
 
     // Servidor Central ========================================================
+    
     public List<DtReserva> listarReservasUsuario(String cli) throws SQLException;
 
     public List<DtReserva> listarReservasProveedor(String prov) throws SQLException;
