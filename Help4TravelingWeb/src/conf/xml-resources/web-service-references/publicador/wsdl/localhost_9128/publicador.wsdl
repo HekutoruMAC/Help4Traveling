@@ -4,20 +4,47 @@
 <xsd:import namespace="http://ServidorPublicador/" schemaLocation="http://localhost:9128/publicador?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="getNkProveedorServicio">
+<message name="existeProveedor">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="getNkProveedorServicioResponse">
+<message name="existeProveedorResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="Comprobacion">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="ComprobacionResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="Registrar">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:string"></part>
+<part name="arg5" type="xsd:string"></part>
+<part name="arg6" type="xsd:string"></part>
+</message>
+<message name="RegistrarResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="listarUsuariosSistema"></message>
+<message name="listarUsuariosSistemaResponse">
+<part name="return" type="tns:arrayList"></part>
+</message>
+<message name="imagenPerfilUsuario">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="imagenPerfilUsuarioResponse">
 <part name="return" type="xsd:string"></part>
 </message>
 <message name="listarPromociones"></message>
 <message name="listarPromocionesResponse">
 <part name="return" type="tns:arrayList"></part>
 </message>
-<message name="listarServiciosCategoria">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="listarServiciosCategoriaResponse">
+<message name="listarProveedores"></message>
+<message name="listarProveedoresResponse">
 <part name="return" type="tns:arrayList"></part>
 </message>
 <message name="listarServiciosDePromociones">
@@ -33,17 +60,17 @@
 <message name="listarPromocionesProveedorResponse">
 <part name="return" type="tns:arrayList"></part>
 </message>
+<message name="Autenticacion">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="AutenticacionResponse">
+<part name="return" type="tns:dtUsuario"></part>
+</message>
 <message name="existeServicio">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="existeServicioResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
-<message name="Comprobacion">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="ComprobacionResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
 <message name="getDtServicio">
@@ -59,55 +86,22 @@
 <message name="listarItemsResponse">
 <part name="return" type="tns:arrayList"></part>
 </message>
-<message name="Registrar">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-<part name="arg4" type="xsd:string"></part>
-<part name="arg5" type="xsd:string"></part>
-<part name="arg6" type="xsd:string"></part>
-</message>
-<message name="RegistrarResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
-<message name="existeProveedor">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="existeProveedorResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
-<message name="Autenticacion">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="AutenticacionResponse">
-<part name="return" type="tns:dtUsuario"></part>
-</message>
 <message name="getDtUsuario">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="getDtUsuarioResponse">
 <part name="return" type="tns:dtUsuario"></part>
 </message>
-<message name="listarUsuariosSistema"></message>
-<message name="listarUsuariosSistemaResponse">
-<part name="return" type="tns:arrayList"></part>
-</message>
-<message name="imagenPerfilUsuario">
+<message name="listarServiciosCategoria">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="imagenPerfilUsuarioResponse">
-<part name="return" type="xsd:string"></part>
-</message>
-<message name="listarProveedores"></message>
-<message name="listarProveedoresResponse">
+<message name="listarServiciosCategoriaResponse">
 <part name="return" type="tns:arrayList"></part>
 </message>
-<message name="obtenerPadre">
+<message name="getNkProveedorServicio">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="obtenerPadreResponse">
+<message name="getNkProveedorServicioResponse">
 <part name="return" type="xsd:string"></part>
 </message>
 <message name="obtenerCategoriasHijas">
@@ -116,18 +110,24 @@
 <message name="obtenerCategoriasHijasResponse">
 <part name="return" type="tns:arrayList"></part>
 </message>
-<message name="getDTPromocion">
+<message name="obtenerPadre">
 <part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
 </message>
-<message name="getDTPromocionResponse">
-<part name="return" type="tns:dtPromocion"></part>
+<message name="obtenerPadreResponse">
+<part name="return" type="xsd:string"></part>
 </message>
 <message name="getDtProveedor">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="getDtProveedorResponse">
 <part name="return" type="tns:dtUsuario"></part>
+</message>
+<message name="getDTPromocion">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="getDTPromocionResponse">
+<part name="return" type="tns:dtPromocion"></part>
 </message>
 <message name="listarServiciosProveedor">
 <part name="arg0" type="tns:dtUsuario"></part>
@@ -136,57 +136,17 @@
 <part name="return" type="tns:arrayList"></part>
 </message>
 <portType name="Publicador">
-<operation name="getNkProveedorServicio">
-<input wsam:Action="http://ServidorPublicador/Publicador/getNkProveedorServicioRequest" message="tns:getNkProveedorServicio"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/getNkProveedorServicioResponse" message="tns:getNkProveedorServicioResponse"></output>
-</operation>
-<operation name="listarPromociones">
-<input wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesRequest" message="tns:listarPromociones"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesResponse" message="tns:listarPromocionesResponse"></output>
-</operation>
-<operation name="listarServiciosCategoria">
-<input wsam:Action="http://ServidorPublicador/Publicador/listarServiciosCategoriaRequest" message="tns:listarServiciosCategoria"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/listarServiciosCategoriaResponse" message="tns:listarServiciosCategoriaResponse"></output>
-</operation>
-<operation name="listarServiciosDePromociones" parameterOrder="arg0 arg1">
-<input wsam:Action="http://ServidorPublicador/Publicador/listarServiciosDePromocionesRequest" message="tns:listarServiciosDePromociones"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/listarServiciosDePromocionesResponse" message="tns:listarServiciosDePromocionesResponse"></output>
-</operation>
-<operation name="listarPromocionesProveedor">
-<input wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesProveedorRequest" message="tns:listarPromocionesProveedor"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesProveedorResponse" message="tns:listarPromocionesProveedorResponse"></output>
-</operation>
-<operation name="existeServicio">
-<input wsam:Action="http://ServidorPublicador/Publicador/existeServicioRequest" message="tns:existeServicio"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/existeServicioResponse" message="tns:existeServicioResponse"></output>
+<operation name="existeProveedor">
+<input wsam:Action="http://ServidorPublicador/Publicador/existeProveedorRequest" message="tns:existeProveedor"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/existeProveedorResponse" message="tns:existeProveedorResponse"></output>
 </operation>
 <operation name="Comprobacion" parameterOrder="arg0 arg1">
 <input wsam:Action="http://ServidorPublicador/Publicador/ComprobacionRequest" message="tns:Comprobacion"></input>
 <output wsam:Action="http://ServidorPublicador/Publicador/ComprobacionResponse" message="tns:ComprobacionResponse"></output>
 </operation>
-<operation name="getDtServicio" parameterOrder="arg0 arg1">
-<input wsam:Action="http://ServidorPublicador/Publicador/getDtServicioRequest" message="tns:getDtServicio"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/getDtServicioResponse" message="tns:getDtServicioResponse"></output>
-</operation>
-<operation name="listarItems">
-<input wsam:Action="http://ServidorPublicador/Publicador/listarItemsRequest" message="tns:listarItems"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/listarItemsResponse" message="tns:listarItemsResponse"></output>
-</operation>
 <operation name="Registrar" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6">
 <input wsam:Action="http://ServidorPublicador/Publicador/RegistrarRequest" message="tns:Registrar"></input>
 <output wsam:Action="http://ServidorPublicador/Publicador/RegistrarResponse" message="tns:RegistrarResponse"></output>
-</operation>
-<operation name="existeProveedor">
-<input wsam:Action="http://ServidorPublicador/Publicador/existeProveedorRequest" message="tns:existeProveedor"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/existeProveedorResponse" message="tns:existeProveedorResponse"></output>
-</operation>
-<operation name="Autenticacion" parameterOrder="arg0 arg1">
-<input wsam:Action="http://ServidorPublicador/Publicador/AutenticacionRequest" message="tns:Autenticacion"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/AutenticacionResponse" message="tns:AutenticacionResponse"></output>
-</operation>
-<operation name="getDtUsuario">
-<input wsam:Action="http://ServidorPublicador/Publicador/getDtUsuarioRequest" message="tns:getDtUsuario"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/getDtUsuarioResponse" message="tns:getDtUsuarioResponse"></output>
 </operation>
 <operation name="listarUsuariosSistema">
 <input wsam:Action="http://ServidorPublicador/Publicador/listarUsuariosSistemaRequest" message="tns:listarUsuariosSistema"></input>
@@ -196,25 +156,65 @@
 <input wsam:Action="http://ServidorPublicador/Publicador/imagenPerfilUsuarioRequest" message="tns:imagenPerfilUsuario"></input>
 <output wsam:Action="http://ServidorPublicador/Publicador/imagenPerfilUsuarioResponse" message="tns:imagenPerfilUsuarioResponse"></output>
 </operation>
+<operation name="listarPromociones">
+<input wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesRequest" message="tns:listarPromociones"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesResponse" message="tns:listarPromocionesResponse"></output>
+</operation>
 <operation name="listarProveedores">
 <input wsam:Action="http://ServidorPublicador/Publicador/listarProveedoresRequest" message="tns:listarProveedores"></input>
 <output wsam:Action="http://ServidorPublicador/Publicador/listarProveedoresResponse" message="tns:listarProveedoresResponse"></output>
 </operation>
-<operation name="obtenerPadre">
-<input wsam:Action="http://ServidorPublicador/Publicador/obtenerPadreRequest" message="tns:obtenerPadre"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/obtenerPadreResponse" message="tns:obtenerPadreResponse"></output>
+<operation name="listarServiciosDePromociones" parameterOrder="arg0 arg1">
+<input wsam:Action="http://ServidorPublicador/Publicador/listarServiciosDePromocionesRequest" message="tns:listarServiciosDePromociones"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/listarServiciosDePromocionesResponse" message="tns:listarServiciosDePromocionesResponse"></output>
+</operation>
+<operation name="listarPromocionesProveedor">
+<input wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesProveedorRequest" message="tns:listarPromocionesProveedor"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/listarPromocionesProveedorResponse" message="tns:listarPromocionesProveedorResponse"></output>
+</operation>
+<operation name="Autenticacion" parameterOrder="arg0 arg1">
+<input wsam:Action="http://ServidorPublicador/Publicador/AutenticacionRequest" message="tns:Autenticacion"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/AutenticacionResponse" message="tns:AutenticacionResponse"></output>
+</operation>
+<operation name="existeServicio">
+<input wsam:Action="http://ServidorPublicador/Publicador/existeServicioRequest" message="tns:existeServicio"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/existeServicioResponse" message="tns:existeServicioResponse"></output>
+</operation>
+<operation name="getDtServicio" parameterOrder="arg0 arg1">
+<input wsam:Action="http://ServidorPublicador/Publicador/getDtServicioRequest" message="tns:getDtServicio"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/getDtServicioResponse" message="tns:getDtServicioResponse"></output>
+</operation>
+<operation name="listarItems">
+<input wsam:Action="http://ServidorPublicador/Publicador/listarItemsRequest" message="tns:listarItems"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/listarItemsResponse" message="tns:listarItemsResponse"></output>
+</operation>
+<operation name="getDtUsuario">
+<input wsam:Action="http://ServidorPublicador/Publicador/getDtUsuarioRequest" message="tns:getDtUsuario"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/getDtUsuarioResponse" message="tns:getDtUsuarioResponse"></output>
+</operation>
+<operation name="listarServiciosCategoria">
+<input wsam:Action="http://ServidorPublicador/Publicador/listarServiciosCategoriaRequest" message="tns:listarServiciosCategoria"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/listarServiciosCategoriaResponse" message="tns:listarServiciosCategoriaResponse"></output>
+</operation>
+<operation name="getNkProveedorServicio">
+<input wsam:Action="http://ServidorPublicador/Publicador/getNkProveedorServicioRequest" message="tns:getNkProveedorServicio"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/getNkProveedorServicioResponse" message="tns:getNkProveedorServicioResponse"></output>
 </operation>
 <operation name="obtenerCategoriasHijas">
 <input wsam:Action="http://ServidorPublicador/Publicador/obtenerCategoriasHijasRequest" message="tns:obtenerCategoriasHijas"></input>
 <output wsam:Action="http://ServidorPublicador/Publicador/obtenerCategoriasHijasResponse" message="tns:obtenerCategoriasHijasResponse"></output>
 </operation>
-<operation name="getDTPromocion" parameterOrder="arg0 arg1">
-<input wsam:Action="http://ServidorPublicador/Publicador/getDTPromocionRequest" message="tns:getDTPromocion"></input>
-<output wsam:Action="http://ServidorPublicador/Publicador/getDTPromocionResponse" message="tns:getDTPromocionResponse"></output>
+<operation name="obtenerPadre">
+<input wsam:Action="http://ServidorPublicador/Publicador/obtenerPadreRequest" message="tns:obtenerPadre"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/obtenerPadreResponse" message="tns:obtenerPadreResponse"></output>
 </operation>
 <operation name="getDtProveedor">
 <input wsam:Action="http://ServidorPublicador/Publicador/getDtProveedorRequest" message="tns:getDtProveedor"></input>
 <output wsam:Action="http://ServidorPublicador/Publicador/getDtProveedorResponse" message="tns:getDtProveedorResponse"></output>
+</operation>
+<operation name="getDTPromocion" parameterOrder="arg0 arg1">
+<input wsam:Action="http://ServidorPublicador/Publicador/getDTPromocionRequest" message="tns:getDTPromocion"></input>
+<output wsam:Action="http://ServidorPublicador/Publicador/getDTPromocionResponse" message="tns:getDTPromocionResponse"></output>
 </operation>
 <operation name="listarServiciosProveedor">
 <input wsam:Action="http://ServidorPublicador/Publicador/listarServiciosProveedorRequest" message="tns:listarServiciosProveedor"></input>
@@ -223,7 +223,43 @@
 </portType>
 <binding name="PublicadorPortBinding" type="tns:Publicador">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="getNkProveedorServicio">
+<operation name="existeProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="Comprobacion">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="Registrar">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="listarUsuariosSistema">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="imagenPerfilUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
@@ -241,7 +277,7 @@
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
 </output>
 </operation>
-<operation name="listarServiciosCategoria">
+<operation name="listarProveedores">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
@@ -268,7 +304,7 @@
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
 </output>
 </operation>
-<operation name="existeServicio">
+<operation name="Autenticacion">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
@@ -277,7 +313,7 @@
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
 </output>
 </operation>
-<operation name="Comprobacion">
+<operation name="existeServicio">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
@@ -304,33 +340,6 @@
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
 </output>
 </operation>
-<operation name="Registrar">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</output>
-</operation>
-<operation name="existeProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</output>
-</operation>
-<operation name="Autenticacion">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</output>
-</operation>
 <operation name="getDtUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -340,7 +349,7 @@
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
 </output>
 </operation>
-<operation name="listarUsuariosSistema">
+<operation name="listarServiciosCategoria">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
@@ -349,25 +358,7 @@
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
 </output>
 </operation>
-<operation name="imagenPerfilUsuario">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</output>
-</operation>
-<operation name="listarProveedores">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
-</output>
-</operation>
-<operation name="obtenerPadre">
+<operation name="getNkProveedorServicio">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
@@ -385,7 +376,7 @@
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
 </output>
 </operation>
-<operation name="getDTPromocion">
+<operation name="obtenerPadre">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
@@ -395,6 +386,15 @@
 </output>
 </operation>
 <operation name="getDtProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>
+</output>
+</operation>
+<operation name="getDTPromocion">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ServidorPublicador/"></soap:body>

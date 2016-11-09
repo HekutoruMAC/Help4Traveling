@@ -85,7 +85,11 @@
         String padre = null;
         String abuelo = null;
         String bisabuelo = null;
-        padre = ManejadorCategoria.getInstance().obtenerPadre(categoria);
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        //servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);  
+        padre = port.obtenerPadre(categoria);
+        //padre = ManejadorCategoria.getInstance().obtenerPadre(categoria);
         DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
     %>
     <div class="section minimo">
@@ -97,9 +101,11 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <%  if (padre != null) {
-                                abuelo = ManejadorCategoria.getInstance().obtenerPadre(padre);
+                                abuelo = port.obtenerPadre(padre);                                
+                                //abuelo = ManejadorCategoria.getInstance().obtenerPadre(padre);
                                 if (abuelo != null) {
-                                    bisabuelo = ManejadorCategoria.getInstance().obtenerPadre(abuelo);
+                                    bisabuelo = port.obtenerPadre(abuelo);
+                                    //bisabuelo = ManejadorCategoria.getInstance().obtenerPadre(abuelo);
                                     if ((bisabuelo != null) && (!bisabuelo.equals("Categorias"))) { %>
                         <li><% out.print(bisabuelo); %></li>
                             <% } %>
@@ -163,7 +169,8 @@
                                                     <tr class="default">
                                                         <td class="default" width="200">Proveedor</td>
                                                         <% String nickname = dtServ.getNkProveedor();
-                                                            DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(nickname);
+                                                            servidorpublicador.DtUsuario prov = port.getDtProveedor(nickname);                                                            
+                                                            //DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(nickname);
                                                         %>
                                                             <td id="nomprov"><% out.print(prov.getNombre());
                                                             out.print(" ");

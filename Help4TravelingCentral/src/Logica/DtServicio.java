@@ -7,11 +7,14 @@ package Logica;
 // // Comentario para que me reconozca los cambios y pueda comitear...
 import java.util.List;
 import java.util.Map;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author Leonardo
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtServicio {
     private String nombre;
     private String nkproveedor;
@@ -22,6 +25,11 @@ public class DtServicio {
     private String nomciuorigen;
     private String nomciudestino;
 
+    public DtServicio() {
+        this.nombre = "null";
+        this.nkproveedor = "null";
+    }
+    
     public DtServicio(String nombre, String nkproveedor, String descripcion, List<String> imagenes, Map<String, DtCategoria> categorias, float precio, String origen, String destino) {
         this.nombre = nombre;
         this.nkproveedor = nkproveedor;
