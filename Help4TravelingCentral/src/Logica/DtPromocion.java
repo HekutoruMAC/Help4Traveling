@@ -6,11 +6,14 @@
 package Logica;
 
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author HP Usuario
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtPromocion {
     // // Comentario para que me reconozca los cambios y pueda comitear...
 

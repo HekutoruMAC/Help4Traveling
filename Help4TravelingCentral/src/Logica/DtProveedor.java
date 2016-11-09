@@ -5,22 +5,25 @@
  */
 package Logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author yaman
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtProveedor extends DtUsuario {
+
     private String empresa;
     private String link;
-    
-    public DtProveedor(String nombre, String apellido, String nickname, String correo, Date nacimiento, String imagen, String empresa, String link){
-            super(nombre,apellido,nickname,correo,nacimiento,imagen,"");
-            this.empresa =empresa;
-            this.link = link;
+
+    public DtProveedor(String nombre, String apellido, String nickname, String correo, Date nacimiento, String imagen, String empresa, String link) {
+        super(nombre, apellido, nickname, correo, nacimiento, imagen, "");
+        this.empresa = empresa;
+        this.link = link;
     }
-            
-    
-    
+
     public String getEmpresa() {
         return empresa;
     }
@@ -29,4 +32,3 @@ public class DtProveedor extends DtUsuario {
         return link;
     }
 }
-

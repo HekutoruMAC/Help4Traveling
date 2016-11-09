@@ -5,10 +5,14 @@
  */
 package Logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author Leonardo
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtItemReserva {
 
     private int id;
@@ -16,10 +20,6 @@ public class DtItemReserva {
     private Date inicio;
     private Date fin;
     private Oferta oferta;
-
-    public DtItemReserva() {
-
-    }
 
     public DtItemReserva(int id, int cantidad, Date inicio, Date fin, Oferta oferta) {
         this.id = id;
