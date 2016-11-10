@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Logica.DtPromocion;
 import Logica.DtServicio;
 import Logica.Servicio;
 import Logica.Fabrica;
@@ -24,6 +25,7 @@ public class altaReserva2 extends javax.swing.JInternalFrame {
     private IControladorServicio IControlador;
     private DefaultListModel modelo;
     private List<DtServicio> listaServicios;
+    private List<DtPromocion> listaPromociones;
 
     /**
      * Creates new form altaReserva2
@@ -42,6 +44,16 @@ public class altaReserva2 extends javax.swing.JInternalFrame {
             DtServicio servicio = i.next();
             modelo.addElement(servicio.getNombre() + "~" + servicio.getNkProveedor());
         }
+        
+        //Agregar las promociones a la lista
+        listaPromociones = this.IControlador.listarPromociones();
+        Iterator<DtPromocion> ip = listaPromociones.iterator();
+        while (ip.hasNext()) {
+            DtPromocion promocion = ip.next();
+            modelo.addElement(promocion.getNombre() + "~" + promocion.getProveedor());
+        }
+        
+        //Agrego los servicios y las primociones a la lista.
         this.Ofertas.setModel(modelo);
 
         //Setear
