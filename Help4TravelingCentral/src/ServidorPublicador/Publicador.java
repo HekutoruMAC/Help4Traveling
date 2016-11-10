@@ -111,7 +111,7 @@ public class Publicador {
         return fab.getIControladorServicio().getNkProveedorServicio(servicio);
     }
 
-    // [OK] Promocion.jsp
+    // [  ] Promocion.jsp
     @WebMethod
     public DtPromocion getDTPromocion(String nombre, String Proveedor) {
         return mser.getDTPromocion(nombre, Proveedor);
@@ -123,13 +123,13 @@ public class Publicador {
         return fab.getIControladorServicio().listarServiciosDePromociones(nombre, prov);
     }
 
-    // [OK] Promocion.jsp, Servicio.jsp
+    // [  ] Promocion.jsp, Servicio.jsp
     @WebMethod
     public DtServicio getDtServicio(String nombre, String proveedor) {
         return fab.getIControladorServicio().getDtServicio(nombre, proveedor);
     }
 
-    // [OK] Promocion.jsp, Proveedor.jsp, Servicio.jsp, Usuario.jsp
+    // [  ] Promocion.jsp, Proveedor.jsp, Servicio.jsp, Usuario.jsp
     @WebMethod
     public DtUsuario getDtProveedor(String nickname) {
         return mprov.getDtProveedor(nickname);

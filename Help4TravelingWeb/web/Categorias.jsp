@@ -57,9 +57,6 @@
                             <%  String catn0 = "Categorias"; %>
                             <li class="jstree-open"><a href="ListarServicios.jsp?categoria=<% out.print(catn0);%>" target="servicios"><%=catn0%></a><%
                                 List<String> listaNivel1 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn0);
-                                //servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
-                                //servidorpublicador.Publicador port = service.getPublicadorPort();
-                                //servidorpublicador.ArrayList listaNivel1 = port.obtenerCategoriasHijas(catn0);
                                 if (!listaNivel1.isEmpty()) {
                                 %><ul><%
                                     Iterator<String> icatn1 = listaNivel1.iterator();
@@ -80,8 +77,8 @@
                                                     while (icatn3.hasNext()) {
                                                         String catn3 = icatn3.next();
                                                     %><li><a href="ListarServicios.jsp?categoria=<%=catn3%>" target="servicios"><%=catn3%></a><%
-                                                        List<String> listaNivel4 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn3);
-                                                        if (!listaNivel4.isEmpty()) {
+                                                    List<String> listaNivel4 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn3);
+                                                    if (!listaNivel4.isEmpty()) {
                                                         %><ul><%
                                                             Iterator<String> icatn4 = listaNivel4.iterator();
                                                             while (icatn4.hasNext()) {
@@ -89,19 +86,19 @@
                                                             %><li><a href="ListarServicios.jsp?categoria=<% out.print(catn4);%>" target="servicios"><%=catn4%></a></li><%
                                                                 }
                                                                 %></ul><%
-                                                                    }
-                                                            %></li><%
-                                                                }
-                                                        %></ul><%
                                                             }
-                                                    %></li><%
+                                                            %></li><%
                                                         }
-                                                %></ul><%
+                                                        %></ul><%
                                                     }
-                                            %></li><%
+                                                    %></li><%
                                                 }
-                                        %></ul><%
+                                                %></ul><%
                                             }
+                                            %></li><%
+                                        }
+                                        %></ul><%
+                                    }
                                     %></li>
                         </ul>
                     </div>
