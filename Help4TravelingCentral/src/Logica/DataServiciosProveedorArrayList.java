@@ -14,18 +14,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * @author Leonardo
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DataServiciosPromocionesArrayList {
-    private ArrayList<String> serviciosPromociones;
-    
-    public DataServiciosPromocionesArrayList() {
-    }    
+public class DataServiciosProveedorArrayList {
+    private ArrayList<DtServicio> serviciosProveedor;
 
-    public DataServiciosPromocionesArrayList(ArrayList<String> serviciosPromociones) {
-        this.serviciosPromociones = serviciosPromociones;
+    public DataServiciosProveedorArrayList() {
+    }
+    
+    public DataServiciosProveedorArrayList(ArrayList<DtServicio> serviciosProveedor) {
+        this.serviciosProveedor = serviciosProveedor;
     }
 
-    public ArrayList<String> getServiciosPromociones() {
-        return serviciosPromociones;
-    }    
+    public ArrayList<DtServicio> getServiciosProveedor() {
+        return serviciosProveedor;
+    }  
+    
     
 }

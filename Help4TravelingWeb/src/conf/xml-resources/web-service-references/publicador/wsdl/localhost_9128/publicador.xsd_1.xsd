@@ -42,24 +42,10 @@
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="arrayList">
-<xs:complexContent>
-<xs:extension base="tns:abstractList">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractList" abstract="true">
-<xs:complexContent>
-<xs:extension base="tns:abstractCollection">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractCollection" abstract="true">
-<xs:sequence></xs:sequence>
+<xs:complexType name="dataUsuariosSistemaArrayList">
+<xs:sequence>
+<xs:element name="usuariosSistema" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtUsuario">
@@ -79,9 +65,9 @@
 
 <xs:complexType name="date">
 <xs:sequence>
-<xs:element name="ano" type="xs:int"></xs:element>
 <xs:element name="dia" type="xs:int"></xs:element>
 <xs:element name="mes" type="xs:int"></xs:element>
+<xs:element name="ano" type="xs:int"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -99,6 +85,26 @@
 <xs:element name="descuento" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="servicios" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="arrayList">
+<xs:complexContent>
+<xs:extension base="tns:abstractList">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractList" abstract="true">
+<xs:complexContent>
+<xs:extension base="tns:abstractCollection">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractCollection" abstract="true">
+<xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="reserva">
@@ -246,6 +252,12 @@
 <xs:complexType name="dataServiciosArrayList">
 <xs:sequence>
 <xs:element name="servicios" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataServiciosProveedorArrayList">
+<xs:sequence>
+<xs:element name="serviciosProveedor" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

@@ -4,12 +4,8 @@
     Author     : Leonardo
 --%>
 
-<%@page import="Logica.Fabrica"%>
-<%@page import="Logica.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="java.util.LinkedList"%>
-<%@page import="Logica.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,21 +56,19 @@
                                                 <td class="default" width="200" align="center"><b>Correo electrónico</b></td>
                                                 <td class="default" width="200" align="center"><b>Fecha Nacimiento</b></td>
                                             </tr>
-                                            <% DtUsuario dtUsu = null;
-                                                List<DtUsuario> usuarios;
-                                                Fabrica fab = Fabrica.getInstance();
-                                                usuarios = fab.getIControladorUsuario().listarUsuariosSistema();
-                                                //servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
-                                                //servidorpublicador.Publicador port = service.getPublicadorPort();
-                                                //usuarios = port.listarUsuariosSistema();
-                                                Iterator<DtUsuario> iter = usuarios.iterator();
+                                            <%  servidorpublicador.DtUsuario dtUsu = null;
+                                                List<servidorpublicador.DtUsuario> usuarios;
+                                                servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+                                                servidorpublicador.Publicador port = service.getPublicadorPort();
+                                                usuarios = port.listarUsuariosSistema().getUsuariosSistema();                                                
+                                                Iterator<servidorpublicador.DtUsuario> iter = usuarios.iterator();
                                                 while (iter.hasNext()) {
                                                     dtUsu = iter.next();
                                                     String nick = dtUsu.getNickname();
                                                     String nombre = dtUsu.getNombre();
                                                     String apellido = dtUsu.getApellido();
                                                     String correo = dtUsu.getCorreo();
-                                                    Date fechanac = dtUsu.getNacimiento();
+                                                    servidorpublicador.Date fechanac = dtUsu.getNacimiento();
                                                     String nacimiento = String.valueOf(fechanac.getDia()) + "/" + String.valueOf(fechanac.getMes()) + "/" + String.valueOf(fechanac.getAno());
                                             %>
                                             <tr class="default">

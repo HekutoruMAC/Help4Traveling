@@ -87,10 +87,10 @@
         String bisabuelo = null;
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
-        //servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);  
+        servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);  
         padre = port.obtenerPadre(categoria);
         //padre = ManejadorCategoria.getInstance().obtenerPadre(categoria);
-        DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
+        //DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
     %>
     <div class="section minimo">
         <div class="container">
@@ -168,7 +168,7 @@
                                                 <tbody>
                                                     <tr class="default">
                                                         <td class="default" width="200">Proveedor</td>
-                                                        <% String nickname = dtServ.getNkProveedor();
+                                                        <% String nickname = dtServ.getNkproveedor();
                                                             servidorpublicador.DtUsuario prov = port.getDtProveedor(nickname);                                                            
                                                             //DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(nickname);
                                                         %>
@@ -178,12 +178,12 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="default" width="200">Origen</td>
-                                                        <td id="ciuorigen"><%=dtServ.getNomCiuOrigen()%></td>
+                                                        <td id="ciuorigen"><%=dtServ.getNomciuorigen()%></td>
                                                     </tr>
-                                                    <% if (dtServ.getNomCiuDestino() != null) {%>
+                                                    <% if (dtServ.getNomciudestino() != null) {%>
                                                     <tr>
                                                         <td class="default" width="200">Destino</td>
-                                                        <td id="ciudestino"><%=dtServ.getNomCiuDestino()%></td>
+                                                        <td id="ciudestino"><%=dtServ.getNomciudestino()%></td>
                                                     </tr>
                                                     <% }%>
                                                     <tr>

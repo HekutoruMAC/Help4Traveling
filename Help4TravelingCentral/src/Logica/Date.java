@@ -5,10 +5,14 @@
  */
 package Logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author Santiago
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Date {
     //Atributos
     private int dia;

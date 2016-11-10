@@ -70,10 +70,8 @@
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
-        <%
-            servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        <%  servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
             servidorpublicador.Publicador port = service.getPublicadorPort();
-
             Boolean esProv = (Boolean) session.getAttribute("esProv");
             String nick = session.getAttribute("nickname").toString();
             String nombre = session.getAttribute("nombre").toString();
@@ -82,17 +80,9 @@
             String correo = session.getAttribute("email").toString();
             String empresa = "";
             String enlace = "";
-            DtUsuario dtProv = null;
-            //empresa = session.getAttribute("empresa").toString();
-            //enlace = session.getAttribute("link").toString();
+            servidorpublicador.DtUsuario dtProv = null;
             if (esProv) {
-                dtProv = ManejadorProveedor.getInstance().getDtProveedor(nick);
-                /*
-                String nombre = dtProv.getNombre();
-                String apellido = dtProv.getApellido();
-                String correo = dtProv.getCorreo();
-                Date fechanac = dtProv.getNacimiento();
-                 */
+                dtProv = port.getDtProveedor(nick);
                 empresa = dtProv.getEmpresa();
                 enlace = dtProv.getLink();
             }
@@ -100,15 +90,7 @@
 
             fecha = partes[2] + "/" + partes[1] + "/" + partes[0];
             Fabrica fab = Fabrica.getInstance();
-            String imagen = port.imagenPerfilUsuario(nick);
-            //System.out.println(mierda1) ;
-            /*Date fecha1 = new Date(10, 11, 2012);
-            Cliente usu = new Cliente("juan", "Perez", "Juanpe", "contrasenia", "alfalfa@gmail.com", fecha1, "aca la imagen");
-            Integer dia = usu.getNacimiento().getDia();
-            Integer mes = usu.getNacimiento().getMes();
-            Integer anio = usu.getNacimiento().getAno();
-            String fexa = dia.toString() + "/" + mes.toString() + "/" + anio.toString();
-             */
+            String imagen = port.imagenPerfilUsuario(nick); 
         %>
         <br>
         <br>
@@ -166,9 +148,9 @@
                     <% if (esProv) { %>
 
                     <%
-                        List<DtServicio> servicios = ManejadorServicio.getInstance().listarServiciosProveedor(dtProv);
+                        List<servidorpublicador.DtServicio> servicios = port.listarServiciosProveedor(dtProv).getServiciosProveedor();                                                
                         if (!servicios.isEmpty()) {
-                            Iterator<DtServicio> iserv = servicios.iterator(); %>
+                            Iterator<servidorpublicador.DtServicio> iserv = servicios.iterator(); %>
                     <div id="servicios" class="tab-pane fade">
                         <table class="default table table-bordered table-hover table-striped">
                             <thead>
@@ -181,11 +163,11 @@
                             </thead>
                             <tbody>
                                 <% while (iserv.hasNext()) {
-                                        DtServicio dtServ = iserv.next();
+                                        servidorpublicador.DtServicio dtServ = iserv.next();
                                         String servicio = dtServ.getNombre();
                                         String descripcion = dtServ.getDescripcion();
                                         float precio = dtServ.getPrecio();
-                                        String origen = dtServ.getNomCiuOrigen();  %>
+                                        String origen = dtServ.getNomciuorigen();  %>                                        
                                 <tr class="default">
                                     <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(servicio); %>&proveedor=<% out.print(nick); %>&categoria=<% out.print("");%>" target="_blank"><%=servicio%></a></td>
                                     <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>
@@ -208,8 +190,6 @@
                         <ul class="list-group"></ul>
                         <% } %>
                     </div>
-
-
                     <%
                         List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
                         if (!promociones.isEmpty()) {
