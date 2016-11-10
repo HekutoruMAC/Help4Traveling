@@ -31,6 +31,11 @@ public class DtReserva {
     private String sql;
 
     //Creadores
+    public DtReserva(){
+        
+    }
+    
+    
     public DtReserva(long id, Date creada, Reserva.eEstado estado, double total, String cliente, Map<Integer, ItemReserva> items) {
         this.id = id;
         this.estado = estado;

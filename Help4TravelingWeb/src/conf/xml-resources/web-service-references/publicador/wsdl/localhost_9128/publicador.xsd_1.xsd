@@ -91,24 +91,10 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="arrayList">
-<xs:complexContent>
-<xs:extension base="tns:abstractList">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractList" abstract="true">
-<xs:complexContent>
-<xs:extension base="tns:abstractCollection">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractCollection" abstract="true">
-<xs:sequence></xs:sequence>
+<xs:complexType name="dataPromocionesProveedorArrayList">
+<xs:sequence>
+<xs:element name="promocionesProveedor" type="tns:dtPromocion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataProveedoresArrayList">
@@ -260,6 +246,26 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="arrayList">
+<xs:complexContent>
+<xs:extension base="tns:abstractList">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractList" abstract="true">
+<xs:complexContent>
+<xs:extension base="tns:abstractCollection">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractCollection" abstract="true">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dataItemsReservasArrayList">
 <xs:sequence>
 <xs:element name="items" type="tns:dtItemReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -282,9 +288,51 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dataReservasUsuarioArrayList">
+<xs:sequence>
+<xs:element name="reservasUsuario" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtReserva">
+<xs:sequence>
+<xs:element name="id" type="xs:long"></xs:element>
+<xs:element name="estado" type="tns:eEstado" minOccurs="0"></xs:element>
+<xs:element name="creada" type="tns:date" minOccurs="0"></xs:element>
+<xs:element name="total" type="xs:double"></xs:element>
+<xs:element name="cliente" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="items">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:int"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:itemReserva"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="conexion" type="tns:conexion" minOccurs="0"></xs:element>
+<xs:element name="sql" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="conexion">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dataServiciosProveedorArrayList">
 <xs:sequence>
 <xs:element name="serviciosProveedor" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataReservasProveedorArrayList">
+<xs:sequence>
+<xs:element name="reservasProveedor" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
