@@ -1,14 +1,19 @@
 
 
-<%@page import="Logica.ManejadorReserva"%>
-<%@page import="Logica.Proveedor"%>
-<%@page import="Logica.Date"%>
-<%@page import="Logica.Oferta"%>
+<%@page import="servidorpublicador.Date"%>
+<%@page import="servidorpublicador.Proveedor"%>
+<%@page import="servidorpublicador.Oferta"%>
+<%@page import="servidorpublicador.DtItemReserva"%>
+<%@page import="servidorpublicador.ItemReserva"%>
+<%--@page import="Logica.ManejadorReserva"--%>
+<%--@page import="Logica.Proveedor"--%>
+<%--@page import="Logica.Date"--%>
+<%--@page import="Logica.Oferta"--%>
 <%@page import="java.util.Iterator"%>
-<%@page import="Logica.IControladorReserva"%>
-<%@page import="Logica.DtItemReserva"%>
+<%--@page import="Logica.IControladorReserva"--%>
+<%--@page import="Logica.DtItemReserva"--%>
 <%@page import="java.util.List"%>
-<%@page import="Logica.Fabrica"%>
+<%--@page import="Logica.Fabrica"--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,15 +50,16 @@
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
 
         <% String IdReserva = request.getParameter("idReserva");
-            Fabrica fab = Fabrica.getInstance();
+            //Fabrica fab = Fabrica.getInstance();
+             servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+             servidorpublicador.Publicador port = service.getPublicadorPort();
             Integer numRes = Integer.parseInt(IdReserva);
             System.out.println("Este es el numero de reserva" + numRes);
-            List<DtItemReserva> itemsReserva;
+            List<ItemReserva> itemsReserva;
 
-            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+            
 
-            //itemsReserva= fab.getIControladorReserva().listarItems(numRes);
+            //itemsReserva= port.listarItems(numRes);
             //itemsReserva= ManejadorReserva.getInstance().listarItems(numRes);
             //aca recibe como parametro la id de reservay devuelve los items vinculados
             //   out.println("la cantidad devuelta es: "+itemsReserva.size());
@@ -92,8 +98,10 @@
 
 
                                             </tr>
-                                            <%                                                ///declaraciones
-                                                Iterator<DtItemReserva> iter = fab.getIControladorReserva().listarItems(Integer.parseInt(IdReserva)).iterator();
+                                            <%            
+                                                ///declaraciones
+                                                List<DtItemReserva> items = port.listarItems(Integer.parseInt(IdReserva)).getItems();
+                                                Iterator<DtItemReserva> iter = items.iterator();
                                                 System.out.println("cargue el iter");
 
                                                 DtItemReserva ItRes;
@@ -115,8 +123,10 @@
                                                     cant = ItRes.getCantidad();
                                                     System.out.println(cant);
                                                     ofertaVinculada = ItRes.getOferta();
-                                                    inicio = ItRes.getInicio().getFecha("/");
-                                                    fin = ItRes.getFin().getFecha("/");
+                                                    Date iniciodate = ItRes.getInicio();
+                                                    inicio=iniciodate.toString();
+                                                    Date findate = ItRes.getFin();
+                                                    fin=findate.toString();
                                                     NombOfr = ofertaVinculada.getNombre();
                                                     Prov = ofertaVinculada.getProveedor();
                                                     NombProv = Prov.getNombre();

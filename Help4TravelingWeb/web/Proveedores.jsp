@@ -1,9 +1,10 @@
-<%@page import="Logica.ManejadorProveedor"%>
-<%@page import="Logica.Date"%>
+<%@page import="servidorpublicador.Date"%>
+<%@page import="servidorpublicador.DtUsuario"%>
+<%--@page import="Logica.Date"--%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="Logica.DtUsuario"%>
+<%--@page import="Logica.DtUsuario"--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -58,7 +59,9 @@
                                             </tr>
                                             <% DtUsuario dtProv = null;
                                                 List<DtUsuario> proveedores;
-                                                proveedores = ManejadorProveedor.getInstance().listarProveedores();
+                                                servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+                                                servidorpublicador.Publicador port = service.getPublicadorPort();
+                                                proveedores = port.listarProveedores().getProveedores();
                                                 Iterator<DtUsuario> iter = proveedores.iterator();
                                                 while (iter.hasNext()) {
                                                     dtProv = iter.next();
@@ -94,7 +97,3 @@
         <footer class="section section-primary" id="footer"></footer>
     </body>
 </html>
-
-
-
-

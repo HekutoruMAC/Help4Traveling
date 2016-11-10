@@ -111,6 +111,12 @@
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dataProveedoresArrayList">
+<xs:sequence>
+<xs:element name="proveedores" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="reserva">
 <xs:sequence>
 <xs:element name="id" type="xs:long"></xs:element>
@@ -254,46 +260,26 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dataItemsReservasArrayList">
+<xs:sequence>
+<xs:element name="items" type="tns:dtItemReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtItemReserva">
+<xs:sequence>
+<xs:element name="id" type="xs:int"></xs:element>
+<xs:element name="cantidad" type="xs:int"></xs:element>
+<xs:element name="inicio" type="tns:date" minOccurs="0"></xs:element>
+<xs:element name="fin" type="tns:date" minOccurs="0"></xs:element>
+<xs:element name="oferta" type="tns:oferta" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dataServiciosArrayList">
 <xs:sequence>
 <xs:element name="servicios" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dataReservasArrayList">
-<xs:sequence>
-<xs:element name="reservas" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtReserva">
-<xs:sequence>
-<xs:element name="id" type="xs:long"></xs:element>
-<xs:element name="estado" type="tns:eEstado" minOccurs="0"></xs:element>
-<xs:element name="creada" type="tns:date" minOccurs="0"></xs:element>
-<xs:element name="total" type="xs:double"></xs:element>
-<xs:element name="cliente" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="items">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="key" minOccurs="0" type="xs:int"></xs:element>
-<xs:element name="value" minOccurs="0" type="tns:itemReserva"></xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="conexion" type="tns:conexion" minOccurs="0"></xs:element>
-<xs:element name="sql" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="conexion">
-<xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataServiciosProveedorArrayList">

@@ -176,24 +176,50 @@ public class Publicador {
         return new DataServiciosProveedorArrayList(serviciosproveedor);        
     }
 
-    // [OK] Proveedor.jsp
+    // [  ] Proveedor.jsp
     @WebMethod
-    public DataPromocionesArrayList listarPromocionesProveedor(String prov) {
-        ArrayList<DtPromocion> promocionesproveedor = fab.getIControladorUsuario().listarPromocionesProveedor(prov);
-        return new DataPromocionesArrayList(promocionesproveedor);        
+    public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
+        return fab.getIControladorUsuario().listarPromocionesProveedor(prov);
     }
 
     // [  ] Proveedor.jsp
+    /*
     @WebMethod
     public ArrayList<DtUsuario> listarProveedores() {
         return mprov.listarProveedores();
     }
+*/
+    
+    @WebMethod
+    public DataProveedoresArrayList listarProveedores(){
+           ArrayList<DtUsuario> listaproveedores = mprov.listarProveedores();
+           return new DataProveedoresArrayList(listaproveedores);     
+    }
+
+
 
     // [  ] Reserva.jsp
+    /*
     @WebMethod
     public ArrayList<DtItemReserva> listarItems(Integer reserva) {
         return fab.getIControladorReserva().listarItems(reserva);
     }
+    */
+    
+    @WebMethod
+    public DataItemsReservasArrayList listarItems(Integer reserva){
+        ArrayList<DtItemReserva> items = fab.getIControladorReserva().listarItems(reserva);
+        return new DataItemsReservasArrayList(items);
+    }
+    
+     @WebMethod
+    public void agregarItem(Reserva nueva,int cantidad,String fi,String ff, Servicio oferta){
+        Date fini = new Date(fi);
+        Date ffin = new Date(ff);
+        
+             fab.getIControladorReserva().agregarItem(nueva, cantidad, fini,ffin, oferta);
+    }
+    
 
     // [OK] Buscar.java, Reserva.jsp
     @WebMethod
@@ -219,20 +245,5 @@ public class Publicador {
         ArrayList<DtUsuario> usuariossistema = fab.getIControladorUsuario().listarUsuariosSistema();
         return new DataUsuariosSistemaArrayList(usuariossistema);        
     }
-    
-    // [OK] Usuario.jsp
-    @WebMethod
-    public DataReservasArrayList listarReservasProveedor(String nickname) {
-        ArrayList<DtReserva> reservasproveedor = fab.getIControladorReserva().listarReservasProveedor(nickname);        
-        return new DataReservasArrayList(reservasproveedor);        
-    }  
-    
-    // [OK] Usuario.jsp
-    @WebMethod
-    public DataReservasArrayList listarReservasUsuario(String nickname) {
-        ArrayList<DtReserva> reservasusuario = fab.getIControladorReserva().listarReservasUsuario(nickname);        
-        return new DataReservasArrayList(reservasusuario);        
-    }  
-    
 
 }
