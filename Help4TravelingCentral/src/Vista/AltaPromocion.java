@@ -52,7 +52,9 @@ public class AltaPromocion extends javax.swing.JInternalFrame {
 
         Fabrica fabrica = Fabrica.getInstance();
         this.IControlador = fabrica.getIControladorServicio();
-
+        jComboBoxProv.setVisible(false);
+        jLabelPromo1.setVisible(false);
+        jLabel2.setVisible(false);
         jTextFieldTotal.setHorizontalAlignment(SwingConstants.RIGHT);
         jTextFieldDesc.setHorizontalAlignment(SwingConstants.RIGHT);
         jTextFieldFinal.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -166,12 +168,14 @@ public class AltaPromocion extends javax.swing.JInternalFrame {
             }
             index++;
         }
-
+            Integer descuento =(Integer)jSpinnerPor100.getModel().getValue();
         DtPromocion dtp = new DtPromocion(
                 jTextFieldPromo.getText(),
-                jComboBoxProv.getSelectedItem().toString(),
-                jTextFieldDesc.getText(),
+                "promocion",//jComboBoxProv.getSelectedItem().toString(),
+                
+                //jTextFieldDesc.getText(),
                 jTextFieldFinal.getText(),
+                descuento.toString(),
                 listaServiciosPromo);
         System.out.println(dtp);
         return dtp;
@@ -304,7 +308,7 @@ public class AltaPromocion extends javax.swing.JInternalFrame {
         jTextFieldTotal.setEditable(false);
         jTextFieldTotal.setText("0.0");
 
-        jLabelDesc.setText("[3] Ingrese el descuento aplicado (%):");
+        jLabelDesc.setText("[2] Ingrese el descuento aplicado (%):");
 
         jTextFieldDesc.setEditable(false);
         jTextFieldDesc.setText("0.0");
@@ -315,6 +319,11 @@ public class AltaPromocion extends javax.swing.JInternalFrame {
         jTextFieldFinal.setEditable(false);
         jTextFieldFinal.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jTextFieldFinal.setText("0.0");
+        jTextFieldFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFinalActionPerformed(evt);
+            }
+        });
 
         jLabelTotal2.setText("Precio final ($):");
         jLabelTotal2.setEnabled(false);
@@ -323,6 +332,12 @@ public class AltaPromocion extends javax.swing.JInternalFrame {
         jSpinnerPor100.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSpinnerPor100StateChanged(evt);
+            }
+        });
+
+        jComboBoxProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProvActionPerformed(evt);
             }
         });
 
@@ -382,7 +397,7 @@ public class AltaPromocion extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jComboBoxProv, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabelPromo1))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelServ)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -529,6 +544,14 @@ public class AltaPromocion extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         refrescarServicios();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBoxProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxProvActionPerformed
+
+    private void jTextFieldFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFinalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFinalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
