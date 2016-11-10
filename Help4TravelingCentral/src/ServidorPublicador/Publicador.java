@@ -89,8 +89,8 @@ public class Publicador {
 
     // [x] Buscar.java
     @WebMethod
-    public String getNkProveedorPromocion(String servicio) {
-        return fab.getIControladorServicio().getNkProveedorPromocion(servicio);
+    public String getNkProveedorPromocion(String promocion) {
+        return fab.getIControladorServicio().getNkProveedorPromocion(promocion);
     }
 
     // Promocion.jsp
