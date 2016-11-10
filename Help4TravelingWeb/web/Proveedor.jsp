@@ -4,6 +4,7 @@
     Author     : HP Usuario
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Logica.DtPromocion"%>
 <%@page import="Logica.Fabrica"%>
 <%@page import="Logica.ManejadorServicio"%>
@@ -73,16 +74,18 @@
     <body>
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
-            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+            servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = service.getPublicadorPort();
 
             String nick = (String) request.getParameter("nick");
+            //servidorpublicador.DtUsuario dtProv = port.getDtProveedor(nick);
             DtUsuario dtProv = ManejadorProveedor.getInstance().getDtProveedor(nick);
             String nombre = dtProv.getNombre();
             String apellido = dtProv.getApellido();
             String correo = dtProv.getCorreo();
             String empresa = dtProv.getEmpresa();
             String enlace = dtProv.getLink();
+            //servidorpublicador.Date fechanac = dtProv.getNacimiento();
             Date fechanac = dtProv.getNacimiento();
             String nacimiento = String.valueOf(fechanac.getDia()) + "/" + String.valueOf(fechanac.getMes()) + "/" + String.valueOf(fechanac.getAno());
 
@@ -181,8 +184,7 @@
 
 
                     <%
-                        //con = new Consultas();
-                        List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
+                        servidorpublicador.ArrayList promociones = port.listarPromocionesProveedor(nick);
                         if (!promociones.isEmpty()) {
                             Iterator<DtPromocion> ipromo = promociones.iterator(); %>
                     <div id="promociones" class="tab-pane fade">

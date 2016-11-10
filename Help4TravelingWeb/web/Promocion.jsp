@@ -76,11 +76,12 @@
     <!--div class="section"></div-->
     <% String nombre = (String) request.getParameter("nombre");
         String proveedor = (String) request.getParameter("proveedor");
+
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        //servidorpublicador.DtPromocion dtProm = port.getDTPromocion(nombre, proveedor);
         DtPromocion dtProm = ManejadorServicio.getInstance().getDTPromocion(nombre, proveedor);
         out.print(dtProm.getNombre());
-
-        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-        servidorpublicador.Publicador port = servicio.getPublicadorPort();
 
     %>
     <div class="section minimo">
@@ -118,6 +119,7 @@
                                                 while (itnomserv.hasNext()) {
                                                     String servprom = itnomserv.next();
                                                     String provserv = port.getNkProveedorServicio(servprom);
+                                                    //servidorpublicador.DtServicio dtServ = port.getDtServicio(servprom, provserv);
                                                     DtServicio dtServ = fab.getIControladorServicio().getDtServicio(servprom, provserv);
                                                     serviciosProm.add(dtServ);
                                                 }
@@ -148,7 +150,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h1><%=nombre%></h1>
-                                <h3><% DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(proveedor);
+                                <h3><% servidorpublicador.DtUsuario prov = port.getDtProveedor(proveedor);
                                     out.print(prov.getNombre());
                                     out.print(" ");
                                     out.print(prov.getApellido()); %></h3>
