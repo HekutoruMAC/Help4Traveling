@@ -6,9 +6,8 @@
 
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="Logica.ManejadorServicio"%>
+
 <%@page import="java.util.List"%>
-<%@page import="Logica.DtServicio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <head>
@@ -31,29 +30,31 @@
             <hr>
 
             <%  //DtServicio dtServ = null;
+                List<servidorpublicador.DtServicio> servicios = new LinkedList<servidorpublicador.DtServicio>();
+                String categoria = (String) request.getParameter("categoria");
+                //Fabrica fab = Fabrica.getInstance();
                 servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
                 servidorpublicador.Publicador port = service.getPublicadorPort();
-
-                List<DtServicio> servicios = new LinkedList<>();
-                String categoria = request.getParameter("categoria");
+                
                 if (!categoria.equals("null")) {
-                    List<String> nombres = new LinkedList<>();
-                    nombres = ManejadorServicio.getInstance().listarServiciosCategoria(categoria);
+                    List<String> nombres = new LinkedList<String>();
+                    nombres = port.listarServiciosCategorias(categoria).getServiciosCategorias();
                     if (!nombres.isEmpty()) {
                         Iterator<String> inom = nombres.iterator();
                         while (inom.hasNext()) {
+                           // Consultas con = new Consultas();
                             String nombre = inom.next();
                             String proveedor = port.getNkProveedorServicio(nombre);
-                            DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
+                            servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);
                             servicios.add(dtServ);
                         }
                     }
 
                 } else {
-                    servicios = ManejadorServicio.getInstance().listarServicios();
+                    servicios = port.listarServicios().getServicios();
                 }
                 if (!servicios.isEmpty()) {
-                    Iterator<DtServicio> iserv = servicios.iterator(); %>
+                    Iterator<servidorpublicador.DtServicio> iserv = servicios.iterator(); %>
             <table class="default table table-bordered table-hover table-striped">
                 <thead>
                     <tr class="default">
@@ -66,12 +67,12 @@
                 </thead>
                 <tbody>
                     <% while (iserv.hasNext()) {
-                            DtServicio dtServ = iserv.next();
+                            servidorpublicador.DtServicio dtServ = iserv.next();
                             String nombre = dtServ.getNombre();
-                            String proveedor = dtServ.getNkProveedor();
+                            String proveedor = dtServ.getNkproveedor();
                             String descripcion = dtServ.getDescripcion();
                             float precio = dtServ.getPrecio();
-                            String origen = dtServ.getNomCiuOrigen();  %>
+                            String origen = dtServ.getNomciuorigen();  %>
                     <tr class="default">
                         <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>&categoria=<% out.print(categoria);%>" target="_blank"><%=nombre%></a></td>
                         <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>
