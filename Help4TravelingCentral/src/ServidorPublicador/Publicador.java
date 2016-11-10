@@ -5,9 +5,7 @@
 package ServidorPublicador;
 
 import Logica.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
-//import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -57,7 +55,7 @@ public class Publicador {
 
     @WebMethod
     public DtUsuario Autenticacion(String nickname, String password) {
-    //public boolean Autenticacion(String nickname, String password) {
+        //public boolean Autenticacion(String nickname, String password) {
         return fab.getIControladorUsuario().Autenticacion(nickname, password);
     }
 
@@ -83,10 +81,16 @@ public class Publicador {
         return mser.listarServiciosCategoria(categoria);
     }
 
-    // ListarServicios.jsp, Promocion.jsp
+    // [x] ListarServicios.jsp, Promocion.jsp Reserva.jsp Buscar.java
     @WebMethod
     public String getNkProveedorServicio(String servicio) {
         return fab.getIControladorServicio().getNkProveedorServicio(servicio);
+    }
+
+    // [x] Buscar.java
+    @WebMethod
+    public String getNkProveedorPromocion(String servicio) {
+        return fab.getIControladorServicio().getNkProveedorPromocion(servicio);
     }
 
     // Promocion.jsp

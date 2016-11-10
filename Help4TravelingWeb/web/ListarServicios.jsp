@@ -4,7 +4,6 @@
     Author     : Leonardo
 --%>
 
-<%@page import="Logica.Fabrica"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="Logica.ManejadorServicio"%>
@@ -32,18 +31,19 @@
             <hr>
 
             <%  //DtServicio dtServ = null;
-                List<DtServicio> servicios = new LinkedList<DtServicio>();
-                String categoria = (String) request.getParameter("categoria");
-                Fabrica fab = Fabrica.getInstance();
+                servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+                servidorpublicador.Publicador port = service.getPublicadorPort();
+
+                List<DtServicio> servicios = new LinkedList<>();
+                String categoria = request.getParameter("categoria");
                 if (!categoria.equals("null")) {
-                    List<String> nombres = new LinkedList<String>();
+                    List<String> nombres = new LinkedList<>();
                     nombres = ManejadorServicio.getInstance().listarServiciosCategoria(categoria);
                     if (!nombres.isEmpty()) {
                         Iterator<String> inom = nombres.iterator();
                         while (inom.hasNext()) {
-                           // Consultas con = new Consultas();
                             String nombre = inom.next();
-                            String proveedor = fab.getIControladorServicio().getNkProveedorServicio(nombre);
+                            String proveedor = port.getNkProveedorServicio(nombre);
                             DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
                             servicios.add(dtServ);
                         }

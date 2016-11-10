@@ -78,6 +78,10 @@
         String proveedor = (String) request.getParameter("proveedor");
         DtPromocion dtProm = ManejadorServicio.getInstance().getDTPromocion(nombre, proveedor);
         out.print(dtProm.getNombre());
+
+        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = servicio.getPublicadorPort();
+
     %>
     <div class="section minimo">
         <div class="container">
@@ -113,7 +117,7 @@
                                                 Iterator<String> itnomserv = nomsServProm.iterator();
                                                 while (itnomserv.hasNext()) {
                                                     String servprom = itnomserv.next();
-                                                    String provserv = fab.getIControladorServicio().getNkProveedorServicio(servprom);
+                                                    String provserv = port.getNkProveedorServicio(servprom);
                                                     DtServicio dtServ = fab.getIControladorServicio().getDtServicio(servprom, provserv);
                                                     serviciosProm.add(dtServ);
                                                 }

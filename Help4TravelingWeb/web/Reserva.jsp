@@ -50,6 +50,9 @@
             System.out.println("Este es el numero de reserva" + numRes);
             List<DtItemReserva> itemsReserva;
 
+            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+
             //itemsReserva= fab.getIControladorReserva().listarItems(numRes);
             //itemsReserva= ManejadorReserva.getInstance().listarItems(numRes);
             //aca recibe como parametro la id de reservay devuelve los items vinculados
@@ -124,7 +127,7 @@
                                                     inicio = partesfech[2] + "/" + partesfech[1] + "/" + partesfech[0];
                                                     partesfech = fin.split("/");
                                                     fin = partesfech[2] + "/" + partesfech[1] + "/" + partesfech[0];
-                                                    boolean esservicio = fab.getIControladorServicio().existeServicio(NombOfr);
+                                                    boolean esservicio = port.existeServicio(NombOfr);
 
                                             %>
                                             <tr class="default">

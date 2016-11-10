@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,13 +30,14 @@ public class Buscar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String oferta = (String) request.getParameter("buscar");
-        Fabrica fab = Fabrica.getInstance();
+        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = servicio.getPublicadorPort();
 
-        if (fab.getIControladorServicio().existeServicio(oferta)) {
-            String proveedor = fab.getIControladorServicio().getNkProveedorServicio(oferta);
+        if (port.existeServicio(oferta)) {
+            String proveedor = port.getNkProveedorServicio(oferta);
             response.sendRedirect("Servicio.jsp?nombre=" + oferta + "&proveedor=" + proveedor + "&categoria=");
         } else {
-            String proveedor = fab.getIControladorServicio().getNkProveedorPromocion(oferta);
+            String proveedor = port.getNkProveedorPromocion(oferta);
             response.sendRedirect("Promocion.jsp?nombre=" + oferta + "&proveedor=" + proveedor);
         }
     }

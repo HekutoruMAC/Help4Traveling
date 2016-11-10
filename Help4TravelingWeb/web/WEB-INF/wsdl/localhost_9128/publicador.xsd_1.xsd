@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://ServidorPublicador/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ServidorPublicador/">
 
-<xs:complexType name="arrayList">
-<xs:complexContent>
-<xs:extension base="tns:abstractList">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:complexType name="arrayList">
+        <xs:complexContent>
+            <xs:extension base="tns:abstractList">
+                <xs:sequence></xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-<xs:complexType name="abstractList" abstract="true">
-<xs:complexContent>
-<xs:extension base="tns:abstractCollection">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:complexType name="abstractList" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="tns:abstractCollection">
+                <xs:sequence></xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-<xs:complexType name="abstractCollection" abstract="true">
-<xs:sequence></xs:sequence>
-</xs:complexType>
+    <xs:complexType name="abstractCollection" abstract="true">
+        <xs:sequence></xs:sequence>
+    </xs:complexType>
 
-<xs:complexType name="dtServicio">
-<xs:sequence>
-<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nkproveedor" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-<xs:element name="categorias">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
-<xs:element name="value" minOccurs="0" type="tns:dtCategoria"></xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="precio" type="xs:float"></xs:element>
-<xs:element name="nomciuorigen" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nomciudestino" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
+    <xs:complexType name="dtServicio">
+        <xs:sequence>
+            <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="nkproveedor" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+            <xs:element name="categorias">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+                                    <xs:element name="value" minOccurs="0" type="tns:dtCategoria"></xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="precio" type="xs:float"></xs:element>
+            <xs:element name="nomciuorigen" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="nomciudestino" type="xs:string" minOccurs="0"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-<xs:complexType name="dtCategoria">
-<xs:sequence></xs:sequence>
-</xs:complexType>
+    <xs:complexType name="dtCategoria">
+        <xs:sequence></xs:sequence>
+    </xs:complexType>
 
-<xs:complexType name="dtUsuario">
-<xs:sequence>
-<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nacimiento" type="tns:date" minOccurs="0"></xs:element>
-<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="tipo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="empresa" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="link" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
+    <xs:complexType name="dtUsuario">
+        <xs:sequence>
+            <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="nacimiento" type="tns:date" minOccurs="0"></xs:element>
+            <xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="tipo" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="empresa" type="xs:string" minOccurs="0"></xs:element>
+            <xs:element name="link" type="xs:string" minOccurs="0"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-<xs:complexType name="date">
-<xs:sequence>
-<xs:element name="ano" type="xs:int"></xs:element>
-<xs:element name="dia" type="xs:int"></xs:element>
-<xs:element name="mes" type="xs:int"></xs:element>
-</xs:sequence>
-</xs:complexType>
+    <xs:complexType name="date">
+        <xs:sequence>
+            <xs:element name="ano" type="xs:int"></xs:element>
+            <xs:element name="dia" type="xs:int"></xs:element>
+            <xs:element name="mes" type="xs:int"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-<xs:complexType name="dtPromocion">
-<xs:sequence></xs:sequence>
-</xs:complexType>
+    <xs:complexType name="dtPromocion">
+        <xs:sequence></xs:sequence>
+    </xs:complexType>
 </xs:schema>
