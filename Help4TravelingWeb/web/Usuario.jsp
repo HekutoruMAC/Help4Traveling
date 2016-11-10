@@ -71,8 +71,8 @@
     <body>
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
-            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+            servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = service.getPublicadorPort();
 
             Boolean esProv = (Boolean) session.getAttribute("esProv");
             String nick = session.getAttribute("nickname").toString();

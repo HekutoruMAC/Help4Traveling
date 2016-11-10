@@ -29,20 +29,18 @@
             <div class="row default"><h2><b>Listado de Servicios</b></h2></div>
             <hr>
 
-            <%  //DtServicio dtServ = null;
-                List<servidorpublicador.DtServicio> servicios = new LinkedList<servidorpublicador.DtServicio>();
-                String categoria = (String) request.getParameter("categoria");
-                //Fabrica fab = Fabrica.getInstance();
+            <%
+                List<servidorpublicador.DtServicio> servicios = new LinkedList<>();
+                String categoria = request.getParameter("categoria");
                 servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
                 servidorpublicador.Publicador port = service.getPublicadorPort();
-                
+
                 if (!categoria.equals("null")) {
-                    List<String> nombres = new LinkedList<String>();
+                    List<String> nombres = new LinkedList<>();
                     nombres = port.listarServiciosCategorias(categoria).getServiciosCategorias();
                     if (!nombres.isEmpty()) {
                         Iterator<String> inom = nombres.iterator();
                         while (inom.hasNext()) {
-                           // Consultas con = new Consultas();
                             String nombre = inom.next();
                             String proveedor = port.getNkProveedorServicio(nombre);
                             servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);
