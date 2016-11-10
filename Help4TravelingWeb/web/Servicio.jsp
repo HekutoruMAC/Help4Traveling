@@ -88,9 +88,7 @@
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);  
-        padre = port.obtenerPadre(categoria);
-        //padre = ManejadorCategoria.getInstance().obtenerPadre(categoria);
-        //DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre, proveedor);
+        padre = port.obtenerPadre(categoria);        
     %>
     <div class="section minimo">
         <div class="container">
@@ -102,10 +100,8 @@
                     <ul class="breadcrumb">
                         <%  if (padre != null) {
                                 abuelo = port.obtenerPadre(padre);                                
-                                //abuelo = ManejadorCategoria.getInstance().obtenerPadre(padre);
                                 if (abuelo != null) {
                                     bisabuelo = port.obtenerPadre(abuelo);
-                                    //bisabuelo = ManejadorCategoria.getInstance().obtenerPadre(abuelo);
                                     if ((bisabuelo != null) && (!bisabuelo.equals("Categorias"))) { %>
                         <li><% out.print(bisabuelo); %></li>
                             <% } %>
@@ -169,8 +165,7 @@
                                                     <tr class="default">
                                                         <td class="default" width="200">Proveedor</td>
                                                         <% String nickname = dtServ.getNkproveedor();
-                                                            servidorpublicador.DtUsuario prov = port.getDtProveedor(nickname);                                                            
-                                                            //DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(nickname);
+                                                           servidorpublicador.DtUsuario prov = port.getDtProveedor(nickname);                                                                                                                       
                                                         %>
                                                             <td id="nomprov"><% out.print(prov.getNombre());
                                                             out.print(" ");
@@ -232,8 +227,8 @@
                                                     </form>
                                                     <hr>
                                                     <h3>Categorías</h3>
-                                                    <% Map<String, DtCategoria> categorias = dtServ.getDtCategorias();
-                                                        Iterator<DtCategoria> iter = categorias.values().iterator();
+                                                    <% Map<String, servidorpublicador.DtCategoria> categorias = dtServ.getDtCategorias();
+                                                        Iterator<servidorpublicador.DtCategoria> iter = categorias.values().iterator();
                                                         if (iter.hasNext()) {%>
                                                     <h4 class="lead"><%=iter.next().getNombre()%>
                                                         <% while (iter.hasNext()) {%>

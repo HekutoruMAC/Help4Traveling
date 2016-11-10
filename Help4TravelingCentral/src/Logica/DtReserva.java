@@ -10,11 +10,14 @@ import static Logica.Reserva.eEstado.FACTURADA;
 import static Logica.Reserva.eEstado.PAGADA;
 import static Logica.Reserva.eEstado.REGISTRADA;
 import java.util.Map;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author Santiago
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtReserva {
 
     //Atributos

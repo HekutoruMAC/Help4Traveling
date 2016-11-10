@@ -5,10 +5,15 @@
  */
 package Logica;
 // Comentario para que me reconozca los cambios y pueda comitear...
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author Leonardo
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtCategoria {
     private String nombre;
     private String padre;

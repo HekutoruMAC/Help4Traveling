@@ -42,9 +42,9 @@ public interface IControladorReserva {
 
     // Servidor Central ========================================================
     
-    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException;
+    public ArrayList<DtReserva> listarReservasUsuario(String cli);
 
-    public List<DtReserva> listarReservasProveedor(String prov) throws SQLException;
+    public ArrayList<DtReserva> listarReservasProveedor(String prov);
 
     public void altaReservaWeb(Reserva nueva);
 }

@@ -176,10 +176,11 @@ public class Publicador {
         return new DataServiciosProveedorArrayList(serviciosproveedor);        
     }
 
-    // [  ] Proveedor.jsp
+    // [OK] Proveedor.jsp
     @WebMethod
-    public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
-        return fab.getIControladorUsuario().listarPromocionesProveedor(prov);
+    public DataPromocionesArrayList listarPromocionesProveedor(String prov) {
+        ArrayList<DtPromocion> promocionesproveedor = fab.getIControladorUsuario().listarPromocionesProveedor(prov);
+        return new DataPromocionesArrayList(promocionesproveedor);        
     }
 
     // [  ] Proveedor.jsp
@@ -218,5 +219,20 @@ public class Publicador {
         ArrayList<DtUsuario> usuariossistema = fab.getIControladorUsuario().listarUsuariosSistema();
         return new DataUsuariosSistemaArrayList(usuariossistema);        
     }
+    
+    // [OK] Usuario.jsp
+    @WebMethod
+    public DataReservasArrayList listarReservasProveedor(String nickname) {
+        ArrayList<DtReserva> reservasproveedor = fab.getIControladorReserva().listarReservasProveedor(nickname);        
+        return new DataReservasArrayList(reservasproveedor);        
+    }  
+    
+    // [OK] Usuario.jsp
+    @WebMethod
+    public DataReservasArrayList listarReservasUsuario(String nickname) {
+        ArrayList<DtReserva> reservasusuario = fab.getIControladorReserva().listarReservasUsuario(nickname);        
+        return new DataReservasArrayList(reservasusuario);        
+    }  
+    
 
 }

@@ -407,8 +407,8 @@ public class ManejadorReserva {
     }
 
     // Servidor Central ========================================================
-    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
-        List<DtReserva> ReservaxUsuario = null;
+    public ArrayList<DtReserva> listarReservasUsuario(String cli) {
+        ArrayList<DtReserva> ReservaxUsuario = null;
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
@@ -416,7 +416,7 @@ public class ManejadorReserva {
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
-            ReservaxUsuario = new LinkedList<DtReserva>();
+            ReservaxUsuario = new ArrayList<DtReserva>();
             while (rs.next()) {
                 String numero = rs.getString("numero");
                 String fecha1 = rs.getString("fecha");
@@ -441,8 +441,8 @@ public class ManejadorReserva {
         return ReservaxUsuario;
     }
 
-    public List<DtReserva> listarReservasProveedor(String prov) throws SQLException {
-        List<DtReserva> ReservaxProveedor = null;
+    public ArrayList<DtReserva> listarReservasProveedor(String prov) {
+        ArrayList<DtReserva> ReservaxProveedor = null;
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
@@ -450,7 +450,7 @@ public class ManejadorReserva {
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
-            ReservaxProveedor = new LinkedList<DtReserva>();
+            ReservaxProveedor = new ArrayList<DtReserva>();
             while (rs.next()) {
                 String numero = rs.getString("numero");
                 String fecha1 = rs.getString("fecha");

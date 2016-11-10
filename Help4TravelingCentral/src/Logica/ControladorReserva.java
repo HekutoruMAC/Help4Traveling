@@ -71,12 +71,12 @@ public class ControladorReserva implements IControladorReserva {
     }
 
     // Servidor Central ========================================================
-    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
+    public ArrayList<DtReserva> listarReservasUsuario(String cli) {
         ManejadorReserva mr = ManejadorReserva.getInstance();
         return mr.listarReservasUsuario(cli);
     }
 
-    public List<DtReserva> listarReservasProveedor(String prov) throws SQLException {
+    public ArrayList<DtReserva> listarReservasProveedor(String prov) {
         ManejadorReserva mr = ManejadorReserva.getInstance();
         return mr.listarReservasProveedor(prov);
     }

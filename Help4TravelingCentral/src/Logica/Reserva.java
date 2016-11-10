@@ -6,7 +6,9 @@
 package Logica;
 import java.util.Map;
 import java.util.TreeMap;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Reserva {
     public static enum eEstado{REGISTRADA,CANCELADA,PAGADA,FACTURADA};
     

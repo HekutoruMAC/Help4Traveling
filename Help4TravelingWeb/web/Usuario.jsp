@@ -191,9 +191,10 @@
                         <% } %>
                     </div>
                     <%
-                        List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
+                        //List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
+                        List<servidorpublicador.DtPromocion> promociones = port.listarPromocionesProveedor(nick).getPromociones();
                         if (!promociones.isEmpty()) {
-                            Iterator<DtPromocion> ipromo = promociones.iterator(); %>
+                            Iterator<servidorpublicador.DtPromocion> ipromo = promociones.iterator(); %>
                     <div id="promociones" class="tab-pane fade">
                         <table class="default table table-bordered table-hover table-striped">
                             <thead>
@@ -206,7 +207,7 @@
                             </thead>
                             <tbody>
                                 <% while (ipromo.hasNext()) {
-                                        DtPromocion dtPromo = ipromo.next();
+                                        servidorpublicador.DtPromocion dtPromo = ipromo.next();
                                         String promocion = dtPromo.getNombre();
                                         String proveedor = dtPromo.getProveedor();
                                         String descuento = dtPromo.getDescuento();
@@ -250,14 +251,16 @@
                                     <td class="default" width="100" align="center"><b>Acciones</b></td>
 
                                 </tr>
-                                <% DtReserva dtRes = null;
-                                    List<DtReserva> reservas;
+                                <%  servidorpublicador.DtReserva dtRes = null;
+                                    List<servidorpublicador.DtReserva> reservas;
                                     if (esProv) {
-                                        reservas = fab.getIControladorReserva().listarReservasProveedor(nick);
+                                        reservas = port.listarReservasProveedor(nick).getReservas();
+                                        //reservas = fab.getIControladorReserva().listarReservasProveedor(nick);
                                     } else {
-                                        reservas = fab.getIControladorReserva().listarReservasUsuario(nick);
+                                        reservas = port.listarReservasUsuario(nick).getReservas();
+                                        //reservas = fab.getIControladorReserva().listarReservasUsuario(nick);
                                     }
-                                    Iterator<DtReserva> iter = reservas.iterator();
+                                    Iterator<servidorpublicador.DtReserva> iter = reservas.iterator();
                                     Integer i = 0;
                                     while (iter.hasNext()) {
                                         i++;
@@ -265,19 +268,20 @@
                                         String numero = i.toString();
                                         Long id = dtRes.getId();
                                         String estado = "";
-                                        if (dtRes.getEstado().compareTo(Reserva.eEstado.REGISTRADA) == 0) {
+                                        if (dtRes.getEstado().compareTo(servidorpublicador.Reserva.eEstado.REGISTRADA) == 0) {
                                             estado = "REGISTRADA";
-                                        } else if (dtRes.getEstado().compareTo(Reserva.eEstado.CANCELADA) == 0) {
+                                        } else if (dtRes.getEstado().compareTo(servidorpublicador.Reserva.eEstado.CANCELADA) == 0) {
                                             estado = "CANCELADA";
-                                        } else if (dtRes.getEstado().compareTo(Reserva.eEstado.FACTURADA) == 0) {
+                                        } else if (dtRes.getEstado().compareTo(servidorpublicador.Reserva.eEstado.FACTURADA) == 0) {
                                             estado = "FACTURADA";
-                                        } else if (dtRes.getEstado().compareTo(Reserva.eEstado.PAGADA) == 0) {
+                                        } else if (dtRes.getEstado().compareTo(servidorpublicador.Reserva.eEstado.PAGADA) == 0) {
                                             estado = "PAGADA";
                                         }
 
                                         String idres = id.toString();
                                         String cliente = dtRes.getCliente();
-                                        String creada = dtRes.getCreada().getFecha("/");
+                                        servidorpublicador.Date fechac = dtRes.getCreada();
+                                        String creada = String.valueOf(fechac.getAno())+ "/" + String.format("%02d",fechac.getMes()) + "/" + String.format("%02d",fechac.getDia());                                       
 
                                         String partesCre[] = creada.split("/");
 
