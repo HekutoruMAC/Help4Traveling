@@ -36,6 +36,14 @@
         <servlet-name>Buscar</servlet-name>
         <servlet-class>Servlets.Buscar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Email</servlet-name>
+        <servlet-class>Servlets.Email</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PDF</servlet-name>
+        <servlet-class>Servlets.PDF</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Validacion</servlet-name>
         <url-pattern>/Autenticacion</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>Buscar</servlet-name>
         <url-pattern>/Buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Email</servlet-name>
+        <url-pattern>/Email</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PDF</servlet-name>
+        <url-pattern>/PDF</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
