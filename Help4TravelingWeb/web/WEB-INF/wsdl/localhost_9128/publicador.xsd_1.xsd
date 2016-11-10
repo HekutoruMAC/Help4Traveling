@@ -32,6 +32,7 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
+<xs:element name="categoriasservicio" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 <xs:element name="precio" type="xs:float"></xs:element>
 <xs:element name="nomciuorigen" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nomciudestino" type="xs:string" minOccurs="0"></xs:element>

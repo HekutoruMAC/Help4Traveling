@@ -4,6 +4,7 @@
     Author     : Leonardo
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.Iterator"%>
 
@@ -30,13 +31,13 @@
             <hr>
 
             <%
-                List<servidorpublicador.DtServicio> servicios = new LinkedList<>();
+                List<servidorpublicador.DtServicio> servicios = new ArrayList<servidorpublicador.DtServicio>();
                 String categoria = request.getParameter("categoria");
                 servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
                 servidorpublicador.Publicador port = service.getPublicadorPort();
 
                 if (!categoria.equals("null")) {
-                    List<String> nombres = new LinkedList<>();
+                    List<String> nombres = new ArrayList<String>();
                     nombres = port.listarServiciosCategorias(categoria).getServiciosCategorias();
                     if (!nombres.isEmpty()) {
                         Iterator<String> inom = nombres.iterator();

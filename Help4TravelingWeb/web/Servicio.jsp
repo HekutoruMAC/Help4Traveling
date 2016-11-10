@@ -4,17 +4,11 @@
     Author     : Leonardo
 --%>
 
-<%@page import="Logica.ManejadorProveedor"%>
-<%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
-<%@page import="Logica.DtCategoria"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Logica.DtUsuario"%>
 <%@page import="java.util.List"%>
-<%@page import="Logica.ManejadorCategoria"%>
-<%@page import="Logica.DtServicio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -227,22 +221,24 @@
                                                     </form>
                                                     <hr>
                                                     <h3>Categorías</h3>
-                                                    <% Map<String, servidorpublicador.DtCategoria> categorias = dtServ.getDtCategorias();
-                                                        Iterator<servidorpublicador.DtCategoria> iter = categorias.values().iterator();
+                                                    <%  List<String> categorias = dtServ.getCategoriasservicio();
+                                                        Iterator<String> iter = categorias.iterator();
                                                         if (iter.hasNext()) {%>
-                                                    <h4 class="lead"><%=iter.next().getNombre()%>
+                                                    <h4 class="lead"><%=iter.next()%>
                                                         <% while (iter.hasNext()) {%>
-                                                        | <%=iter.next().getNombre()%>
+                                                        | <%=iter.next()%>
                                                         <% } %>
                                                         <% }%>
                                                     </h4>
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    <footer class="section section-primary" id="footer"></footer>
-                                                    </html>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="section section-primary" id="footer"></footer>
+</html>

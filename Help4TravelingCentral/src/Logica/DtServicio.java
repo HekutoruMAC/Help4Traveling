@@ -5,6 +5,8 @@
  */
 package Logica;
 // // Comentario para que me reconozca los cambios y pueda comitear...
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,6 +23,7 @@ public class DtServicio {
     private String descripcion;
     private List<String> imagenes;
     private Map<String,DtCategoria> categorias;
+    List<String> categoriasservicio;
     private float precio;
     private String nomciuorigen;
     private String nomciudestino;
@@ -52,9 +55,18 @@ public class DtServicio {
     public List<String> getImagenes() {
         return imagenes;
     }
-
-    public Map<String, DtCategoria> getDtCategorias() {
+    
+    public Map<String,DtCategoria> getDtCategorias() {
         return categorias;
+    }
+
+    public List<String> getCategoriasServicio() {
+        categoriasservicio = new ArrayList<String>();
+        Iterator<DtCategoria> iter = categorias.values().iterator();
+        while (iter.hasNext()) {
+            categoriasservicio.add(iter.next().getNombre());
+        }
+        return categoriasservicio;
     }
 
     public float getPrecio() {
