@@ -75,14 +75,10 @@
     </div>
     <!--div class="section"></div-->
     <% String nombre = (String) request.getParameter("nombre");
-        String proveedor = (String) request.getParameter("proveedor");
-        DtPromocion dtProm = ManejadorServicio.getInstance().getDTPromocion(nombre, proveedor);
-        out.print(dtProm.getNombre());
-
-        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-        servidorpublicador.Publicador port = servicio.getPublicadorPort();
-
-    %>
+       String proveedor = (String) request.getParameter("proveedor");
+       servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+       servidorpublicador.Publicador port = servicio.getPublicadorPort();
+       servidorpublicador.DtPromocion dtProm = port.getDTPromocion(nombre, proveedor);%>
     <div class="section minimo">
         <div class="container">
             <div class="row">
@@ -109,28 +105,27 @@
                                     </thead>
                                     <tbody>
                                         <%  float total = 0;
-                                            List<String> nomsServProm = new LinkedList<String>();
-                                            Fabrica fab = Fabrica.getInstance();
-                                            nomsServProm = fab.getIControladorServicio().listarServiciosDePromociones(nombre, proveedor);
+                                            List<String> nomsServProm = new ArrayList<String>();
+                                            nomsServProm = port.listarServiciosDePromociones(nombre, proveedor).getServiciosPromociones();                                            
                                             if (!nomsServProm.isEmpty()) {
-                                                List<DtServicio> serviciosProm = new LinkedList<DtServicio>();
+                                                List<servidorpublicador.DtServicio> serviciosProm = new ArrayList<servidorpublicador.DtServicio>();
                                                 Iterator<String> itnomserv = nomsServProm.iterator();
                                                 while (itnomserv.hasNext()) {
                                                     String servprom = itnomserv.next();
                                                     String provserv = port.getNkProveedorServicio(servprom);
-                                                    DtServicio dtServ = fab.getIControladorServicio().getDtServicio(servprom, provserv);
+                                                    servidorpublicador.DtServicio dtServ = port.getDtServicio(servprom, provserv);
                                                     serviciosProm.add(dtServ);
                                                 }
                                                 if (!serviciosProm.isEmpty()) {
-                                                    Iterator<DtServicio> itserv = serviciosProm.iterator();
+                                                    Iterator<servidorpublicador.DtServicio> itserv = serviciosProm.iterator();
                                                     total = 0;
                                                     while (itserv.hasNext()) {
-                                                        DtServicio dtServ1 = itserv.next();
+                                                        servidorpublicador.DtServicio dtServ1 = itserv.next();
                                                         String nomserv = dtServ1.getNombre();
-                                                        String provserv = dtServ1.getNkProveedor();
+                                                        String provserv = dtServ1.getNkproveedor();
                                                         String descripcion = dtServ1.getDescripcion();
                                                         float precio = dtServ1.getPrecio();
-                                                        String origen = dtServ1.getNomCiuOrigen();
+                                                        String origen = dtServ1.getNomciuorigen();                                                        
                                                         total = total + precio; %>
                                         <tr class="default">
                                             <td class="default" align="center" width="200" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nomserv); %>&proveedor=<% out.print(provserv); %>&categoria=<% out.print("");%>" target="_blank"><%=nomserv%></a></td>
@@ -148,7 +143,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h1><%=nombre%></h1>
-                                <h3><% DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(proveedor);
+                                <h3><% servidorpublicador.DtUsuario prov = port.getDtProveedor(proveedor);
                                     out.print(prov.getNombre());
                                     out.print(" ");
                                     out.print(prov.getApellido()); %></h3>

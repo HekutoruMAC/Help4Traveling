@@ -6,24 +6,10 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="arrayList">
-<xs:complexContent>
-<xs:extension base="tns:abstractList">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractList" abstract="true">
-<xs:complexContent>
-<xs:extension base="tns:abstractCollection">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractCollection" abstract="true">
-<xs:sequence></xs:sequence>
+<xs:complexType name="dataServiciosPromocionesArrayList">
+<xs:sequence>
+<xs:element name="serviciosPromociones" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtServicio">
@@ -53,6 +39,26 @@
 </xs:complexType>
 
 <xs:complexType name="dtCategoria">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="arrayList">
+<xs:complexContent>
+<xs:extension base="tns:abstractList">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractList" abstract="true">
+<xs:complexContent>
+<xs:extension base="tns:abstractCollection">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractCollection" abstract="true">
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
