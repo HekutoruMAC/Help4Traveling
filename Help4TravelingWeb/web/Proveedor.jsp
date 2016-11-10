@@ -73,8 +73,10 @@
     <body>
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
+            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+
             String nick = (String) request.getParameter("nick");
-            Consultas con = new Consultas();
             DtUsuario dtProv = ManejadorProveedor.getInstance().getDtProveedor(nick);
             String nombre = dtProv.getNombre();
             String apellido = dtProv.getApellido();
@@ -83,8 +85,8 @@
             String enlace = dtProv.getLink();
             Date fechanac = dtProv.getNacimiento();
             String nacimiento = String.valueOf(fechanac.getDia()) + "/" + String.valueOf(fechanac.getMes()) + "/" + String.valueOf(fechanac.getAno());
-            Fabrica fab = Fabrica.getInstance();
-            String imagen = fab.getIControladorUsuario().imagenPerfilUsuario(nick);
+
+            String imagen = port.imagenPerfilUsuario(nick);
             out.print(dtProv.getNombre());
         %>
         <br>

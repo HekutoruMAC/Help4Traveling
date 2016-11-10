@@ -29,7 +29,7 @@ public class Buscar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String oferta = (String) request.getParameter("buscar");
+        String oferta = request.getParameter("buscar");
         servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = servicio.getPublicadorPort();
 

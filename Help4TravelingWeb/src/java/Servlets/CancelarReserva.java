@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -36,8 +35,10 @@ public class CancelarReserva extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Integer reserva = Integer.parseInt(request.getParameter("reserva"));
 
-        Fabrica fab = Fabrica.getInstance();
-        fab.getIControladorReserva().actualizarEstadoDeReserva(reserva, "CANCELADA");
+        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = servicio.getPublicadorPort();
+
+        port.actualizarEstadoDeReserva(reserva, "CANCELADA");
 
         response.sendRedirect("Usuario.jsp");
     }

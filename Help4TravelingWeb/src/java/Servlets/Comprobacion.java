@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -42,7 +41,7 @@ public class Comprobacion extends HttpServlet {
         sesion.setAttribute("email", email);
         sesion.setAttribute("registra", "true");
         //System.out.println(nickname+ "   "+email);
-           servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         if (port.comprobacion(nickname, email)) {
 

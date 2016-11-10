@@ -46,13 +46,10 @@ public class Validacion extends HttpServlet {
         sesion.setAttribute("password", password);
         sesion.setAttribute("inicia", "true");
 
-        //Fabrica fab = Fabrica.getInstance();
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
-        servidorpublicador.DtUsuario dtu = port.autenticacion(nickname, password);       
-        if (!dtu.getNickname().equals("null")) {        
-        //if (port.autenticacion(nickname, password)) {
-       // if (fab.getIControladorUsuario().Autenticacion(sesion)) {
+        servidorpublicador.DtUsuario dtu = port.autenticacion(nickname, password);
+        if (!dtu.getNickname().equals("null")) {
             sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
             sesion.setAttribute("nombre", dtu.getNombre());
             sesion.setAttribute("apellido", dtu.getApellido());
@@ -126,6 +123,5 @@ public class Validacion extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-      
 
 }

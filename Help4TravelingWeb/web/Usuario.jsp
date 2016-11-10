@@ -71,6 +71,9 @@
     <body>
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
+            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+
             Boolean esProv = (Boolean) session.getAttribute("esProv");
             String nick = session.getAttribute("nickname").toString();
             String nombre = session.getAttribute("nombre").toString();
@@ -97,7 +100,7 @@
 
             fecha = partes[2] + "/" + partes[1] + "/" + partes[0];
             Fabrica fab = Fabrica.getInstance();
-            String imagen = fab.getIControladorUsuario().imagenPerfilUsuario(nick);
+            String imagen = port.imagenPerfilUsuario(nick);
             //System.out.println(mierda1) ;
             /*Date fecha1 = new Date(10, 11, 2012);
             Cliente usu = new Cliente("juan", "Perez", "Juanpe", "contrasenia", "alfalfa@gmail.com", fecha1, "aca la imagen");

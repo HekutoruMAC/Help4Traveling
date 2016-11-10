@@ -71,8 +71,12 @@ public class eliminarCarrito extends HttpServlet {
             List<Reserva> itemsCarrito = (List<Reserva>) sesion.getAttribute("carrito");
             Iterator<Reserva> iter = itemsCarrito.iterator();
 
+            servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = service.getPublicadorPort();
+
             Reserva res;
             Logica.Reserva reserva = new Logica.Reserva();
+
             reserva.setCliente((String) sesion.getAttribute("nickname"));
             reserva.setEstado(REGISTRADA);
             reserva.setTotal((float) sesion.getAttribute("preciototal"));
@@ -107,9 +111,11 @@ public class eliminarCarrito extends HttpServlet {
 
                 //itemsCarrito.remove(res);
             }
+
             Fabrica fab = Fabrica.getInstance();
             fab.getIControladorReserva().altaReservaWeb(reserva);
 
+            //port.altaReservaWeb(reserva);
             sesion.setAttribute("preciototal", 0);
             for (int i = 0; i < itemsCarrito.size(); i++) {
                 itemsCarrito.remove(i);

@@ -48,124 +48,142 @@ public class Publicador {
         return mcli.getDtUsuario(nickname);
     }
 
+    // Servicios para Servlets =================================================
+    // [OK] Buscar.java
+    @WebMethod
+    public String getNkProveedorPromocion(String promocion) {
+        return fab.getIControladorServicio().getNkProveedorPromocion(promocion);
+    }
+
+    // [OK] CancelarReserva.java
+    @WebMethod
+    public void actualizarEstadoDeReserva(Integer reserva, String estado) {
+        fab.getIControladorReserva().actualizarEstadoDeReserva(reserva, estado);
+    }
+
+    // [OK] Comprobacion.java
+    @WebMethod
+    public boolean Comprobacion(String nickname, String password) {
+        return fab.getIControladorUsuario().Comprobacion(nickname, password);
+    }
+
+    // [OK] Comprobacion.java, Validacion.java
+    @WebMethod
+    public boolean existeProveedor(String nickname) {
+        return fab.getIControladorUsuario().existeProveedor(nickname);
+    }
+
+    // [  ] eliminarCarrito.java
+    @WebMethod
+    public void altaReservaWeb(Reserva nueva) {
+        fab.getIControladorReserva().altaReservaWeb(nueva);
+    }
+
+    // [OK] Registrar.java
     @WebMethod
     public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) {
         return fab.getIControladorUsuario().Registrar(nickname, nombre, apellido, password, email, imagen, fecha);
     }
 
+    // [OK] Validacion.java
     @WebMethod
     public DtUsuario Autenticacion(String nickname, String password) {
         //public boolean Autenticacion(String nickname, String password) {
         return fab.getIControladorUsuario().Autenticacion(nickname, password);
     }
 
-    @WebMethod
-    public boolean existeProveedor(String nickname) {
-        return fab.getIControladorUsuario().existeProveedor(nickname);
-    }
-
-    @WebMethod
-    public boolean Comprobacion(String nickname, String password) {
-        return fab.getIControladorUsuario().Comprobacion(nickname, password);
-    }
-
-    // Categorías.jsp
+    // Servicios para JSP ======================================================
+    // [  ] Categorías.jsp
     @WebMethod
     public ArrayList<String> obtenerCategoriasHijas(String padre) {
         return mcat.obtenerCategoriasHijas(padre);
     }
 
-    // ListarServicios.jsp
+    // [  ] ListarServicios.jsp
     @WebMethod
     public ArrayList<String> listarServiciosCategoria(String categoria) {
         return mser.listarServiciosCategoria(categoria);
     }
 
-    // [x] ListarServicios.jsp, Promocion.jsp Reserva.jsp Buscar.java
+    // [OK] ListarServicios.jsp, Promocion.jsp Reserva.jsp Buscar.java
     @WebMethod
     public String getNkProveedorServicio(String servicio) {
         return fab.getIControladorServicio().getNkProveedorServicio(servicio);
     }
 
-    // [x] Buscar.java
-    @WebMethod
-    public String getNkProveedorPromocion(String promocion) {
-        return fab.getIControladorServicio().getNkProveedorPromocion(promocion);
-    }
-
-    // Promocion.jsp
+    // [  ] Promocion.jsp
     @WebMethod
     public DtPromocion getDTPromocion(String nombre, String Proveedor) {
         return mser.getDTPromocion(nombre, Proveedor);
     }
 
-    // Promocion.jsp
+    // [  ] Promocion.jsp
     @WebMethod
     public ArrayList<String> listarServiciosDePromociones(String nombre, String prov) {
         return fab.getIControladorServicio().listarServiciosDePromociones(nombre, prov);
     }
 
-    // Promocion.jsp, Servicio.jsp
+    // [  ] Promocion.jsp, Servicio.jsp
     @WebMethod
     public DtServicio getDtServicio(String nombre, String proveedor) {
         return fab.getIControladorServicio().getDtServicio(nombre, proveedor);
     }
 
-    // Promocion.jsp, Proveedor.jsp, Servicio.jsp, Usuario.jsp
+    // [  ] Promocion.jsp, Proveedor.jsp, Servicio.jsp, Usuario.jsp
     @WebMethod
     public DtUsuario getDtProveedor(String nickname) {
         return mprov.getDtProveedor(nickname);
     }
 
-    // Promociones.jsp
+    // [  ] Promociones.jsp
     @WebMethod
     public ArrayList<DtPromocion> listarPromociones() {
         return fab.getIControladorServicio().listarPromociones();
     }
 
-    // Proveedor.jsp (ArrayList)
+    // [  ] Proveedor.jsp
     @WebMethod
     public ArrayList<DtServicio> listarServiciosProveedor(DtUsuario user) {
         return mser.listarServiciosProveedor(user);
     }
 
-    // Proveedor.jsp (ArrayList)
+    // [  ] Proveedor.jsp
     @WebMethod
     public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
         return fab.getIControladorUsuario().listarPromocionesProveedor(prov);
     }
 
-    // Proveedor.jsp (ArrayList)
+    // [  ] Proveedor.jsp
     @WebMethod
     public ArrayList<DtUsuario> listarProveedores() {
         return mprov.listarProveedores();
     }
 
-    // Reserva.jsp
+    // [  ] Reserva.jsp
     @WebMethod
     public ArrayList<DtItemReserva> listarItems(Integer reserva) {
         return fab.getIControladorReserva().listarItems(reserva);
     }
 
-    // Reserva.jsp
+    // [OK] Buscar.java, Reserva.jsp
     @WebMethod
     public boolean existeServicio(String nombre) {
         return fab.getIControladorServicio().existeServicio(nombre);
     }
 
-    // Servicio.jsp
+    // [OK] Servicio.jsp
     @WebMethod
     public String obtenerPadre(String hijo) {
         return mcat.obtenerPadre(hijo);
     }
 
-    // Usuario.jsp
+    // [OK] Proveedor.jsp, Usuario.jsp
     @WebMethod
     public String imagenPerfilUsuario(String nickname) {
         return fab.getIControladorUsuario().imagenPerfilUsuario(nickname);
     }
 
-    // Usuarios.jsp
+    // [  ] Usuarios.jsp
     @WebMethod
     public ArrayList<DtUsuario> listarUsuariosSistema() {
         return fab.getIControladorUsuario().listarUsuariosSistema();

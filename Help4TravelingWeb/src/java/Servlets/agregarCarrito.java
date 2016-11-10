@@ -6,19 +6,14 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import Servlets.Reserva;
-import java.util.Iterator;
 
 /**
  *
@@ -55,16 +50,14 @@ public class agregarCarrito extends HttpServlet {
         reserva.setCantidad(Integer.parseInt(cantidad));
         reserva.setFechaini(fechaini);
         reserva.setFechafin(fechafin);
-        
-        
 
         List<Reserva> reservas = new ArrayList<Reserva>();
         boolean existe = false;
         HttpSession sesion = request.getSession();
         if (sesion.getAttribute("carrito") != null) {
             reservas = (List<Reserva>) sesion.getAttribute("carrito");
-            float preciototal = (float)sesion.getAttribute("preciototal");
-            sesion.setAttribute("preciototal",preciototal + Integer.parseInt(cantidad)*Float.parseFloat(precio));
+            float preciototal = (float) sesion.getAttribute("preciototal");
+            sesion.setAttribute("preciototal", preciototal + Integer.parseInt(cantidad) * Float.parseFloat(precio));
             Iterator<Reserva> iter = reservas.iterator();
             Reserva res;
             while (iter.hasNext()) {
@@ -82,10 +75,9 @@ public class agregarCarrito extends HttpServlet {
                 sesion.setAttribute("contador", contador + 1);
             }
 
-        }
-        else{
-            sesion.setAttribute("contador",1);
-            sesion.setAttribute("preciototal",Integer.parseInt(cantidad)*Float.parseFloat(precio));
+        } else {
+            sesion.setAttribute("contador", 1);
+            sesion.setAttribute("preciototal", Integer.parseInt(cantidad) * Float.parseFloat(precio));
         }
         reservas.add(reserva);
         sesion.setAttribute("carrito", reservas);

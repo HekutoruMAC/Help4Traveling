@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -30,6 +29,7 @@ public class Registro extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -38,17 +38,16 @@ public class Registro extends HttpServlet {
 
         String nickname = (String) sesion.getAttribute("nickname");
         String mail = (String) sesion.getAttribute("email");
-        String nombre = (String) request.getParameter("nombre_in");
-        String apellido = (String) request.getParameter("apellido_in");
-        String fecha = (String) request.getParameter("fecha");
-        String contrasenia = (String) request.getParameter("password_in");
-        String imagen = (String) request.getParameter("imagen_registro");
+        String nombre = request.getParameter("nombre_in");
+        String apellido = request.getParameter("apellido_in");
+        String fecha = request.getParameter("fecha");
+        String contrasenia = request.getParameter("password_in");
+        String imagen = request.getParameter("imagen_registro");
         System.out.println(imagen);
 
-       servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
-        if (port.registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {        
-        //if (fab.getIControladorUsuario().Registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
+        if (port.registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
             sesion.setAttribute("nombre", nombre);
             sesion.setAttribute("email", mail);
             sesion.setAttribute("apellido", apellido);

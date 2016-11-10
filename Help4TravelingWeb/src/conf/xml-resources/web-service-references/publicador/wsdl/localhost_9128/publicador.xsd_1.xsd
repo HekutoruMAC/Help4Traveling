@@ -1,5 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://ServidorPublicador/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ServidorPublicador/">
 
+<xs:complexType name="reserva">
+<xs:sequence>
+<xs:element name="cliente" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="estado" type="tns:eEstado" minOccurs="0"></xs:element>
+<xs:element name="id" type="xs:long"></xs:element>
+<xs:element name="items">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:int"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:itemReserva"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="total" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="itemReserva">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:int"></xs:element>
+<xs:element name="fin" type="tns:date" minOccurs="0"></xs:element>
+<xs:element name="inicio" type="tns:date" minOccurs="0"></xs:element>
+<xs:element name="oferta" type="tns:oferta" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="date">
+<xs:sequence>
+<xs:element name="ano" type="xs:int"></xs:element>
+<xs:element name="dia" type="xs:int"></xs:element>
+<xs:element name="mes" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="oferta" abstract="true">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="proveedor" type="tns:proveedor" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="proveedor">
+<xs:complexContent>
+<xs:extension base="tns:usuario">
+<xs:sequence>
+<xs:element name="empresa" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="link" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="promocionesNom">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:promocion"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="serviciosNom">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:servicio"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="usuario" abstract="true">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nacimiento" type="tns:date" minOccurs="0"></xs:element>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="promocion">
+<xs:complexContent>
+<xs:extension base="tns:oferta">
+<xs:sequence>
+<xs:element name="descuento" type="xs:float"></xs:element>
+<xs:element name="serviciosNom">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:servicio"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="servicio">
+<xs:complexContent>
+<xs:extension base="tns:oferta">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="destino" type="tns:ciudad" minOccurs="0"></xs:element>
+<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="origen" type="tns:ciudad" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:float"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="ciudad">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pais" type="tns:pais" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pais">
+<xs:sequence>
+<xs:element name="ciudades" type="tns:ciudad" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="arrayList">
 <xs:complexContent>
 <xs:extension base="tns:abstractList">
@@ -65,14 +215,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="date">
-<xs:sequence>
-<xs:element name="ano" type="xs:int"></xs:element>
-<xs:element name="dia" type="xs:int"></xs:element>
-<xs:element name="mes" type="xs:int"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dtPromocion">
 <xs:sequence>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
@@ -82,4 +224,13 @@
 <xs:element name="servicios" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
+
+<xs:simpleType name="eEstado">
+<xs:restriction base="xs:string">
+<xs:enumeration value="REGISTRADA"></xs:enumeration>
+<xs:enumeration value="CANCELADA"></xs:enumeration>
+<xs:enumeration value="PAGADA"></xs:enumeration>
+<xs:enumeration value="FACTURADA"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
 </xs:schema>

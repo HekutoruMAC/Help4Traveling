@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -29,6 +28,7 @@ public class FacturarReserva extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -36,8 +36,10 @@ public class FacturarReserva extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Integer reserva = Integer.parseInt(request.getParameter("reserva"));
 
-        Fabrica fab = Fabrica.getInstance();
-        fab.getIControladorReserva().actualizarEstadoDeReserva(reserva, "FACTURADA");
+        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = servicio.getPublicadorPort();
+
+        port.actualizarEstadoDeReserva(reserva, "FACTURADA");
 
         response.sendRedirect("Usuario.jsp");
     }
