@@ -73,8 +73,8 @@
     <body>
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
-            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+            servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = service.getPublicadorPort();
 
             String nick = (String) request.getParameter("nick");
             DtUsuario dtProv = ManejadorProveedor.getInstance().getDtProveedor(nick);
@@ -181,7 +181,7 @@
 
 
                     <%
-                        //con = new Consultas();
+                        Fabrica fab = Fabrica.getInstance();
                         List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
                         if (!promociones.isEmpty()) {
                             Iterator<DtPromocion> ipromo = promociones.iterator(); %>
