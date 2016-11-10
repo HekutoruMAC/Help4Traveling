@@ -100,9 +100,26 @@ public class Publicador {
     }
 
     // [  ] ListarServicios.jsp
+    
+    /*
     @WebMethod
     public ArrayList<String> listarServiciosCategoria(String categoria) {
         return mser.listarServiciosCategoria(categoria);
+    }
+*/
+    
+    @WebMethod
+    public DataServiciosCategoriasArrayList listarServiciosCategorias(String categoria){
+        ArrayList<String> lista = mser.listarServiciosCategoria(categoria);
+        return new DataServiciosCategoriasArrayList(lista);
+         
+    }
+    
+      @WebMethod
+    public DataServiciosArrayList listarServicios(){
+        ArrayList<DtServicio> lista = mser.listarServicios();
+        return new DataServiciosArrayList(lista);
+         
     }
 
     // [OK] ListarServicios.jsp, Promocion.jsp Reserva.jsp Buscar.java
@@ -136,9 +153,20 @@ public class Publicador {
     }
 
     // [  ] Promociones.jsp
+    
+    /*
     @WebMethod
     public ArrayList<DtPromocion> listarPromociones() {
         return fab.getIControladorServicio().listarPromociones();
+    }
+
+*/
+    
+      @WebMethod
+    public DataPromocionesArrayList listarPromociones(){
+        ArrayList<DtPromocion> lista = fab.getIControladorServicio().listarPromociones();
+        return new DataPromocionesArrayList(lista);
+         
     }
 
     // [  ] Proveedor.jsp

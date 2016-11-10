@@ -204,14 +204,14 @@ public class ManejadorServicio {
         return nuevo;
     }
 
-    public List<DtServicio> listarServicios() {
+    public ArrayList<DtServicio> listarServicios() {
         ResultSet rsServicios;
         ResultSet rsServImagenes;
         ResultSet rsServCategorias;
         Connection con = Conexion.getInstance().getConnection();
         Statement st, sti, stc;
         String sqlServicio, sqlImagenes, sqlCategorias;
-        List<DtServicio> listaServicios = new LinkedList<DtServicio>();
+        ArrayList<DtServicio> listaServicios = new ArrayList<DtServicio>();
         sqlServicio = "SELECT * FROM help4traveling.servicios";
         try {
             st = con.createStatement();
