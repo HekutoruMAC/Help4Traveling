@@ -4,19 +4,19 @@
     Author     : Leonardo
 --%>
 
-<%@page import="Logica.Fabrica"%>
+<%--@page import="Logica.Fabrica"%>
 <%@page import="Logica.DtPromocion"%>
 <%@page import="Logica.ManejadorProveedor"%>
-<%@page import="Logica.ManejadorServicio"%>
+<%@page import="Logica.ManejadorServicio"--%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
-<%@page import="Logica.DtCategoria"%>
+<%--@page import="Logica.DtCategoria"--%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Logica.DtUsuario"%>
+<%--@page import="Logica.DtUsuario"--%>
 <%@page import="java.util.List"%>
-<%@page import="Logica.ManejadorCategoria"%>
-<%@page import="Logica.DtServicio"%>
+<%--@page import="Logica.ManejadorCategoria"%>
+<%@page import="Logica.DtServicio"--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

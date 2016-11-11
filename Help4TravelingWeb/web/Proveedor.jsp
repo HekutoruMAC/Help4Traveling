@@ -4,20 +4,24 @@
     Author     : HP Usuario
 --%>
 
-<%@page import="Logica.DtPromocion"%>
+<%@page import="servidorpublicador.DtPromocion"%>
+<%@page import="servidorpublicador.DtServicio"%>
+<%@page import="servidorpublicador.Date"%>
+<%@page import="servidorpublicador.DtUsuario"%>
+<%--@page import="Logica.DtPromocion"%>
 <%@page import="Logica.Fabrica"%>
-<%@page import="Logica.ManejadorServicio"%>
+<%@page import="Logica.ManejadorServicio"--%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="Logica.DtServicio"%>
+<%--@page import="Logica.DtServicio"%>
 <%@page import="Logica.DtProveedor"%>
 <%@page import="Logica.ManejadorProveedor"%>
 <%@page import="Logica.DtUsuario"%>
-<%@page import="Logica.Reserva"%>
+<%@page import="Logica.Reserva"--%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="Logica.DtReserva"%>
+<%--@page import="Logica.DtReserva"%>
 <%@page import="Logica.Cliente" %>
-<%@page import="Logica.Date" %>
+<%@page import="Logica.Date"--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -77,7 +81,7 @@
             servidorpublicador.Publicador port = service.getPublicadorPort();
 
             String nick = (String) request.getParameter("nick");
-            DtUsuario dtProv = ManejadorProveedor.getInstance().getDtProveedor(nick);
+            DtUsuario dtProv = port.getDtProveedor(nick);
             String nombre = dtProv.getNombre();
             String apellido = dtProv.getApellido();
             String correo = dtProv.getCorreo();
@@ -136,7 +140,7 @@
 
 
                         <%
-                            List<DtServicio> servicios = ManejadorServicio.getInstance().listarServiciosProveedor(dtProv);
+                            List<DtServicio> servicios =port.listarServiciosProveedor(dtProv).getServiciosProveedor();
 
                             if (!servicios.isEmpty()) {
                                 Iterator<DtServicio> iserv = servicios.iterator(); %>
@@ -155,7 +159,7 @@
                                         String servicio = dtServ.getNombre();
                                         String descripcion = dtServ.getDescripcion();
                                         float precio = dtServ.getPrecio();
-                                        String origen = dtServ.getNomCiuOrigen();  %>
+                                        String origen = dtServ.getNomciuorigen();  %>
                                 <tr class="default">
                                     <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(servicio); %>&proveedor=<% out.print(nick); %>&categoria=<% out.print("");%>" target="_blank"><%=servicio%></a></td>
                                     <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>
@@ -181,8 +185,8 @@
 
 
                     <%
-                        Fabrica fab = Fabrica.getInstance();
-                        List<DtPromocion> promociones = fab.getIControladorUsuario().listarPromocionesProveedor(nick);
+                        //Fabrica fab = Fabrica.getInstance();
+                        List<DtPromocion> promociones = port.listarPromocionesProveedor(nick).getPromocionesProveedor();
                         if (!promociones.isEmpty()) {
                             Iterator<DtPromocion> ipromo = promociones.iterator(); %>
                     <div id="promociones" class="tab-pane fade">

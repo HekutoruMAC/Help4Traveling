@@ -125,18 +125,30 @@
                                                     ofertaVinculada = ItRes.getOferta();
                                                     Date iniciodate = ItRes.getInicio();
                                                     inicio=iniciodate.toString();
+                                                    
+                                                    
+                                                    inicio = String.valueOf(iniciodate.getDia()) + "/" + String.valueOf(iniciodate.getMes()) + "/" + String.valueOf(iniciodate.getAno());
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    System.out.println(inicio);
                                                     Date findate = ItRes.getFin();
-                                                    fin=findate.toString();
+                                                    fin = String.valueOf(findate.getDia()) + "/" + String.valueOf(findate.getMes()) + "/" + String.valueOf(findate.getAno());
+                                                    System.out.println(fin);
                                                     NombOfr = ofertaVinculada.getNombre();
                                                     Prov = ofertaVinculada.getProveedor();
                                                     NombProv = Prov.getNombre();
                                                     //System.out.println(NombProv);
                                                     servoprom = ofertaVinculada.getClass().getName();
                                                     //invierto fecha inicio
-                                                    partesfech = inicio.split("/");
-                                                    inicio = partesfech[2] + "/" + partesfech[1] + "/" + partesfech[0];
-                                                    partesfech = fin.split("/");
-                                                    fin = partesfech[2] + "/" + partesfech[1] + "/" + partesfech[0];
+                                                    //partesfech = inicio.split("/");
+                                                    //inicio = partesfech[2] + "/" + partesfech[1] + "/" + partesfech[0];
+                                                    //partesfech = fin.split("/");
+                                                    //fin = partesfech[2] + "/" + partesfech[1] + "/" + partesfech[0];
                                                     boolean esservicio = port.existeServicio(NombOfr);
 
                                             %>
