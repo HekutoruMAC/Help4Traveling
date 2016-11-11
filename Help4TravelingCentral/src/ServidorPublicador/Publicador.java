@@ -112,8 +112,7 @@ public class Publicador {
     @WebMethod
     public DataServiciosCategoriasArrayList listarServiciosCategorias(String categoria){
         ArrayList<String> lista = mser.listarServiciosCategoria(categoria);
-        return new DataServiciosCategoriasArrayList(lista);
-         
+        return new DataServiciosCategoriasArrayList(lista);         
     }
     
       @WebMethod
@@ -241,6 +240,13 @@ public class Publicador {
     public String obtenerPadre(String hijo) {
         return mcat.obtenerPadre(hijo);
     }
+    
+    @WebMethod
+    public DataNombresCategoriasArrayList getNombresCategoriasServicio(String nomserv){
+        ArrayList<String> categoriasservicio = mcat.getNombresCategoriasServicio(nomserv);
+        return new DataNombresCategoriasArrayList(categoriasservicio);         
+    }
+    
 
     // [OK] Proveedor.jsp, Usuario.jsp
     @WebMethod

@@ -253,4 +253,24 @@ public class ManejadorCategoria {
         }
         return listaCat;
     }
+    
+    public ArrayList<String> getNombresCategoriasServicio(String nomserv) {
+        ArrayList<String> listaCat = new ArrayList<String>();
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            String sql = "SELECT * FROM help4traveling.servicioscategorias WHERE servicio = '" + nomserv + "'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                listaCat.add(rs.getString("categoria"));
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude LISTAR :(");
+        }
+        return listaCat;
+    }
+    
 }

@@ -222,14 +222,14 @@
                                                     </form>
                                                     <hr>
                                                     <h3>Categorías</h3>
-                                                    <%  List<String> categorias = dtServ.getCategoriasservicio();
+                                                    <%  List<String> categorias = port.getNombresCategoriasServicio(dtServ.getNombre()).getCategorias();
                                                         Iterator<String> iter = categorias.iterator();
                                                         if (iter.hasNext()) {%>
                                                     <h4 class="lead"><%=iter.next()%>
                                                         <% while (iter.hasNext()) {%>
                                                         | <%=iter.next()%>
                                                         <% } %>
-                                                        <% }%>
+                                                     <% } %>
                                                     </h4>
                                         </div>
                                     </div>
