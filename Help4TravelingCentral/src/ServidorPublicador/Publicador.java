@@ -272,5 +272,10 @@ public class Publicador {
         ArrayList<DtReserva> reservas = fab.getIControladorReserva().listarReservasUsuario(nick);
         return new DataReservasUsuarioArrayList(reservas);
     }
+    
+    @WebMethod
+    public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion) {
+        fab.getIControladorReserva().FacturarItemReserva(reserva, servicio, proveedorServicio, promocion);
+    }
         
 }

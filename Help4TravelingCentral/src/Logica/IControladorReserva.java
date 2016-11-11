@@ -47,4 +47,6 @@ public interface IControladorReserva {
     public ArrayList<DtReserva> listarReservasProveedor(String prov);
 
     public void altaReservaWeb(Reserva nueva);
+    
+    public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion);
 }

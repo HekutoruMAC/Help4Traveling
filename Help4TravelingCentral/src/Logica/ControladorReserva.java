@@ -85,4 +85,7 @@ public class ControladorReserva implements IControladorReserva {
         ManejadorReserva.getInstance().altaReservaWeb(nueva);
     }
 
+    public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion) {
+         ManejadorReserva.getInstance().FacturarItemReserva(reserva, servicio, proveedorServicio, promocion);
+    }
 }

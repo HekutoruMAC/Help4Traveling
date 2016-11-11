@@ -539,5 +539,26 @@ public class ManejadorReserva {
             System.err.println(e);
         }
     }
-
+    
+    //Cambia el estado a facturada de un itemreserva o itemreservapromocion (dependiendo de si es promocion o no)
+    public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion) {
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        if (promocion == "") {
+            String SQL = "UPDATE reservasitems " +
+                         "SET facturada = true " +
+                         "WHERE reserva = " + String.valueOf(reserva) + " AND servicio = '" + servicio + "' AND proveedorServicio = '" + proveedorServicio  + "'";
+        }else {
+            String SQL = "UPDATE reservasitemspromociones " +
+                         "SET facturada = true " +
+                         "WHERE reserva = " + String.valueOf(reserva) + " AND oferta = '" + promocion + "' AND servicio = '" + servicio + "' AND proveedorServicio = '" + proveedorServicio  + "'";
+        }
+        
+        try {
+            st = con.createStatement();
+            st.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println("No se pudo facturar!");
+        }
+    }
 }
