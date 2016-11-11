@@ -6,7 +6,6 @@
 
 
 <%@page import="java.util.Iterator"%>
-<%@page import="Logica.ManejadorCategoria"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,28 +55,30 @@
                         <ul>
                             <%  String catn0 = "Categorias"; %>
                             <li class="jstree-open"><a href="ListarServicios.jsp?categoria=<% out.print(catn0);%>" target="servicios"><%=catn0%></a><%
-                                List<String> listaNivel1 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn0);
+                                servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+                                servidorpublicador.Publicador port = service.getPublicadorPort();
+                                List<String> listaNivel1 = port.obtenerCategoriasHijas(catn0).getCategorias();                                
                                 if (!listaNivel1.isEmpty()) {
                                 %><ul><%
                                     Iterator<String> icatn1 = listaNivel1.iterator();
                                     while (icatn1.hasNext()) {
                                         String catn1 = icatn1.next();
                                     %><li><a href="ListarServicios.jsp?categoria=<% out.print(catn1);%>" target="servicios"><%=catn1%></a><%
-                                        List<String> listaNivel2 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn1);
+                                        List<String> listaNivel2 = port.obtenerCategoriasHijas(catn1).getCategorias();
                                         if (!listaNivel2.isEmpty()) {
                                         %><ul><%
                                             Iterator<String> icatn2 = listaNivel2.iterator();
                                             while (icatn2.hasNext()) {
                                                 String catn2 = icatn2.next();
                                             %><li><a href="ListarServicios.jsp?categoria=<% out.print(catn2);%>" target="servicios"><%=catn2%></a><%
-                                                List<String> listaNivel3 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn2);
+                                                List<String> listaNivel3 = port.obtenerCategoriasHijas(catn2).getCategorias();
                                                 if (!listaNivel3.isEmpty()) {
                                                 %><ul><%
                                                     Iterator<String> icatn3 = listaNivel3.iterator();
                                                     while (icatn3.hasNext()) {
                                                         String catn3 = icatn3.next();
                                                     %><li><a href="ListarServicios.jsp?categoria=<%=catn3%>" target="servicios"><%=catn3%></a><%
-                                                    List<String> listaNivel4 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn3);
+                                                    List<String> listaNivel4 = port.obtenerCategoriasHijas(catn3).getCategorias();
                                                     if (!listaNivel4.isEmpty()) {
                                                         %><ul><%
                                                             Iterator<String> icatn4 = listaNivel4.iterator();

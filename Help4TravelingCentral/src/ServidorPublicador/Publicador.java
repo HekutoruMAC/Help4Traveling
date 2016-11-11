@@ -93,10 +93,11 @@ public class Publicador {
     }
 
     // Servicios para JSP ======================================================
-    // [  ] Categorías.jsp
+    // [OK] Categorías.jsp
     @WebMethod
-    public ArrayList<String> obtenerCategoriasHijas(String padre) {
-        return mcat.obtenerCategoriasHijas(padre);
+    public DataNombresCategoriasArrayList obtenerCategoriasHijas(String padre){        
+        ArrayList<String> categorias = mcat.obtenerCategoriasHijas(padre);
+        return new DataNombresCategoriasArrayList(categorias);
     }
 
     // [  ] ListarServicios.jsp
@@ -163,7 +164,7 @@ public class Publicador {
 
 */
     
-      @WebMethod
+    @WebMethod
     public DataPromocionesArrayList listarPromociones(){
         ArrayList<DtPromocion> lista = fab.getIControladorServicio().listarPromociones();
         return new DataPromocionesArrayList(lista);         
@@ -265,5 +266,5 @@ public class Publicador {
         ArrayList<DtReserva> reservas = fab.getIControladorReserva().listarReservasUsuario(nick);
         return new DataReservasUsuarioArrayList(reservas);
     }
-
+        
 }

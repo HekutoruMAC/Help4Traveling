@@ -6,15 +6,12 @@
 package Logica;
 
 import java.util.ArrayList;
-
 /**
  *
  * @author yaman
  */
 public class DataServiciosArrayList {
     private ArrayList<DtServicio> servicios;
-    
-
 
 public  DataServiciosArrayList(){    
 }

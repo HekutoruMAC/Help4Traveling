@@ -53,10 +53,8 @@
                String apellido = "\"" + session.getAttribute("apellido").toString() + "\"";
                 String fecha = "\"" + session.getAttribute("fNac").toString() + "\"";
                String correo = "\"" + session.getAttribute("email").toString() + "\"";
-
             --%>
             <%};%>
-
                 setTimeout(function () {
             <%if ((String) session.getAttribute("nickname") != null) {%>
                     $('#idIniciar').hide();
@@ -90,7 +88,6 @@
                 enlace = dtProv.getLink();
             }
             String partes[] = fecha.split("-");
-
             fecha = partes[2] + "/" + partes[1] + "/" + partes[0];
             //Fabrica fab = Fabrica.getInstance();
             String imagen = port.imagenPerfilUsuario(nick); 
@@ -282,14 +279,11 @@
                                         } else if (dtRes.getEstado().toString().equals("PAGADA") ) {
                                             estado = "PAGADA";
                                         }
-
                                         String idres = id.toString();
                                         String cliente = dtRes.getCliente();
                                         servidorpublicador.Date fechac = dtRes.getCreada();
                                         String creada = String.valueOf(fechac.getAno())+ "/" + String.format("%02d",fechac.getMes()) + "/" + String.format("%02d",fechac.getDia());                                       
-
                                         String partesCre[] = creada.split("/");
-
                                         creada = partesCre[2] + "/" + partesCre[1] + "/" + partesCre[0];
                                         String total = String.valueOf(dtRes.getTotal());%>
 

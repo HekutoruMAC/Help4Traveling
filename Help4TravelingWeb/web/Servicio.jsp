@@ -81,8 +81,9 @@
         String bisabuelo = null;
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
-        servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);  
-        padre = port.obtenerPadre(categoria);        
+        servidorpublicador.DtServicio dtServ = port.getDtServicio(nombre, proveedor);
+        if (!categoria.equals(""))
+            padre = port.obtenerPadre(categoria);        
     %>
     <div class="section minimo">
         <div class="container">

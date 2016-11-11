@@ -5,12 +5,9 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="Logica.Fabrica"%>
-<%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="Logica.DtPromocion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -73,8 +70,6 @@
                                         </tr-->
                                         <% servidorpublicador.DtPromocion dtProm = null;
                                             List<servidorpublicador.DtPromocion> promos = new ArrayList();
-                                            //Fabrica fab = Fabrica.getInstance();
-                                            //promos = fab.getIControladorServicio().listarPromociones();
                                             servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
                                             servidorpublicador.Publicador port = service.getPublicadorPort();
                                             promos = port.listarPromociones().getPromociones();
