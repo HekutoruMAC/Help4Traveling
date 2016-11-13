@@ -30,18 +30,15 @@ public class FacturarReserva extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws java.sql.SQLException
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        Integer reserva = Integer.parseInt(request.getParameter("reserva"));
 
-        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-        servidorpublicador.Publicador port = servicio.getPublicadorPort();
-
-        port.actualizarEstadoDeReserva(reserva, "FACTURADA");
-
-        response.sendRedirect("Usuario.jsp");
+        String action = request.getParameter("action");
+        if (action == "Item") {
+            FacturarItem(request, response);
+        } else if (action == "Reserva") {
+            FacturarReserva(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,5 +87,30 @@ public class FacturarReserva extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    //Factura la reserva completa. Es decir cambia el estado de la reserva.
+    private void FacturarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        Integer reserva = Integer.parseInt(request.getParameter("reserva"));
+
+        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = servicio.getPublicadorPort();
+
+        port.actualizarEstadoDeReserva(reserva, "FACTURADA");
+
+        response.sendRedirect("Usuario.jsp");
+    }
+    
+    //Factura un item de una reserva.
+    private void FacturarItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        Integer reserva = Integer.parseInt(request.getParameter("reserva"));
+        String servicio = request.getParameter("servicio");
+        String proveedorServicio = request.getParameter("proveedorServicio");
+        String promocion = request.getParameter("proveedorServicio");
+        
+        servidorpublicador.PublicadorService publicador = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = publicador.getPublicadorPort();
+        
+        port.facturarItemReserva(reserva, servicio, proveedorServicio, promocion);
+    }
 
 }
