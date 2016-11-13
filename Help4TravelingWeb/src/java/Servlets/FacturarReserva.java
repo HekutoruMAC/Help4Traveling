@@ -91,10 +91,12 @@ public class FacturarReserva extends HttpServlet {
     //Factura la reserva completa. Es decir cambia el estado de la reserva.
     private void FacturarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         Integer reserva = Integer.parseInt(request.getParameter("reserva"));
-
+        String proveedorServicio = request.getParameter("proveedorServicio");
+        
         servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = servicio.getPublicadorPort();
         //port.actualizarEstadoDeReserva(reserva, "FACTURADA");
+        port.facturarReserva(reserva, proveedorServicio);
         response.sendRedirect("Usuario.jsp");
     }
     
