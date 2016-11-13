@@ -94,9 +94,7 @@ public class FacturarReserva extends HttpServlet {
 
         servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = servicio.getPublicadorPort();
-
-        port.actualizarEstadoDeReserva(reserva, "FACTURADA");
-
+        //port.actualizarEstadoDeReserva(reserva, "FACTURADA");
         response.sendRedirect("Usuario.jsp");
     }
     
@@ -109,8 +107,8 @@ public class FacturarReserva extends HttpServlet {
         
         servidorpublicador.PublicadorService publicador = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = publicador.getPublicadorPort();
-        
         port.facturarItemReserva(reserva, servicio, proveedorServicio, promocion);
+        response.sendRedirect("Usuario.jsp");
     }
 
 }

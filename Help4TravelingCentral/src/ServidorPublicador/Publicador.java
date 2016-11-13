@@ -280,8 +280,12 @@ public class Publicador {
     }
     
     @WebMethod
+    public void FacturarReserva(int reserva,String proveedorServicio) {
+        fab.getIControladorReserva().FacturarReserva(reserva, proveedorServicio);
+    }
+    
+    @WebMethod
     public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion) {
         fab.getIControladorReserva().FacturarItemReserva(reserva, servicio, proveedorServicio, promocion);
-    }
-        
+    }       
 }
