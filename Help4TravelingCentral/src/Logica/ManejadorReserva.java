@@ -79,6 +79,7 @@ public class ManejadorReserva {
                     }
                 } catch (SQLException e) {
                     System.out.println("No se pudo insertar item reserva :(");
+                    System.out.println(e);
                 }
             } catch (SQLException e) {
                 System.out.println("No se pudo obtener id :(");
@@ -539,26 +540,82 @@ public class ManejadorReserva {
             System.err.println(e);
         }
     }
-    
+
     //Cambia el estado a facturada de un itemreserva o itemreservapromocion (dependiendo de si es promocion o no)
     public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion) {
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
         if (promocion == "") {
-            String SQL = "UPDATE reservasitems " +
-                         "SET facturada = true " +
-                         "WHERE reserva = " + String.valueOf(reserva) + " AND servicio = '" + servicio + "' AND proveedorServicio = '" + proveedorServicio  + "'";
-        }else {
-            String SQL = "UPDATE reservasitemspromociones " +
-                         "SET facturada = true " +
-                         "WHERE reserva = " + String.valueOf(reserva) + " AND oferta = '" + promocion + "' AND servicio = '" + servicio + "' AND proveedorServicio = '" + proveedorServicio  + "'";
+            String SQL = "UPDATE reservasitems "
+                    + "SET facturada = true "
+                    + "WHERE reserva = " + String.valueOf(reserva) + " AND servicio = '" + servicio + "' AND proveedorServicio = '" + proveedorServicio + "'";
+        } else {
+            String SQL = "UPDATE reservasitemspromociones "
+                    + "SET facturada = true "
+                    + "WHERE reserva = " + String.valueOf(reserva) + " AND oferta = '" + promocion + "' AND servicio = '" + servicio + "' AND proveedorServicio = '" + proveedorServicio + "'";
         }
-        
+
         try {
             st = con.createStatement();
             st.executeUpdate(sql);
         } catch (SQLException e) {
             System.out.println("No se pudo facturar!");
         }
+    }
+
+    public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin) {
+        //conexion = new Conexion();
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        ResultSet rsId;
+        String sid;
+
+        /*sql = "INSERT INTO help4traveling.reservas (fecha,total,estado,cliente) "
+                + "VALUES ('" + nueva.getCreada() + "'," + nueva.getTotal() + ",'" + nueva.getEstado() + "','" + nueva.getCliente() + "')";
+
+        try {
+            st = con.createStatement();
+            st.executeUpdate(sql);*/
+        try {
+            st = con.createStatement();
+            sql = "SELECT MAX(numero) AS id FROM help4traveling.reservas";
+            rsId = st.executeQuery(sql);
+            rsId.next();
+            sid = rsId.getString("id");
+            String iniciostr = Integer.toString(inicio.getAno())+"-"+Integer.toString(inicio.getMes())+"-"+Integer.toString(inicio.getDia());
+            String finstr = Integer.toString(fin.getAno())+"-"+Integer.toString(fin.getMes())+"-"+Integer.toString(fin.getDia());
+            
+            try {
+                
+                System.out.println(sid);
+              
+                String ofertastr = oferta.getNombre();
+                String proveedorstr = proveedor.getNickname();
+                String cantidadstr = Integer.toString(cantidad);
+                System.out.println(ofertastr);
+                System.out.println(proveedorstr);
+                System.out.println(cantidadstr);
+                System.out.println(iniciostr);
+                System.out.println(finstr);
+                
+                
+                sql = "INSERT INTO help4traveling.reservasitems (reserva, oferta, proveedorOferta, cantidad, inicio, fin) "
+                        + "VALUES (" + sid + ",'" + ofertastr + "','"+proveedorstr+"','" + cantidadstr + "','" + iniciostr + "','" + finstr + "')";
+
+                st.executeUpdate(sql);
+
+                con.close();
+                st.close();
+                System.out.println("Item agregado con exito :)");
+
+            } catch (SQLException e) {
+                System.out.println("No se pudo insertar item reserva :(");
+                System.out.println(e);
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo obtener id :(");
+            System.out.println(e);
+        }
+
     }
 }

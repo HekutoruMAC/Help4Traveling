@@ -19,6 +19,10 @@ public class Proveedor extends Usuario {
     private Map<String, Servicio> serviciosNom;
     private Map<String, Promocion> promocionesNom;
     
+    public Proveedor(){
+        super("");
+    }
+    
     public Proveedor(String nombre){
         super(nombre);
     }

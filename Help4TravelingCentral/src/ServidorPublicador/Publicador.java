@@ -78,6 +78,14 @@ public class Publicador {
     public void altaReservaWeb(Reserva nueva) {
         fab.getIControladorReserva().altaReservaWeb(nueva);
     }
+    
+    @WebMethod
+    public boolean existePromocion(String nombre){
+        return mser.existePromo(nombre);
+    }
+    
+    
+    
 
     // [OK] Registrar.java
     @WebMethod
@@ -160,7 +168,6 @@ public class Publicador {
     public ArrayList<DtPromocion> listarPromociones() {
         return fab.getIControladorServicio().listarPromociones();
     }
-
 */
     
     @WebMethod
@@ -221,11 +228,10 @@ public class Publicador {
     }
     
      @WebMethod
-    public void agregarItem(Reserva nueva,int cantidad,String fi,String ff, Servicio oferta){
+    public void agregarItemReserva(Reserva nueva,Proveedor prov,int cantidad,String fi,String ff, Servicio oferta){
         Date fini = new Date(fi);
         Date ffin = new Date(ff);
-        
-             fab.getIControladorReserva().agregarItem(nueva, cantidad, fini,ffin, oferta);
+            fab.getIControladorReserva().agregarItemReserva(nueva, oferta, prov, cantidad, fini, ffin);
     }
     
 

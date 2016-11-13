@@ -49,4 +49,7 @@ public interface IControladorReserva {
     public void altaReservaWeb(Reserva nueva);
     
     public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion);
+     
+    public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin);
+            
 }

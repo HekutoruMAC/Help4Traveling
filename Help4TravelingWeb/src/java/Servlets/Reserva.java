@@ -16,6 +16,10 @@ package Servlets;
         private int cantidad;
         private String fechaini;
         private String fechafin;
+        
+        public void Reserva(){
+            
+        }
 
         public void Reserva(String servicio, float precio, int cantidad,String fechaini,String fechafin) {
             this.servicio = servicio;

@@ -66,6 +66,10 @@ public class ItemReserva {
     public void setOferta(Oferta oferta) {
         this.oferta = oferta;
     }
+    
+    public void setId(int id){
+        this.id = id;
+    }
 
     public DtItemReserva getDtItem() {
         DtItemReserva dti = new DtItemReserva(

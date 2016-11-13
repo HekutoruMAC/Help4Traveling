@@ -5,11 +5,14 @@
  */
 package Servlets;
 
-import Logica.Date;
-import Logica.Fabrica;
-import Logica.Proveedor;
-import static Logica.Reserva.eEstado.REGISTRADA;
-import Logica.Servicio;
+//import Logica.Date;
+//import Logica.Fabrica;
+//import Logica.Proveedor;
+//import static Logica.Reserva.eEstado.REGISTRADA;
+//import Logica.Servicio;
+import servidorpublicador.Proveedor;
+import servidorpublicador.Servicio;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -75,12 +78,14 @@ public class eliminarCarrito extends HttpServlet {
             servidorpublicador.Publicador port = service.getPublicadorPort();
 
             Reserva res;
-            Logica.Reserva reserva = new Logica.Reserva();
-
+            servidorpublicador.Reserva reserva = new servidorpublicador.Reserva();
+            
             reserva.setCliente((String) sesion.getAttribute("nickname"));
-            reserva.setEstado(REGISTRADA);
+            reserva.setEstado(servidorpublicador.EEstado.REGISTRADA);
             reserva.setTotal((float) sesion.getAttribute("preciototal"));
-
+            port.altaReservaWeb(reserva);
+            
+            
             System.out.println(itemsCarrito.size());
             int contador = 0;
             while (iter.hasNext()) {
@@ -89,33 +94,43 @@ public class eliminarCarrito extends HttpServlet {
                 //if (servicio.equals(res.getServicio())) {
                 cantidad = res.getCantidad();
                 servicio = res.getServicio();
-                Proveedor prov = new Proveedor("yama");
-                prov.setEmpresa("yama");
-                prov.setNickname("yama");
-                Servicio ofertatype = new Servicio(servicio, prov);
-                Date iniciodate = new Date(res.getFechaini());
+                Proveedor prov = new Proveedor();
+                //prov.setEmpresa("yama");
+                //prov.setNickname("yama");
+                if (port.existePromocion(servicio)){
+                    prov.setNickname(port.getNkProveedorPromocion(servicio));
+                }
+                else{
+                    prov.setNickname(port.getNkProveedorServicio(servicio));
+                }
+                
+                //prov.setNombre(port.getNkProveedorServicio(servicio));
+                Servicio ofertatype = new Servicio();
+                ofertatype.setNombre(servicio);
+                ofertatype.setProveedor(prov);
+                //Date iniciodate = new Date(res.getFechaini());
                 //iniciodate.setAno(2006);
                 //iniciodate.setMes(8);
                 //iniciodate.setDia(05);
-                Date findate = new Date(res.getFechafin());
+                //Date findate = new Date(res.getFechafin());
                 //Date findate = new Date("1988-08-07");
 
                 System.out.println("llegue hasta aca");
-                System.out.println("Intento agregar un item con cantidad " + cantidad + " inicio " + iniciodate.getAno() + "-" + iniciodate.getMes() + "-" + iniciodate.getDia() + " fin " + iniciodate.getAno() + "-" + iniciodate.getMes() + "-" + iniciodate.getDia() + " servicio de nombre " + ofertatype.getNombre() + " de proveedor " + ofertatype.getProveedor().toString());
-
-                reserva.agregarItem(cantidad, iniciodate, findate, ofertatype);
+                System.out.println("Intento agregar un item a la reserva "+reserva.getId() +"con cantidad " +cantidad + " inicio " + res.getFechaini() + " fin " + res.getFechafin() + " servicio de nombre " + ofertatype.getNombre() + " de proveedor " + ofertatype.getProveedor().toString());
+                port.agregarItemReserva(reserva, prov,cantidad, res.getFechaini(),res.getFechafin() , ofertatype);
+                //port.agregarItem(reserva,cantidad, iniciodate, findate, ofertatype);
                 System.out.println("agregue un item");
-                System.out.println("la cantidad de items es " + reserva.getItems().size());
+                //System.out.println("la cantidad de items es " + reserva.getItems().size());
 
                 contador++;
 
                 //itemsCarrito.remove(res);
             }
 
-            Fabrica fab = Fabrica.getInstance();
-            fab.getIControladorReserva().altaReservaWeb(reserva);
+            //Fabrica fab = Fabrica.getInstance();
+            //fab.getIControladorReserva().altaReservaWeb(reserva);
 
-            //port.altaReservaWeb(reserva);
+            
             sesion.setAttribute("preciototal", 0);
             for (int i = 0; i < itemsCarrito.size(); i++) {
                 itemsCarrito.remove(i);

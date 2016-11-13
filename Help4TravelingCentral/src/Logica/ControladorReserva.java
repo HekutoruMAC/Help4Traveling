@@ -88,4 +88,9 @@ public class ControladorReserva implements IControladorReserva {
     public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion) {
          ManejadorReserva.getInstance().FacturarItemReserva(reserva, servicio, proveedorServicio, promocion);
     }
+    
+    public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin){
+        ManejadorReserva mr = ManejadorReserva.getInstance();
+        mr.agregarItemReserva(nueva, oferta, proveedor, cantidad, inicio, fin);
+    }
 }
