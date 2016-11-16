@@ -90,7 +90,7 @@
             String partes[] = fecha.split("-");
             fecha = partes[2] + "/" + partes[1] + "/" + partes[0];
             //Fabrica fab = Fabrica.getInstance();
-            String imagen = port.imagenPerfilUsuario(nick); 
+            String imagen = port.imagenPerfilUsuario(nick);
         %>
         <br>
         <br>
@@ -148,7 +148,7 @@
                     <% if (esProv) { %>
 
                     <%
-                        List<servidorpublicador.DtServicio> servicios = port.listarServiciosProveedor(dtProv).getServiciosProveedor();                                                
+                        List<servidorpublicador.DtServicio> servicios = port.listarServiciosProveedor(dtProv).getServiciosProveedor();
                         if (!servicios.isEmpty()) {
                             Iterator<servidorpublicador.DtServicio> iserv = servicios.iterator(); %>
                     <div id="servicios" class="tab-pane fade">
@@ -167,7 +167,7 @@
                                         String servicio = dtServ.getNombre();
                                         String descripcion = dtServ.getDescripcion();
                                         float precio = dtServ.getPrecio();
-                                        String origen = dtServ.getNomciuorigen();  %>                                        
+                                        String origen = dtServ.getNomciuorigen();  %>
                                 <tr class="default">
                                     <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(servicio); %>&proveedor=<% out.print(nick); %>&categoria=<% out.print("");%>" target="_blank"><%=servicio%></a></td>
                                     <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>
@@ -248,17 +248,17 @@
                                     <td class="default" width="100" align="center"><b>Fecha</b></td>
                                     <td class="default" width="100" align="center"><b>Estado</b></td>
                                     <td class="default" width="100" align="center"><b>Total</b></td>
-                                    <td class="default" width="100" align="center"><b>Acciones</b></td>
+                                    <td class="default" width="200" align="center"><b>Acciones</b></td>
 
                                 </tr>
                                 <%  DtReserva dtRes = null;
                                     List<DtReserva> reservas;
                                     if (esProv) {
-                                        
+
                                         //reservas = fab.getIControladorReserva().listarReservasProveedor(nick);
                                         reservas = port.listarReservasProveedor(nick).getReservasProveedor();
                                     } else {
-                                        
+
                                         //reservas = fab.getIControladorReserva().listarReservasUsuario(nick);
                                         reservas = port.listarReservasUsuario(nick).getReservasUsuario();
                                     }
@@ -270,19 +270,19 @@
                                         String numero = i.toString();
                                         Long id = dtRes.getId();
                                         String estado = "";
-                                        if (dtRes.getEstado().toString().equals("REGISTRADA") ) {
+                                        if (dtRes.getEstado().toString().equals("REGISTRADA")) {
                                             estado = "REGISTRADA";
-                                        } else if (dtRes.getEstado().toString().equals("CANCELADA") ) {
+                                        } else if (dtRes.getEstado().toString().equals("CANCELADA")) {
                                             estado = "CANCELADA";
-                                        } else if (dtRes.getEstado().toString().equals("FACTURADA") ) {
+                                        } else if (dtRes.getEstado().toString().equals("FACTURADA")) {
                                             estado = "FACTURADA";
-                                        } else if (dtRes.getEstado().toString().equals("PAGADA") ) {
+                                        } else if (dtRes.getEstado().toString().equals("PAGADA")) {
                                             estado = "PAGADA";
                                         }
                                         String idres = id.toString();
                                         String cliente = dtRes.getCliente();
                                         servidorpublicador.Date fechac = dtRes.getCreada();
-                                        String creada = String.valueOf(fechac.getAno())+ "/" + String.format("%02d",fechac.getMes()) + "/" + String.format("%02d",fechac.getDia());                                       
+                                        String creada = String.valueOf(fechac.getAno()) + "/" + String.format("%02d", fechac.getMes()) + "/" + String.format("%02d", fechac.getDia());
                                         String partesCre[] = creada.split("/");
                                         creada = partesCre[2] + "/" + partesCre[1] + "/" + partesCre[0];
                                         String total = String.valueOf(dtRes.getTotal());%>
@@ -296,7 +296,7 @@
                                     <td class="default" align="center" width="100" id="fecha" style="vertical-align: middle"><%=creada%></td>
                                     <td class="default" align="center" width="100" id="estado" style="vertical-align: middle"><%=estado%></td>
                                     <td class="default" align="center" width="100" id="total" style="vertical-align: middle"><%=total%></td>
-                                    <td class="default" align="center" width="100">
+                                    <td class="default" align="center" width="200">
                                         <% if (estado == "FACTURADA") {%>
                                         <form role="form" action='' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
@@ -315,6 +315,13 @@
                                         <form role="form" action='PagarReserva' method="post" style="float: left">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
+                                        </form>
+                                        <form role="form" action='Email' method="post">
+                                            <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
+                                            <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
+                                            <input type='hidden' id='reserva' name='total' value=<%=total%>>
+                                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-envelope"></span> Correo</button>
+                                        </form>
                                         </form>
                                         <form role="form" action='CancelarReserva' method="post" style="float: right">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>

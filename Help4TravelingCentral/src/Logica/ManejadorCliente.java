@@ -12,11 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpSession;
-//import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -215,9 +211,9 @@ public class ManejadorCliente {
 
     // Servidor Central ========================================================
     public boolean Comprobacion(String nickname, String email) {
-        try{
-        Connection con = Conexion.getInstance().getConnection();
-        Statement st = con.createStatement();
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            Statement st = con.createStatement();
             ResultSet rs = null;
             String sql = "SELECT * FROM usuarios";
             rs = st.executeQuery(sql);
@@ -230,12 +226,12 @@ public class ManejadorCliente {
             }
             rs.close();
             return true;
-        }catch(SQLException e){
-        return true;
+        } catch (SQLException e) {
+            return true;
         }
     }
 
-    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha)  {
+    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) {
         Statement st;
         if (imagen != null) {
             imagen = "'" + imagen + "'";
@@ -286,7 +282,7 @@ public class ManejadorCliente {
                 Date fecha = new Date(rsUsu.getString("fechaNac"));
                 String imagen = null;
                 stImg = con.createStatement();
-                sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE nickname='" + nickname + "'";
+                sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
                 rsImg = stImg.executeQuery(sql);
                 if (rsImg.next()) {
                     imagen = rsImg.getString("imagen");
@@ -368,7 +364,7 @@ public class ManejadorCliente {
         return imagen;
     }
 
-    /*public boolean Autenticacion(String nickname, String password) {        
+    /*public boolean Autenticacion(String nickname, String password) {
         try {
             Connection con = Conexion.getInstance().getConnection();
             Statement st = con.createStatement();
@@ -385,15 +381,14 @@ public class ManejadorCliente {
                     st.close();
                     return true;
                 }
-                
+
             }
             rs.close();
             return false;
         }catch(SQLException e){
            return false;
-        }       
+        }
     }*/
-    
     public DtUsuario Autenticacion(String nickname, String password) {
         ResultSet rs = null;
         DtUsuario dtu = new DtUsuario();
@@ -403,18 +398,18 @@ public class ManejadorCliente {
             String sql = "SELECT * FROM usuarios";
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                if (nickname.equals(rs.getString("nickname")) && password.equals(rs.getString("password"))) {                    
+                if (nickname.equals(rs.getString("nickname")) && password.equals(rs.getString("password"))) {
                     Date fecha = new Date(rs.getString("fechaNac"));
                     dtu = new DtUsuario(rs.getString("nombre"), rs.getString("apellido"), nickname, password, rs.getString("email"), fecha, null, null, null, null);
-                }                
+                }
             }
             rs.close();
             st.close();
-            con.close();           
+            con.close();
         } catch (SQLException e) {
             System.out.println("No obtuve DtUsuario :(");
             System.err.println(e.getMessage());
-        } 
+        }
         return dtu;
     }
 

@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servidorpublicador.DtUsuario;
 
 /**
  *
@@ -41,9 +42,16 @@ public class Email extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
+            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+            //Integer reserva = Integer.parseInt(request.getParameter("reserva"));
+            String cliente = request.getParameter("cliente");
+            String total = request.getParameter("total");
+            servidorpublicador.DtUsuario dtu = getDtUsuario(cliente);
+
             // Ingresar datos
-            String to = "destino@mail.com";
-            String from = "origen@mail.com";
+            String to = dtu.getCorreo();
+            String from = "facturacion@help4traveling.com";
             String host = "localhost";
 
             // Configurar mensaje
@@ -59,11 +67,10 @@ public class Email extends HttpServlet {
             String fechayhora = sdf.format(cal.getTime());
 
             // Ensamblar mensaje
-            String usuario = "";
+            String nombre = dtu.getNombre() + " " + dtu.getApellido();
             String servicios = "";
             String promociones = "";
-            String total = "";
-            String cuerpo = "<p>Estimado <strong>" + usuario + "</strong>."
+            String cuerpo = "<p>Estimado <strong>" + nombre + "</strong>."
                     + "Su compra ha sido facturada con &eacute;xito:</p>"
                     + "<p>---Detalles de la Compra</p>"
                     + "<p>-<em>Servicios</em>:</p>"
@@ -86,8 +93,10 @@ public class Email extends HttpServlet {
 
                 // Enviar mensaje
                 Transport.send(message);
+                response.sendRedirect("Usuario.jsp");
                 System.out.println("Mensaje enviado correctamente.");
             } catch (MessagingException mex) {
+                response.sendRedirect("Usuario.jsp");
                 System.out.println("El mensaje no pudo enviarse.");
             }
         }
@@ -137,5 +146,11 @@ public class Email extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DtUsuario getDtUsuario(java.lang.String arg0) {
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        return port.getDtUsuario(arg0);
+    }
 
 }
