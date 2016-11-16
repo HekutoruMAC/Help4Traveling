@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -19,6 +21,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servidorpublicador.DataItemsReservasArrayList;
+import servidorpublicador.DtItemReserva;
 import servidorpublicador.DtUsuario;
 
 /**
@@ -42,19 +46,40 @@ public class Email extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-            servidorpublicador.Publicador port = servicio.getPublicadorPort();
-            //Integer reserva = Integer.parseInt(request.getParameter("reserva"));
+            // Obtener parametros de reserva
+            String reserva = request.getParameter("reserva");
             String cliente = request.getParameter("cliente");
             String total = request.getParameter("total");
-            servidorpublicador.DtUsuario dtu = getDtUsuario(cliente);
 
-            // Ingresar datos
+            // Obtener datos de cliente e items de reserva
+            DtUsuario dtu = getDtUsuario(cliente);
+            String nombre = dtu.getNombre();
+            String apellido = dtu.getApellido();
+            String servicios = "";
+            String promos = "";
+            List<DtItemReserva> dtItems = listarItems(Integer.parseInt(reserva)).getItems();
+            Iterator<DtItemReserva> iter = dtItems.iterator();
+            DtItemReserva ItRes;
+            while (iter.hasNext()) {
+                ItRes = iter.next();
+                int cant = ItRes.getCantidad();
+                String oferta = ItRes.getOferta().getNombre();
+                String proveedor = ItRes.getOferta().getProveedor().getNickname();
+                String item = "-Nombre: " + oferta
+                        + " - Cantidad: " + cant
+                        + " - $:x"
+                        + " - Proveedor: " + proveedor + "<br/>";
+                if (existeServicio(oferta)) {
+                    servicios += item;
+                } else {
+                    promos += item;
+                }
+            }
+
+            // Configurar mensaje
             String to = dtu.getCorreo();
             String from = "facturacion@help4traveling.com";
             String host = "localhost";
-
-            // Configurar mensaje
             Properties props = System.getProperties();
             props.setProperty("mail.smtp.host", host);
             props.setProperty("mail.user", "myuser");
@@ -67,17 +92,16 @@ public class Email extends HttpServlet {
             String fechayhora = sdf.format(cal.getTime());
 
             // Ensamblar mensaje
-            String nombre = dtu.getNombre() + " " + dtu.getApellido();
-            String servicios = "";
-            String promociones = "";
-            String cuerpo = "<p>Estimado <strong>" + nombre + "</strong>."
+            String cuerpo = "<p>Estimado/a <strong>" + nombre + " " + apellido + "</strong>. "
                     + "Su compra ha sido facturada con &eacute;xito:</p>"
-                    + "<p>---Detalles de la Compra</p>"
-                    + "<p>-<em>Servicios</em>:</p>"
-                    + servicios
-                    + "<p>-<em>Promociones</em>:</p>"
-                    + promociones
-                    + "<p>---Precio total: $ " + total + "</p>"
+                    + "<p>---Detalles de la Compra</p>";
+            if (!servicios.isEmpty()) {
+                cuerpo += "<p>-<em>Servicios</em>:</p>" + servicios;
+            }
+            if (!servicios.isEmpty()) {
+                cuerpo += "<p>-<em>Promociones</em>:</p>" + promos;
+            }
+            cuerpo += "<p>---Precio total: $ " + total + "</p>"
                     + "<p>Gracias por preferirnos, Saludos.<br/>"
                     + "Help4Traveling</p>";
 
@@ -151,6 +175,18 @@ public class Email extends HttpServlet {
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         return port.getDtUsuario(arg0);
+    }
+
+    private static DataItemsReservasArrayList listarItems(int arg0) {
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        return port.listarItems(arg0);
+    }
+
+    private static boolean existeServicio(java.lang.String arg0) {
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        return port.existeServicio(arg0);
     }
 
 }
