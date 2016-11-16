@@ -117,7 +117,7 @@ public class Filtro implements Filter {
             
         String servicio;
         if ((request.getParameter("nombre"))==null){
-            servicio = "";
+            servicio = "null";
         }else{            
             servicio = request.getParameter("nombre");
         }
