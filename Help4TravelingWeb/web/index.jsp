@@ -11,6 +11,8 @@
         <script>
             $(document).ready(function () {
                 setTimeout(function () {
+                              
+
             <%if ((String) session.getAttribute("nickname") != null) {%>
                     $('#idIniciar').hide();
                     $('#idRegistrar').hide();
