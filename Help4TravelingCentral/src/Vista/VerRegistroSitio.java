@@ -193,11 +193,11 @@ private DefaultTableCellRenderer centerRenderer;
                 .addContainerGap()
                 .addComponent(jLabelRes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelItems)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonActualizar)
@@ -225,16 +225,13 @@ private DefaultTableCellRenderer centerRenderer;
                 acc.getBrowse(),
                 acc.getSO()
                 
-            //u.getImagen()
             };
             modeloRegistros.addRow(fila);
         }
         
         
         
-        //modeloRegistros.getDataVector().removeAllElements();
         jTableReg.setModel(modeloRegistros);
-        //jTableReg.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
         
         
         while (c.hasNext()){

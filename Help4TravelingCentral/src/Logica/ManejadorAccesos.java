@@ -60,7 +60,7 @@ public class ManejadorAccesos {
     }
       
     public ArrayList<CantServicios> obtenerCantServicio(){
-        String sql = "SELECT COUNT(*) as cantidad,servicio FROM help4traveling.accesos WHERE servicio!='null' GROUP BY servicio ORDER BY COUNT(*) DESC";
+        String sql = "SELECT COUNT(*) as cantidad,servicio FROM help4traveling.accesos WHERE servicio!='null' GROUP BY servicio ORDER BY COUNT(*) DESC LIMIT 10";
         
         ResultSet rs;
 
