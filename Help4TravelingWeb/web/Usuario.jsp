@@ -304,7 +304,8 @@
                                         </form>
                                         <% } else %>
                                         <% if ((estado == "PAGADA") && (esProv)) {%>
-                                        <form role="form" action='FacturarReserva?action=Reserva' method="post">
+                                        <form role="form" action='FacturarReserva' method="post">
+                                            <input type='hidden' id='action' name='action' value='Reserva'>
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <input type='hidden' id='servicioProveedor' name='servicioProveedor' value=<%=cliente%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Facturar</button>

@@ -32,12 +32,16 @@ public class FacturarReserva extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String action = request.getParameter("action");
-        if (action == "Item") {
-            FacturarItem(request, response);
-        } else if (action == "Reserva") {
-            FacturarReserva(request, response);
+        
+        try {
+            String action = request.getParameter("action");
+            if (action.equals("Item")) {
+                FacturarItem(request, response);
+            } else if (action.equals("Reserva")) {
+                FacturarReserva(request, response);
+            }
+        } catch (SQLException ex) {
+            response.sendRedirect("Usuario.jsp");
         }
     }
 
@@ -89,15 +93,20 @@ public class FacturarReserva extends HttpServlet {
     }// </editor-fold>
     
     //Factura la reserva completa. Es decir cambia el estado de la reserva.
-    private void FacturarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        Integer reserva = Integer.parseInt(request.getParameter("reserva"));
-        String proveedorServicio = request.getParameter("proveedorServicio");
-        
-        servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
-        servidorpublicador.Publicador port = servicio.getPublicadorPort();
-        //port.actualizarEstadoDeReserva(reserva, "FACTURADA");
-        port.facturarReserva(reserva, proveedorServicio);
-        response.sendRedirect("Usuario.jsp");
+    private void FacturarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {  
+        try {
+            Integer reserva = Integer.parseInt(request.getParameter("reserva"));
+            String proveedorServicio = request.getParameter("servicioProveedor");
+
+            servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
+            String proveedorServicio2 = request.getParameter("servicioproveedor");
+            servidorpublicador.Publicador port = servicio.getPublicadorPort();
+            //port.actualizarEstadoDeReserva(reserva, "FACTURADA");
+            port.facturarReserva(reserva, proveedorServicio);
+            response.sendRedirect("Usuario.jsp");
+        } catch (Exception e) {
+            response.sendRedirect("Usuario.jsp");
+        }
     }
     
     //Factura un item de una reserva.

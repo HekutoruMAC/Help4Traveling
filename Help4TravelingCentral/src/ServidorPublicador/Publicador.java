@@ -288,4 +288,13 @@ public class Publicador {
     public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion) {
         fab.getIControladorReserva().FacturarItemReserva(reserva, servicio, proveedorServicio, promocion);
     }       
+    
+    
+    
+    @WebMethod
+    public void agregarRegistro(String IP,String URL,String Browser, String SO,String servicio){
+        ManejadorAccesos macc = ManejadorAccesos.getInstance();
+        macc.agregarAcceso(IP, URL, Browser, SO,servicio);
+        
+    }
 }
