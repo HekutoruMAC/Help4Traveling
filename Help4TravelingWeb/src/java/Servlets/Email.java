@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import servidorpublicador.DataItemsReservasArrayList;
 import servidorpublicador.DtItemReserva;
+import servidorpublicador.DtPromocion;
+import servidorpublicador.DtServicio;
 import servidorpublicador.DtUsuario;
 
 /**
@@ -59,16 +61,26 @@ public class Email extends HttpServlet {
             String promos = "";
             List<DtItemReserva> dtItems = listarItems(Integer.parseInt(reserva)).getItems();
             Iterator<DtItemReserva> iter = dtItems.iterator();
-            DtItemReserva ItRes;
+            DtItemReserva dtItem;
             while (iter.hasNext()) {
-                ItRes = iter.next();
-                int cant = ItRes.getCantidad();
-                String oferta = ItRes.getOferta().getNombre();
-                String proveedor = ItRes.getOferta().getProveedor().getNickname();
-                String item = "-Nombre: " + oferta
-                        + " - Cantidad: " + cant
-                        + " - $:x"
-                        + " - Proveedor: " + proveedor + "<br/>";
+                dtItem = iter.next();
+                int cantidad = dtItem.getCantidad();
+                String oferta = dtItem.getOferta().getNombre();
+                String precio;
+                String proveedor;
+                if (existeServicio(oferta)) {
+                    proveedor = getNkProveedorServicio(oferta);
+                    DtServicio dts = getDtServicio(oferta, proveedor);
+                    precio = String.valueOf(dts.getPrecio());
+                } else {
+                    proveedor = getNkProveedorPromocion(oferta);
+                    DtPromocion dtp = getDTPromocion(oferta, proveedor);
+                    precio = dtp.getPrecio();
+                }
+                String item = "<li>Nombre: <em>" + oferta + "</em>"
+                        + " - Cantidad: <em>" + cantidad + "</em>"
+                        + " - $:<em>" + precio + "</em>"
+                        + " - Proveedor: <em>" + proveedor + "</em></li>";
                 if (existeServicio(oferta)) {
                     servicios += item;
                 } else {
@@ -96,14 +108,14 @@ public class Email extends HttpServlet {
                     + "Su compra ha sido facturada con &eacute;xito:</p>"
                     + "<p>---Detalles de la Compra</p>";
             if (!servicios.isEmpty()) {
-                cuerpo += "<p>-<em>Servicios</em>:</p>" + servicios;
+                cuerpo += "<p>-Servicios:</p><ul>" + servicios + "</ul>";
             }
             if (!servicios.isEmpty()) {
-                cuerpo += "<p>-<em>Promociones</em>:</p>" + promos;
+                cuerpo += "<p>-Promociones:</p><ul>" + promos + "</ul>";
             }
             cuerpo += "<p>---Precio total: $ " + total + "</p>"
                     + "<p>Gracias por preferirnos, Saludos.<br/>"
-                    + "Help4Traveling</p>";
+                    + "<em>Help4Traveling</em></p>";
 
             try {
                 // Crear mensaje
@@ -187,6 +199,30 @@ public class Email extends HttpServlet {
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         return port.existeServicio(arg0);
+    }
+
+    private static DtServicio getDtServicio(java.lang.String arg0, java.lang.String arg1) {
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        return port.getDtServicio(arg0, arg1);
+    }
+
+    private static DtPromocion getDTPromocion(java.lang.String arg0, java.lang.String arg1) {
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        return port.getDTPromocion(arg0, arg1);
+    }
+
+    private static String getNkProveedorServicio(java.lang.String arg0) {
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        return port.getNkProveedorServicio(arg0);
+    }
+
+    private static String getNkProveedorPromocion(java.lang.String arg0) {
+        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+        servidorpublicador.Publicador port = service.getPublicadorPort();
+        return port.getNkProveedorPromocion(arg0);
     }
 
 }
