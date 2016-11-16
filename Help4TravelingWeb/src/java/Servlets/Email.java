@@ -7,6 +7,8 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -44,11 +46,33 @@ public class Email extends HttpServlet {
             String from = "origen@mail.com";
             String host = "localhost";
 
+            // Configurar mensaje
             Properties props = System.getProperties();
             props.setProperty("mail.smtp.host", host);
             props.setProperty("mail.user", "myuser");
             props.setProperty("mail.password", "mypwd");
             Session session = Session.getDefaultInstance(props);
+
+            // Obtener fecha y hora actual
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            String fechayhora = sdf.format(cal.getTime());
+
+            // Ensamblar mensaje
+            String usuario = "";
+            String servicios = "";
+            String promociones = "";
+            String total = "";
+            String cuerpo = "<p>Estimado <strong>" + usuario + "</strong>."
+                    + "Su compra ha sido facturada con &eacute;xito:</p>"
+                    + "<p>---Detalles de la Compra</p>"
+                    + "<p>-<em>Servicios</em>:</p>"
+                    + servicios
+                    + "<p>-<em>Promociones</em>:</p>"
+                    + promociones
+                    + "<p>---Precio total: $ " + total + "</p>"
+                    + "<p>Gracias por preferirnos, Saludos.<br/>"
+                    + "Help4Traveling</p>";
 
             try {
                 // Crear mensaje
@@ -57,9 +81,8 @@ public class Email extends HttpServlet {
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
                 // Ingresar contenido
-                message.setSubject("Título del mensaje.");
-                //message.setText("Texto del mensaje.");
-                message.setContent("<h1>Texto del mensaje.</h1>", "text/html");
+                message.setSubject("[Help4Traveling] [" + fechayhora + "]");
+                message.setContent(cuerpo, "text/html");
 
                 // Enviar mensaje
                 Transport.send(message);
