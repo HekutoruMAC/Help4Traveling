@@ -289,7 +289,10 @@ public class Publicador {
         fab.getIControladorReserva().FacturarItemReserva(reserva, servicio, proveedorServicio, promocion);
     }       
     
-    
+    @WebMethod
+    public int EstadoParcialReserva(int reserva, String proveedor) {
+        return fab.getIControladorReserva().EstadoParcialReserva(reserva, proveedor);
+    } 
     
     @WebMethod
     public void agregarRegistro(String IP,String URL,String Browser, String SO,String servicio){

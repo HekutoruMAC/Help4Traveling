@@ -25,17 +25,17 @@ import net.sf.uadetector.UserAgentStringParser;
  * @author yaman
  */
 public class Filtro implements Filter {
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
+
     public Filtro() {
-    }    
-    
+    }
+
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -62,8 +62,8 @@ public class Filtro implements Filter {
 	    log(buf.toString());
 	}
          */
-    }    
-    
+    }
+
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -101,121 +101,98 @@ public class Filtro implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         if (debug) {
             log("Filtro:doFilter()");
         }
-        
-        
-        
-        
-        
+
         doBeforeProcessing(request, response);
-        
+
         Throwable problem = null;
         try {
-            
-        String servicio;
-        if ((request.getParameter("nombre"))==null){
-            servicio = "";
-        }else{            
-            servicio = request.getParameter("nombre");
-        }
-        
-        System.out.println(servicio);
-        String ip = request.getRemoteHost();
-        
-        String uri = request.getScheme() + "://" +   // "http" + "://
-             request.getServerName() +       // "myhost"
-             ":" + request.getServerPort() + // ":" + "8080"
-             ((HttpServletRequest)request).getRequestURI() +       // "/people"
-            (((HttpServletRequest)request).getQueryString() != null ? "?" +
-             ((HttpServletRequest)request).getQueryString() : "");
-        System.out.println(uri);
-        
-        
-          String  browserDetails  =   ((HttpServletRequest)request).getHeader("User-Agent");
-        String  userAgent       =   browserDetails;
-        String  user            =   userAgent.toLowerCase();
 
-        String os = "";
-        String browser = "";
+            String servicio;
+            servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
+            servidorpublicador.Publicador port = service.getPublicadorPort();
+            if ((request.getParameter("nombre")) == null) {
+                servicio = "null";
+            } else if (port.existePromocion(request.getParameter("nombre"))) {
+                servicio = "null";
+            } else {
+                servicio = request.getParameter("nombre");
+            }
+            System.out.println(servicio);
+            String ip = request.getRemoteHost();
 
-         System.out.println("User Agent for the request is===>"+browserDetails);
-        //=================OS=======================
-         if (userAgent.toLowerCase().indexOf("windows") >= 0 )
-         {
-             os = "Windows";
-         } else if(userAgent.toLowerCase().indexOf("mac") >= 0)
-         {
-             os = "Mac";
-         } else if(userAgent.toLowerCase().indexOf("x11") >= 0)
-         {
-             os = "Unix";
-         } else if(userAgent.toLowerCase().indexOf("android") >= 0)
-         {
-             os = "Android";
-         } else if(userAgent.toLowerCase().indexOf("iphone") >= 0)
-         {
-             os = "IPhone";
-         }else{
-             os = "UnKnown, More-Info: "+userAgent;
-         }
-         //===============Browser===========================
-        if (user.contains("msie"))
-        {
-            String substring=userAgent.substring(userAgent.indexOf("MSIE")).split(";")[0];
-            browser=substring.split(" ")[0].replace("MSIE", "IE")+"-"+substring.split(" ")[1];
-        } else if (user.contains("safari") && user.contains("version"))
-        {
-            browser=(userAgent.substring(userAgent.indexOf("Safari")).split(" ")[0]).split("/")[0]+"-"+(userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
-        } else if ( user.contains("opr") || user.contains("opera"))
-        {
-            if(user.contains("opera"))
-                browser=(userAgent.substring(userAgent.indexOf("Opera")).split(" ")[0]).split("/")[0]+"-"+(userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
-            else if(user.contains("opr"))
-                browser=((userAgent.substring(userAgent.indexOf("OPR")).split(" ")[0]).replace("/", "-")).replace("OPR", "Opera");
-        } else if (user.contains("chrome"))
-        {
-            browser=(userAgent.substring(userAgent.indexOf("Chrome")).split(" ")[0]).replace("/", "-");
-        } else if ((user.indexOf("mozilla/7.0") > -1) || (user.indexOf("netscape6") != -1)  || (user.indexOf("mozilla/4.7") != -1) || (user.indexOf("mozilla/4.78") != -1) || (user.indexOf("mozilla/4.08") != -1) || (user.indexOf("mozilla/3") != -1) )
-        {
-            //browser=(userAgent.substring(userAgent.indexOf("MSIE")).split(" ")[0]).replace("/", "-");
-            browser = "Netscape-?";
+            String uri = request.getScheme() + "://"
+                    + // "http" + "://
+                    request.getServerName()
+                    + // "myhost"
+                    ":" + request.getServerPort()
+                    + // ":" + "8080"
+                    ((HttpServletRequest) request).getRequestURI()
+                    + // "/people"
+                    (((HttpServletRequest) request).getQueryString() != null ? "?"
+                            + ((HttpServletRequest) request).getQueryString() : "");
+            System.out.println(uri);
 
-        } else if (user.contains("firefox"))
-        {
-            browser=(userAgent.substring(userAgent.indexOf("Firefox")).split(" ")[0]).replace("/", "-");
-        } else if(user.contains("rv"))
-        {
-            browser="IE";
-        } else
-        {
-            browser = "UnKnown, More-Info: "+userAgent;
-        }
-        System.out.println("Operating System======>"+os);
-        System.out.println("Browser Name==========>"+browser);
-        
-        
-        
-        
-        
-        //System.out.println("Url1 "+url1+" Url2 "+url2+" Url4 "+ url4+ " Url5"+ url5+ " Url6 "+url6+ " Url7 "+url7+" Url8 "+url8+ " Browser "+userAgent);
-            System.out.println(ip +"  "+uri+"  "+browser+"   "+os );
-        servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
-        servidorpublicador.Publicador port = service.getPublicadorPort();
-        port.agregarRegistro(ip,uri , browser, os,servicio);
-            
-            
-            
-            
+            String browserDetails = ((HttpServletRequest) request).getHeader("User-Agent");
+            String userAgent = browserDetails;
+            String user = userAgent.toLowerCase();
+
+            String os = "";
+            String browser = "";
+
+            System.out.println("User Agent for the request is===>" + browserDetails);
+            //=================OS=======================
+            if (userAgent.toLowerCase().indexOf("windows") >= 0) {
+                os = "Windows";
+            } else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
+                os = "Mac";
+            } else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
+                os = "Unix";
+            } else if (userAgent.toLowerCase().indexOf("android") >= 0) {
+                os = "Android";
+            } else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
+                os = "IPhone";
+            } else {
+                os = "UnKnown, More-Info: " + userAgent;
+            }
+            //===============Browser===========================
+            if (user.contains("msie")) {
+                String substring = userAgent.substring(userAgent.indexOf("MSIE")).split(";")[0];
+                browser = substring.split(" ")[0].replace("MSIE", "IE") + "-" + substring.split(" ")[1];
+            } else if (user.contains("safari") && user.contains("version")) {
+                browser = (userAgent.substring(userAgent.indexOf("Safari")).split(" ")[0]).split("/")[0] + "-" + (userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
+            } else if (user.contains("opr") || user.contains("opera")) {
+                if (user.contains("opera")) {
+                    browser = (userAgent.substring(userAgent.indexOf("Opera")).split(" ")[0]).split("/")[0] + "-" + (userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
+                } else if (user.contains("opr")) {
+                    browser = ((userAgent.substring(userAgent.indexOf("OPR")).split(" ")[0]).replace("/", "-")).replace("OPR", "Opera");
+                }
+            } else if (user.contains("chrome")) {
+                browser = (userAgent.substring(userAgent.indexOf("Chrome")).split(" ")[0]).replace("/", "-");
+            } else if ((user.indexOf("mozilla/7.0") > -1) || (user.indexOf("netscape6") != -1) || (user.indexOf("mozilla/4.7") != -1) || (user.indexOf("mozilla/4.78") != -1) || (user.indexOf("mozilla/4.08") != -1) || (user.indexOf("mozilla/3") != -1)) {
+                //browser=(userAgent.substring(userAgent.indexOf("MSIE")).split(" ")[0]).replace("/", "-");
+                browser = "Netscape-?";
+
+            } else if (user.contains("firefox")) {
+                browser = (userAgent.substring(userAgent.indexOf("Firefox")).split(" ")[0]).replace("/", "-");
+            } else if (user.contains("rv")) {
+                browser = "IE";
+            } else {
+                browser = "UnKnown, More-Info: " + userAgent;
+            }
+            System.out.println("Operating System======>" + os);
+            System.out.println("Browser Name==========>" + browser);
+
+            //System.out.println("Url1 "+url1+" Url2 "+url2+" Url4 "+ url4+ " Url5"+ url5+ " Url6 "+url6+ " Url7 "+url7+" Url8 "+url8+ " Browser "+userAgent);
+            System.out.println(ip + "  " + uri + "  " + browser + "   " + os);
+
+            port.agregarRegistro(ip, uri, browser, os, servicio);
+
             chain.doFilter(request, response);
-            
-            
-            
-            
-            
-            
+
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
@@ -223,11 +200,8 @@ public class Filtro implements Filter {
             problem = t;
             t.printStackTrace();
         }
-        
+
         doAfterProcessing(request, response);
-        
-        
-        
 
         // If there was a problem, we want to rethrow it if it is
         // a known type, otherwise log it.
@@ -261,16 +235,16 @@ public class Filtro implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("Filtro:Initializing filter");
             }
         }
@@ -289,20 +263,20 @@ public class Filtro implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -319,7 +293,7 @@ public class Filtro implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -333,9 +307,9 @@ public class Filtro implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }

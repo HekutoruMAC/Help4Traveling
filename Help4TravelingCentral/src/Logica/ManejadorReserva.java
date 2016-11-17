@@ -591,6 +591,29 @@ public class ManejadorReserva {
             System.out.println("No se pudo facturar!");
         }
     }
+    
+    //Devuelve la cantidad de items no facturados de un proveedor en una reserva, ya sean de una promocion o simplemente servicios.
+    public int EstadoParcialReserva(int reserva, String proveedor) {
+        int cantidad = 0;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String  SQL;
+        ResultSet rsItemsNF;
+        
+        try {
+            SQL = "SELECT oferta FROM reservasitems WHERE reserva = " + reserva + " AND proveedorOferta = '" + proveedor + "' AND facturada = false "
+                + "UNION "
+                + "SELECT oferta FROM reservasitemspromociones WHERE reserva = " + reserva + " AND proveedorServicio = '" + proveedor + "' AND facturada = false";
+            st = con.createStatement();
+            rsItemsNF = st.executeQuery(SQL);
+            while (rsItemsNF.next()) {
+                cantidad += 1;
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo verificar los items"); 
+        }
+        return cantidad;
+    }
 
     public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin) {
         //conexion = new Conexion();

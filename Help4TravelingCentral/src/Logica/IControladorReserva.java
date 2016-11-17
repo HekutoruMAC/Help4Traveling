@@ -51,6 +51,8 @@ public interface IControladorReserva {
     public void FacturarReserva(int reserva, String proveedorServicio);
     
     public void FacturarItemReserva(int reserva, String servicio, String proveedorServicio, String promocion);
+    
+    public int EstadoParcialReserva(int reserva, String proveedor);
      
     public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin);
             

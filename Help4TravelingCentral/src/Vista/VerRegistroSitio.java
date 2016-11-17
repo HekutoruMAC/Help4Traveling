@@ -5,17 +5,62 @@
  */
 package Vista;
 
+import Logica.Acceso;
+import Logica.CantServicios;
+import Logica.DtUsuario;
+import Logica.ManejadorAccesos;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+
+
 /**
  *
  * @author Hekutoru
  */
 public class VerRegistroSitio extends javax.swing.JInternalFrame {
-
+private ArrayList<Acceso> listaRegistros;
+private ArrayList<CantServicios> listaCantidad;
+private DefaultTableModel modeloRegistros;
+private DefaultTableModel modeloCantidad;
+private DefaultTableCellRenderer centerRenderer;
+    private DefaultTableCellRenderer rightRenderer;
+    
+    String[] colRegistros = {"#", "IP", "URL", "Browse", "SO"};
+    String[] colCantidad = {"#","cantidad", "servicio"};
+    //String[] colReservas = {"Número", "Fecha", "Estado", "Total"};
+    
+    
     /**
      * Creates new form VerRegistroSitio
      */
     public VerRegistroSitio() {
+        
+       /* this.centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        this.rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+*/
+        this.modeloCantidad = new DefaultTableModel(colCantidad, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        this.modeloRegistros = new DefaultTableModel(colRegistros, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        
+        
         initComponents();
+        IniciarTabla();
     }
 
     /**
@@ -148,11 +193,11 @@ public class VerRegistroSitio extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabelRes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelItems)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonActualizar)
@@ -162,7 +207,55 @@ public class VerRegistroSitio extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void IniciarTabla(){
+        
+        ManejadorAccesos macc = ManejadorAccesos.getInstance();
+        this.listaRegistros = macc.obtenerRegistros();
+        this.listaCantidad = macc.obtenerCantServicio();
+        Iterator<Acceso> i = this.listaRegistros.iterator();
+        Iterator<CantServicios> c = this.listaCantidad.iterator();
+        modeloRegistros.getDataVector().removeAllElements();
+        modeloCantidad.getDataVector().removeAllElements();
 
+        while (i.hasNext()) {
+            Acceso acc = i.next();
+            Object[] fila = {
+                acc.getNum(),
+                acc.getIP(),
+                acc.getURL(),
+                acc.getBrowse(),
+                acc.getSO()
+                
+            };
+            modeloRegistros.addRow(fila);
+        }
+        
+        
+        
+        jTableReg.setModel(modeloRegistros);
+        
+        int contador=1;
+        while (c.hasNext()){
+            
+            CantServicios serv = c.next();
+            Object[] fila2 = {
+                contador,
+                serv.getCantidad(),
+                serv.getServicio()
+            };
+            contador=contador+1;
+            modeloCantidad.addRow(fila2);
+        }
+        
+        
+        
+        jTableVis.setModel(modeloCantidad);
+        
+    }
+
+    
+    
+    
     private void jTableRegMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRegMouseClicked
 
     }//GEN-LAST:event_jTableRegMouseClicked
@@ -172,7 +265,7 @@ public class VerRegistroSitio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableRegKeyReleased
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-
+            IniciarTabla();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
