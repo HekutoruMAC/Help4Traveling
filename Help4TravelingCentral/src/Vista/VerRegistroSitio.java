@@ -12,6 +12,7 @@ import Logica.ManejadorAccesos;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -234,6 +235,15 @@ private DefaultTableCellRenderer centerRenderer;
         
         jTableReg.setModel(modeloRegistros);
         
+        
+        jTableReg.getColumnModel().getColumn(0).setPreferredWidth(25);
+        jTableReg.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTableReg.getColumnModel().getColumn(2).setPreferredWidth(500);
+        jTableReg.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTableReg.getColumnModel().getColumn(4).setPreferredWidth(100);
+        
+       // jTableReg.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        
         int contador=1;
         while (c.hasNext()){
             
@@ -250,6 +260,7 @@ private DefaultTableCellRenderer centerRenderer;
         
         
         jTableVis.setModel(modeloCantidad);
+        
         
     }
 

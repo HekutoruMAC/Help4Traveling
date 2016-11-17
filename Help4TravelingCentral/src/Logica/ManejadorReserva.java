@@ -464,7 +464,7 @@ public class ManejadorReserva {
                 Date fecha = new Date(Integer.valueOf(partes[2]), Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
                 Map<Integer, ItemReserva> items = null;
 
-                DtReserva nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.valueOf(estado), Double.parseDouble(total), prov, items);
+                DtReserva nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.valueOf(estado), Double.parseDouble(total), cliente, items);
                 ReservaxProveedor.add(nueva);
             }
             rs.close();
