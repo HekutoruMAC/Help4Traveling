@@ -107,11 +107,12 @@ public class FacturarReserva extends HttpServlet {
                 port.actualizarEstadoDeReserva(reserva, "FACTURADA");
                 
                 //Mando mail
-                Integer total = Integer.parseInt(request.getParameter("total"));
                 String cliente = request.getParameter("cliente");
-                response.sendRedirect("Email.java?reserva=" + reserva.toString() + "&cliente=" + cliente + "&total=" + total.toString());
+                Double total = Double.parseDouble(request.getParameter("total"));
+                response.sendRedirect("Email?reserva=" + reserva.toString() + "&cliente=" + cliente + "&total=" + total.toString());
+            }else {
+                response.sendRedirect("Usuario.jsp");
             }
-            response.sendRedirect("Usuario.jsp");
         } catch (Exception e) {
             response.sendRedirect("Usuario.jsp");
         }
