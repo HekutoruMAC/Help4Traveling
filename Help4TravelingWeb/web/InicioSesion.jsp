@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-md-4" id="ingreso_usuario">
                     <h1>Ingreso de Usuario:</h1>
-                    <form role="form" class="form-horizontal" action="Autenticacion" method="post" id="ingreso_form">
+                    <form role="form" class="form" action="Autenticacion" method="post" id="ingreso_form">
                         <div class="form-group">
                             <!--div class="col-sm-2"-->
                             <label for="nickname_ingreso" class="control-label">Nickname
