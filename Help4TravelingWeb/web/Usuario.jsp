@@ -272,7 +272,6 @@
                                         String numero = i.toString();
                                         Long id = dtRes.getId();
                                         String estado = "";
-                                        int itemsNF = port.estadoParcialReserva(id.intValue(), dtRes.getCliente());
                                         if (dtRes.getEstado().toString().equals("REGISTRADA")) {
                                             estado = "REGISTRADA";
                                         } else if (dtRes.getEstado().toString().equals("CANCELADA")) {
@@ -280,10 +279,9 @@
                                         } else if (dtRes.getEstado().toString().equals("FACTURADA")) {
                                             estado = "FACTURADA";
                                         } else if (dtRes.getEstado().toString().equals("PAGADA")) {
-                                            if (itemsNF == 0) {
+                                            estado = "PAGADA";
+                                            if ((esProv) && (port.estadoParcialReserva(id.intValue(), nick) == 0)) {
                                                 estado = "PARCIAL";
-                                            } else {
-                                                estado = "PAGADA";
                                             }
                                         }
                                         String idres = id.toString();
@@ -310,10 +308,10 @@
                                             <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
                                         </form>
                                         <% } else %>
-                                        <% if (estado == "PARCIAL") {%>
+                                        <% if ((estado == "PARCIAL") && (esProv)) {%>
                                         <form role="form" action='' method="">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <button type="button" class="btn btn-primary" style="background-color: background;"><span class="glyphicon glyphicon-check"></span> Facturada</button>
+                                            <button type="button" class="btn btn-primary" style="background-color: background;"><span class="glyphicon glyphicon-check"></span> Parcial</button>
                                         </form>
                                         <% } else %>
                                         <% if ((estado == "PAGADA") && (esProv)) {%>
@@ -321,7 +319,9 @@
                                             <input type='hidden' id='action' name='action' value='Reserva'>
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <input type='hidden' id='reserva' name='total' value=<%=total%>>
-                                            <input type='' id='servicioProveedor' name='servicioProveedor' value=<%=cliente%>>
+                                            <input type='hidden' id='servicioProveedor' name='servicioProveedor' value=<%=nick%>>
+                                            <input type='hidden' id='total' name='total' value=<%=total%>>
+                                            <input type='hidden' id='cliente' name='cliente' value=<%=cliente%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Facturar</button>
                                         </form>
                                         <% } else %>

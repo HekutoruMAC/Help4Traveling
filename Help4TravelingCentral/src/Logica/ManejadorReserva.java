@@ -541,7 +541,8 @@ public class ManejadorReserva {
         }
     }
     
-    private void FacturarPromocion(int reserva, String proveedorServicio) {
+    //Factura la primicion en la tabla itemsreserva siempre y cuando todos los items de la promocion estan facturados.
+    private void FacturarPromocion(int reserva) {
         Connection con = Conexion.getInstance().getConnection();
         String SQL = "";
         Statement st ;
@@ -588,7 +589,7 @@ public class ManejadorReserva {
                     + "WHERE reserva = " + String.valueOf(reserva) + " AND proveedorServicio = '" + proveedorServicio + "'";
                 st = con.createStatement();
                 st.executeUpdate(SQL);
-                FacturarPromocion(reserva, proveedorServicio);
+                FacturarPromocion(reserva);
             } catch (SQLException e) {
                 System.out.println(SQL);
                 System.out.println("No se pudo facturar las promociones!");
@@ -644,25 +645,25 @@ public class ManejadorReserva {
     }
     
     public boolean ItemsFacturados(int reserva) {
-        boolean falta = true;
+        boolean Facturados = false;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
         String  SQL;
         ResultSet rsItemsNF;
         
         try {
-            SQL = "SELECT oferta FROM reservasitems WHERE reserva = " + reserva + " AND facturada = false "
-                + "UNION "
-                + "SELECT oferta FROM reservasitemspromociones WHERE reserva = " + reserva + " AND facturada = false";
+            SQL = "SELECT oferta FROM reservasitems WHERE reserva = " + reserva + " AND facturada = false LIMIT 1";
             st = con.createStatement();
             rsItemsNF = st.executeQuery(SQL);
-            while (rsItemsNF.next()) {
-                //cantidad += 1;
+            if (rsItemsNF == null) {
+                Facturados = false;
+            }else {
+                Facturados = true;
             }
         } catch (SQLException e) {
             System.out.println("No se pudo verificar los items"); 
         }
-        return falta;
+        return Facturados;
     }
 
     public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin) {
