@@ -47,7 +47,9 @@
     </head>
 
     <body>
-        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+        <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+        <jsp:include page="WEB-INF/Header.jsp"/>
+        <!-- </div> /-->
 
         <% String IdReserva = request.getParameter("idReserva");
             //Fabrica fab = Fabrica.getInstance();
@@ -185,6 +187,8 @@
                 </div>
             </div>
         </div>
-        <footer class="section section-primary" id="footer"></footer>
+        <!-- <footer class="section section-primary" id="footer"> /-->
+        <jsp:include page="WEB-INF/Footer.jsp"/>
+        <!-- </footer> /-->
     </body>
 </html>

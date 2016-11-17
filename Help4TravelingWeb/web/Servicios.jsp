@@ -41,14 +41,18 @@
     </head>
     <title>Listado de Servicios</title>
     <body>
-        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+        <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+        <jsp:include page="WEB-INF/Header.jsp"/>
+        <!-- </div> /-->
         <div class="section minimo">
             <iframe name="categorias" src="Categorias.jsp" style="float: left; position:relative; width:30%; height: 600px" scrolling="auto" frameborder="0">
             </iframe>
             <iframe name="servicios" src="ListarServicios.jsp?categoria=Categorias" style="float: right; position:relative; width:70%; height: 600px" scrolling="auto" frameborder="0">
             </iframe>
         </div>
-        <div><footer class="section section-primary" id="footer"></footer></div>
+        <div><!-- <footer class="section section-primary" id="footer"> /-->
+        <jsp:include page="WEB-INF/Footer.jsp"/>
+        <!-- </footer> /--></div>
     </body>
 </html>
 

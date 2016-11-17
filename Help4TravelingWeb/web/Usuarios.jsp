@@ -20,8 +20,17 @@
         <link type="text/css" href="css/jquery-ui.css" rel="Stylesheet" />
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="css\test.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <!--
+        <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+        <link href="http://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet"/>
+        <script src="http://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+        /-->
+
         <script>
             $(document).ready(function () {
+                $('.data-table').DataTable();
                 setTimeout(function () {
             <%if ((String) session.getAttribute("nickname") != null) {%>
                     $('#idIniciar').hide();
@@ -37,7 +46,10 @@
     </head>
     <body>
         <title>Listado de Usuarios</title>
-        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+        <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+        <jsp:include page="WEB-INF/Header.jsp"/>
+        <!-- </div> /-->
+
         <div class="section">
             <div class="container">
                 <div class="row">
@@ -47,7 +59,7 @@
                                 <div class="row default"><h2><b>Listado de Usuarios</b></h2></div>
                                 <hr>
                                 <div class="row default">
-                                    <table class="default table table-bordered table-hover table-striped table-responsive">
+                                    <table id="data-table" class="display default table table-bordered table-hover table-striped table-responsive dataTable data-table">
                                         <tbody>
                                             <tr class="default">
                                                 <td class="default" width="200" align="center"><b>Nickname</b></td>
@@ -60,7 +72,7 @@
                                                 List<servidorpublicador.DtUsuario> usuarios;
                                                 servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
                                                 servidorpublicador.Publicador port = service.getPublicadorPort();
-                                                usuarios = port.listarUsuariosSistema().getUsuariosSistema();                                                
+                                                usuarios = port.listarUsuariosSistema().getUsuariosSistema();
                                                 Iterator<servidorpublicador.DtUsuario> iter = usuarios.iterator();
                                                 while (iter.hasNext()) {
                                                     dtUsu = iter.next();
@@ -89,7 +101,9 @@
                 </div>
             </div>
         </div>
-        <footer class="section section-primary" id="footer"></footer>
+        <!-- <footer class="section section-primary" id="footer"> /-->
+        <jsp:include page="WEB-INF/Footer.jsp"/>
+        <!-- </footer> /-->
     </body>
 </html>
 

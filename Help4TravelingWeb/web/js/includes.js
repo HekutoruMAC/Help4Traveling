@@ -1,8 +1,8 @@
 
 //Espera a que el documento esta totalmente cargado
 $(document).ready(function () {
-    $("#header").load("header.html", function () {
-        $("#footer").load("footer.html", function () {
+    $("#header").load("WEB-INF/Header.jsp", function () {
+        $("#footer").load("WEB-INF/Footer.jsp", function () {
             setTimeout(function () {
 
                 //Logo
