@@ -91,15 +91,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="dataProveedoresArrayList">
-<xs:sequence>
-<xs:element name="proveedores" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dataPromocionesProveedorArrayList">
 <xs:sequence>
 <xs:element name="promocionesProveedor" type="tns:dtPromocion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataProveedoresArrayList">
+<xs:sequence>
+<xs:element name="proveedores" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
