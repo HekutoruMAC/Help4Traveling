@@ -101,8 +101,10 @@ public class FacturarReserva extends HttpServlet {
             servidorpublicador.PublicadorService servicio = new servidorpublicador.PublicadorService();
             String proveedorServicio2 = request.getParameter("servicioproveedor");
             servidorpublicador.Publicador port = servicio.getPublicadorPort();
-            //port.actualizarEstadoDeReserva(reserva, "FACTURADA");
             port.facturarReserva(reserva, proveedorServicio);
+            if (port.ItemsFacturados(reserva)) {
+                port.actualizarEstadoDeReserva(reserva, "FACTURADA");
+            }
             response.sendRedirect("Usuario.jsp");
         } catch (Exception e) {
             response.sendRedirect("Usuario.jsp");

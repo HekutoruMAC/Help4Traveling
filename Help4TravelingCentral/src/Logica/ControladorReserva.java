@@ -98,6 +98,11 @@ public class ControladorReserva implements IControladorReserva {
         return mr.EstadoParcialReserva(reserva, proveedor);
     }
     
+    public boolean ItemsFacturados(int reserva) {
+        ManejadorReserva mr = ManejadorReserva.getInstance();
+        return mr.ItemsFacturados(reserva);
+    }
+    
     public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin){
         ManejadorReserva mr = ManejadorReserva.getInstance();
         mr.agregarItemReserva(nueva, oferta, proveedor, cantidad, inicio, fin);

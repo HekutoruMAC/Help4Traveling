@@ -295,6 +295,12 @@ public class Publicador {
     } 
     
     @WebMethod
+    public boolean ItemsFacturados(int reserva) {
+        return fab.getIControladorReserva().ItemsFacturados(reserva);
+    } 
+    
+    
+    @WebMethod
     public void agregarRegistro(String IP,String URL,String Browser, String SO,String servicio){
         ManejadorAccesos macc = ManejadorAccesos.getInstance();
         macc.agregarAcceso(IP, URL, Browser, SO,servicio);

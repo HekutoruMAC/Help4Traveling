@@ -55,5 +55,7 @@ public interface IControladorReserva {
     public int EstadoParcialReserva(int reserva, String proveedor);
      
     public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin);
+    
+    public boolean ItemsFacturados(int reserva);
             
 }

@@ -541,6 +541,34 @@ public class ManejadorReserva {
         }
     }
     
+    private void FacturarPromocion(int reserva, String proveedorServicio) {
+        Connection con = Conexion.getInstance().getConnection();
+        String SQL = "";
+        Statement st ;
+        ResultSet rsItemsNF;
+
+        try {
+            SQL = "SELECT oferta, proveedorOferta "
+                + "FROM reservasitems i "
+                + "WHERE oferta not in (SELECT oferta "
+                                     + "FROM reservasitemspromociones p "
+                                     + "WHERE p.reserva = i.reserva AND p.oferta = i.oferta AND p.proveedorOferta = i.proveedorOferta AND facturada = false) "
+                                     + "AND proveedorOferta = 'PROMOCION' AND reserva = " + reserva + " AND facturada = false ";
+            st = con.createStatement();
+            rsItemsNF = st.executeQuery(SQL);
+            if (rsItemsNF.next()) {
+                try {
+                    SQL = "UPDATE reservasitems SET facturada = true WHERE reserva = " + reserva + " AND oferta = '" + rsItemsNF.getString("oferta") + "' AND proveedorOferta = '" + rsItemsNF.getString("proveedorOferta") + "'";
+                    st.executeUpdate(SQL);
+                } catch (SQLException e) {
+                    System.out.println("Error al facturar el item promocion");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al verificar item promocion");
+        }
+    }
+    
     //Cambia el estado a facturada de todos los items de un proveedor dentro de una reserva.
     public void FacturarReserva(int reserva, String proveedorServicio) {
         Connection con = Conexion.getInstance().getConnection();
@@ -560,7 +588,7 @@ public class ManejadorReserva {
                     + "WHERE reserva = " + String.valueOf(reserva) + " AND proveedorServicio = '" + proveedorServicio + "'";
                 st = con.createStatement();
                 st.executeUpdate(SQL);
-                
+                FacturarPromocion(reserva, proveedorServicio);
             } catch (SQLException e) {
                 System.out.println(SQL);
                 System.out.println("No se pudo facturar las promociones!");
@@ -613,6 +641,28 @@ public class ManejadorReserva {
             System.out.println("No se pudo verificar los items"); 
         }
         return cantidad;
+    }
+    
+    public boolean ItemsFacturados(int reserva) {
+        boolean falta = true;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String  SQL;
+        ResultSet rsItemsNF;
+        
+        try {
+            SQL = "SELECT oferta FROM reservasitems WHERE reserva = " + reserva + " AND facturada = false "
+                + "UNION "
+                + "SELECT oferta FROM reservasitemspromociones WHERE reserva = " + reserva + " AND facturada = false";
+            st = con.createStatement();
+            rsItemsNF = st.executeQuery(SQL);
+            while (rsItemsNF.next()) {
+                //cantidad += 1;
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo verificar los items"); 
+        }
+        return falta;
     }
 
     public void agregarItemReserva(Reserva nueva, Oferta oferta, Proveedor proveedor, int cantidad, Date inicio, Date fin) {
