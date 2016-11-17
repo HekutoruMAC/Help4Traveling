@@ -215,6 +215,7 @@ private DefaultTableCellRenderer centerRenderer;
         Iterator<Acceso> i = this.listaRegistros.iterator();
         Iterator<CantServicios> c = this.listaCantidad.iterator();
         modeloRegistros.getDataVector().removeAllElements();
+        modeloCantidad.getDataVector().removeAllElements();
 
         while (i.hasNext()) {
             Acceso acc = i.next();
@@ -264,7 +265,7 @@ private DefaultTableCellRenderer centerRenderer;
     }//GEN-LAST:event_jTableRegKeyReleased
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-
+            IniciarTabla();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
