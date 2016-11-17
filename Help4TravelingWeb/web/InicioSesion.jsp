@@ -71,8 +71,9 @@
 </head>
 <body>
 
-    <div class="navbar navbar-default navbar-fixed-top" id="header">
-    </div>
+    <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+    <jsp:include page="WEB-INF/Header.jsp"/>
+    <!-- </div> /-->
     <%
         Cookie[] todoslosCookies = request.getCookies();
         String nicknameCookie = "";
@@ -91,7 +92,7 @@
             <div class="row">
                 <div class="col-md-4" id="ingreso_usuario">
                     <h1>Ingreso de Usuario:</h1>
-                    <form role="form" class="form-horizontal" action="Autenticacion" method="post" id="ingreso_form">
+                    <form role="form" class="form" action="Autenticacion" method="post" id="ingreso_form">
                         <div class="form-group">
                             <!--div class="col-sm-2"-->
                             <label for="nickname_ingreso" class="control-label">Nickname
@@ -190,7 +191,7 @@
             </div>
         </div>
     </div>
-    <footer class="section section-primary" id="footer">
-    </footer>
-
+    <!-- <footer class="section section-primary" id="footer"> /-->
+    <jsp:include page="WEB-INF/Footer.jsp"/>
+    <!-- </footer> /-->
 </html>

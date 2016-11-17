@@ -36,7 +36,9 @@
     </head>
     <body>
         <title>Listado de Proveedores</title>
-        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+        <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+        <jsp:include page="WEB-INF/Header.jsp"/>
+        <!-- </div> /-->
         <div class="section">
             <div class="container">
                 <div class="row">
@@ -46,7 +48,7 @@
                                 <div class="row default"><h2><b>Listado de Proveedores</b></h2></div>
                                 <hr>
                                 <div class="row default">
-                                    <table class="default table table-bordered table-hover table-striped">
+                                    <table class="default table table-bordered table-hover table-striped table-responsive">
                                         <tbody>
                                             <tr class="default">
                                                 <td class="default" width="200" align="center"><b>Nickname</b></td>
@@ -94,6 +96,8 @@
                 </div>
             </div>
         </div>
-        <footer class="section section-primary" id="footer"></footer>
+        <!-- <footer class="section section-primary" id="footer"> /-->
+        <jsp:include page="WEB-INF/Footer.jsp"/>
+        <!-- </footer> /-->
     </body>
 </html>

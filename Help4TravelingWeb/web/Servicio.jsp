@@ -68,7 +68,9 @@
         </script>
     </head>
     <title>Detalle de Servicio</title>
-    <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+    <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+        <jsp:include page="WEB-INF/Header.jsp"/>
+        <!-- </div> /-->
     <div>
         <p>AAA</p>
     </div>
@@ -155,7 +157,7 @@
                                             </div>
                                             <% } %>
                                             <hr>
-                                            <table class="default table table-bordered table-hover table-striped" style="font-size:20px">
+                                            <table class="default table table-bordered table-hover table-striped table-responsive" style="font-size:20px">
                                                 <tbody>
                                                     <tr class="default">
                                                         <td class="default" width="200">Proveedor</td>
@@ -241,5 +243,7 @@
             </div>
         </div>
     </div>
-    <footer class="section section-primary" id="footer"></footer>
+    <!-- <footer class="section section-primary" id="footer"> /-->
+        <jsp:include page="WEB-INF/Footer.jsp"/>
+        <!-- </footer> /-->
 </html>

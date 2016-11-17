@@ -1,4 +1,6 @@
-<html><head>
+
+<html>
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11,7 +13,7 @@
         <script>
             $(document).ready(function () {
                 setTimeout(function () {
-                              
+
 
             <%if ((String) session.getAttribute("nickname") != null) {%>
                     $('#idIniciar').hide();
@@ -26,8 +28,9 @@
         </script>
     </head>
     <body>
-        <div class="navbar navbar-default navbar-fixed-top" id="header">
-        </div>
+        <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+        <jsp:include page="WEB-INF/Header.jsp"/>
+        <!-- </div> /-->
         <div class="section">
             <div class="container">
                 <div class="row">
@@ -94,7 +97,8 @@
                 </div>
             </div>
         </div>
-        <footer class="section section-primary" id="footer">
-        </footer>
+        <!-- <footer class="section section-primary" id="footer"> /-->
+        <jsp:include page="WEB-INF/Footer.jsp"/>
+        <!-- </footer> /-->
     </body>
 </html>

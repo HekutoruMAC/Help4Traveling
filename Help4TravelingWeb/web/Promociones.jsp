@@ -39,7 +39,9 @@
     </head>
     <body>
         <title>Listado de Promociones</title>
-        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+        <!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+        <jsp:include page="WEB-INF/Header.jsp"/>
+        <!-- </div> /-->
         <div>
             <p>AAA</p>
         </div>
@@ -55,7 +57,7 @@
                             <div class="row default">
                                 <div class="row default"><h2><b>Listado de Promociones</b></h2></div>
                                 <hr>
-                                <table class="default table table-bordered table-hover table-striped">
+                                <table class="default table table-bordered table-hover table-striped table-responsive">
                                     <thead>
                                         <tr class="default">
                                             <td class="default" width="200" align="center"><b>Nombre</b></td>
@@ -97,7 +99,9 @@
             </div>
         </div>
         <!--/div-->
-        <footer class="section section-primary" id="footer"></footer>
+        <!-- <footer class="section section-primary" id="footer"> /-->
+        <jsp:include page="WEB-INF/Footer.jsp"/>
+        <!-- </footer> /-->
     </body>
 </html>
 

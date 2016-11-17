@@ -37,7 +37,9 @@
     </script>
 </head>
 
-<div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+<!-- <div class="navbar navbar-default navbar-fixed-top" id="header"> /-->
+<jsp:include page="WEB-INF/Header.jsp"/>
+<!-- </div> /-->
 <div>
     <p>A</p>
 </div>
@@ -65,7 +67,7 @@
                                 Reserva reserva = null;
 
                                 out.print("<div class='row default'>"
-                                        + "<table class='default table table-bordered table-hover table-striped'>"
+                                        + "<table class='default table table-bordered table-hover table-striped table-responsive'>"
                                         + "<tbody>"
                                         + "<tr class='default'>"
                                         + "<td class='default' width='300' align='center'><b><h1>Reservas de " + nickname + "</h1></b></td>"
@@ -137,4 +139,6 @@
     </div>
 </div>
 </div>
-<footer class="section section-primary" id="footer"></footer>
+<!-- <footer class="section section-primary" id="footer"> /-->
+<jsp:include page="WEB-INF/Footer.jsp"/>
+<!-- </footer> /-->
