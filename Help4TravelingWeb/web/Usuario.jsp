@@ -152,7 +152,7 @@
                         if (!servicios.isEmpty()) {
                             Iterator<servidorpublicador.DtServicio> iserv = servicios.iterator(); %>
                     <div id="servicios" class="tab-pane fade">
-                        <table class="default table table-bordered table-hover table-striped">
+                        <table class="default table table-bordered table-hover table-striped table-responsive">
                             <thead>
                                 <tr class="default">
                                     <td class="default" width="100" align="center"><b>Nombre</b></td>
@@ -196,7 +196,7 @@
                         if (!promociones.isEmpty()) {
                             Iterator<servidorpublicador.DtPromocion> ipromo = promociones.iterator(); %>
                     <div id="promociones" class="tab-pane fade">
-                        <table class="default table table-bordered table-hover table-striped">
+                        <table class="default table table-bordered table-hover table-striped table-responsive">
                             <thead>
                                 <tr class="default">
                                     <td class="default" width="200" align="center"><b>Nombre</b></td>
@@ -237,7 +237,7 @@
 
                     <% } %>
                     <div id="reservas" class="tab-pane fade">
-                        <table class="default table table-bordered table-hover table-striped">
+                        <table class="default table table-bordered table-hover table-striped table-responsive">
                             <tbody>
                                 <tr class="default">
                                     <td class="default" width="50" align="center"><b>Número</b></td>

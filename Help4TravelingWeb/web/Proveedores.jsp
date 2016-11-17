@@ -46,7 +46,7 @@
                                 <div class="row default"><h2><b>Listado de Proveedores</b></h2></div>
                                 <hr>
                                 <div class="row default">
-                                    <table class="default table table-bordered table-hover table-striped">
+                                    <table class="default table table-bordered table-hover table-striped table-responsive">
                                         <tbody>
                                             <tr class="default">
                                                 <td class="default" width="200" align="center"><b>Nickname</b></td>

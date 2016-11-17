@@ -54,7 +54,7 @@
                 }
                 if (!servicios.isEmpty()) {
                     Iterator<servidorpublicador.DtServicio> iserv = servicios.iterator(); %>
-            <table class="default table table-bordered table-hover table-striped">
+            <table class="default table table-bordered table-hover table-striped table-responsive">
                 <thead>
                     <tr class="default">
                         <td class="default" width="100" align="center"><b>Nombre</b></td>

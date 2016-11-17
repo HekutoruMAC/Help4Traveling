@@ -72,6 +72,25 @@
                 }, 100);
             });
         </script>
+
+        <script>
+                $(function () {
+                        var baseURL = 'http://localhost:8084/Help4TravelingWeb/';
+                        //load content for first tab and initialize
+                        $('#Datos').load(baseURL + 'Datos', function () {
+                                $('#myTabs').tab(); //initialize tabs
+                        });    
+                        $('#myTabs').bind('show', function (e) {    
+                               var pattern = '/#.+/gi'; //use regex to get anchor(==selector)
+                               var contentID = e.target.toString().match(pattern)[0]; //get anchor         
+                               //load content for selected tab
+                                $(contentID).load(baseURL + contentID.replace('#', ''), function () {
+                                        $('#myTabs').tab(); //reinitialize tabs
+                                });
+                        });
+                });
+        </script>
+
         <title>Detalle de Proveedor</title>
     </head>
     <body>
@@ -114,7 +133,7 @@
                     </div>
                 </div>
 
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs" id="myTabs">
                     <li class="active">
                         <a data-toggle="tab" href="#Datos">Datos personales</a></li>
                     <li><a data-toggle="tab" href="#reservas">Servicios</a></li>
@@ -130,7 +149,7 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">Nombre: <%=nombre%> </li>
                                     <li class="list-group-item">Apellido: <%=apellido%> </li>
-                                    <li class="list-group-item">F de nac: <%=nacimiento%></li>
+                                    <li class="list-group-item">Nacimiento: <%=nacimiento%></li>
                                 </ul>
 
                             </div>
@@ -140,11 +159,11 @@
 
 
                         <%
-                            List<DtServicio> servicios =port.listarServiciosProveedor(dtProv).getServiciosProveedor();
+                            List<DtServicio> servicios = port.listarServiciosProveedor(dtProv).getServiciosProveedor();
 
                             if (!servicios.isEmpty()) {
                                 Iterator<DtServicio> iserv = servicios.iterator(); %>
-                        <table class="default table table-bordered table-hover table-striped">
+                        <table class="default table table-bordered table-hover table-striped table-responsive">
                             <thead>
                                 <tr class="default">
                                     <td class="default" width="100" align="center"><b>Nombre</b></td>
@@ -190,7 +209,7 @@
                         if (!promociones.isEmpty()) {
                             Iterator<DtPromocion> ipromo = promociones.iterator(); %>
                     <div id="promociones" class="tab-pane fade">
-                        <table class="default table table-bordered table-hover table-striped">
+                        <table class="default table table-bordered table-hover table-striped table-responsive">
                             <thead>
                                 <tr class="default">
                                     <td class="default" width="200" align="center"><b>Nombre</b></td>

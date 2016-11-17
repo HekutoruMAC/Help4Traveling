@@ -85,7 +85,7 @@
                             <div class="container">
                                 <div class="row default">
 
-                                    <table class="default table table-bordered table-hover table-striped">
+                                    <table class="default table table-bordered table-hover table-striped table-responsive">
                                         <tbody>
                                             <tr class="default">
                                                 <td class="default" width="200" align="center"><b>nombre</b></td>

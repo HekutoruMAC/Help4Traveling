@@ -93,7 +93,7 @@
                                     <h2><b>Servicios de la Promoción</b></h2>
                                 </div>
                                 <hr>
-                                <table class="default table table-bordered table-hover table-striped">
+                                <table class="default table table-bordered table-hover table-striped table-responsive">
                                     <thead>
                                         <tr class="default">
                                             <td class="default" width="200" align="center"><b>Nombre</b></td>

@@ -155,7 +155,7 @@
                                             </div>
                                             <% } %>
                                             <hr>
-                                            <table class="default table table-bordered table-hover table-striped" style="font-size:20px">
+                                            <table class="default table table-bordered table-hover table-striped table-responsive" style="font-size:20px">
                                                 <tbody>
                                                     <tr class="default">
                                                         <td class="default" width="200">Proveedor</td>
