@@ -313,21 +313,25 @@
                                         </form>
                                         <% } else %>
                                         <% if ((estado == "REGISTRADA") && !(esProv)) {%>
-                                        <form role="form" action='PagarReserva' method="post" style="float: left">
-                                            <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
-                                        </form>
-                                        <form role="form" action='Email' method="post">
-                                            <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
-                                            <input type='hidden' id='reserva' name='total' value=<%=total%>>
-                                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-envelope"></span> Correo</button>
-                                        </form>
-                                        </form>
-                                        <form role="form" action='CancelarReserva' method="post" style="float: right">
-                                            <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Está seguro de cancelar la reserva?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                                        </form>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <form role="form" action='PagarReserva' method="post">
+                                                    <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
+                                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
+                                                </form></div>
+                                            <div class="col-md-4">
+                                                <form role="form" action='Email' method="post">
+                                                    <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
+                                                    <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
+                                                    <input type='hidden' id='reserva' name='total' value=<%=total%>>
+                                                    <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-envelope"></span> Correo</button>
+                                                </form></div>
+                                            <div class="col-md-4">
+                                                <form role="form" action='CancelarReserva' method="post">
+                                                    <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Está seguro de cancelar la reserva?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                                </form></div>
+                                        </div>
                                         <% } %>
                                     </td>
                                 </tr>
