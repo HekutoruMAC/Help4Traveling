@@ -30,7 +30,7 @@ private DefaultTableCellRenderer centerRenderer;
     private DefaultTableCellRenderer rightRenderer;
     
     String[] colRegistros = {"#", "IP", "URL", "Browse", "SO"};
-    String[] colCantidad = {"cantidad", "servicio"};
+    String[] colCantidad = {"#","cantidad", "servicio"};
     //String[] colReservas = {"Número", "Fecha", "Estado", "Total"};
     
     
@@ -233,13 +233,16 @@ private DefaultTableCellRenderer centerRenderer;
         
         jTableReg.setModel(modeloRegistros);
         
-        
+        int contador=1;
         while (c.hasNext()){
+            
             CantServicios serv = c.next();
             Object[] fila2 = {
+                contador,
                 serv.getCantidad(),
                 serv.getServicio()
             };
+            contador=contador+1;
             modeloCantidad.addRow(fila2);
         }
         
