@@ -234,6 +234,14 @@ private DefaultTableCellRenderer centerRenderer;
         
         jTableReg.setModel(modeloRegistros);
         
+        
+        jTableReg.getColumnModel().getColumn(0).setPreferredWidth(10);
+        jTableReg.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTableReg.getColumnModel().getColumn(2).setPreferredWidth(150);
+        jTableReg.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTableReg.getColumnModel().getColumn(4).setPreferredWidth(50);
+
+        
         int contador=1;
         while (c.hasNext()){
             
@@ -250,6 +258,7 @@ private DefaultTableCellRenderer centerRenderer;
         
         
         jTableVis.setModel(modeloCantidad);
+        
         
     }
 
