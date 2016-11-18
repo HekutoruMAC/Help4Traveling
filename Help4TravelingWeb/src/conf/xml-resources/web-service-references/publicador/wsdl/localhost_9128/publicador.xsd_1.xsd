@@ -103,6 +103,12 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dataNombresCategoriasArrayList">
+<xs:sequence>
+<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="reserva">
 <xs:sequence>
 <xs:element name="id" type="xs:long"></xs:element>
@@ -244,12 +250,6 @@
 <xs:sequence>
 <xs:element name="ciudades" type="tns:ciudad" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dataNombresCategoriasArrayList">
-<xs:sequence>
-<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

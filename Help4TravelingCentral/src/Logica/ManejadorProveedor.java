@@ -194,40 +194,37 @@ public class ManejadorProveedor {
                 String fecha = rsProveedores.getString("fechaNac");
                 Date nacimiento = new Date(fecha);
                 String empresa = rsProveedores.getString("empresa");
-                System.out.println(empresa);
                 String link = rsProveedores.getString("link");
-                System.out.println(link);
-                String imagen = rsProveedores.getString("imagen");;
-                //String empresa = rsProveedores.getString("Empresa");
-                //String direccion = rsProveedores.getString("Direccion");
+                String imagen = rsProveedores.getString("imagen");
                 Proveedor nuevo = new Proveedor(nombre, apellido, nickname, password, correo, nacimiento, imagen, empresa, link);
                 proveedoresNK.put(nickname, nuevo);
+                System.out.println(nuevo.getEmpresa());
+                System.out.println(nuevo.getLink());
             }
             rsProveedores.close();
             con.close();
             st.close();
-
             System.out.println("Usuarios cargados :)");
         } catch (SQLException e) {
             System.out.println("No pude cargar usuarios :(");
         }
 
-        ArrayList<DtUsuario> listaProveedores = new ArrayList<>();
+        ArrayList<DtUsuario> listaProveedores = new ArrayList<DtUsuario>();
         Iterator<Proveedor> iter = this.proveedoresNK.values().iterator();
-        while (iter.hasNext()) {
+        /*while (iter.hasNext()) {
             Proveedor pr = iter.next();
             listaProveedores.add(pr.getDtProveedor());
+        }*/
+        while (iter.hasNext()) {
+            String nick = iter.next().getNickname();
+            listaProveedores.add(getDtProveedor(nick));
         }
         return listaProveedores;
     }
 
     public String persistirProveedor(Proveedor prov) {
-        //Conexion conexion;
-        System.out.println("Entro a persistir");
         Connection con = Conexion.getInstance().getConnection();
-        //conexion = new Conexion();
         String mensaje = "Se dio de alta al Usuario Proveedor.";
-        //Connection con = conexion.getConnection();
         Statement st;
         if (!existeNickname(prov.getNickname())) {
             String imagen = prov.getImagen();
