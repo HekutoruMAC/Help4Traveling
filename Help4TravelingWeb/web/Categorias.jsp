@@ -47,7 +47,6 @@
     <div class="col-md-12">
         <div>
             <div>
-                <p>Ofertas en Hoteles, Paquetes de viaje y más</p>
                 <div><h2><b>Arbol de Categorías</b></h2></div>
                 <hr>
                 <div><!--div class="row default"-->
@@ -57,7 +56,7 @@
                             <li class="jstree-open"><a href="ListarServicios.jsp?categoria=<% out.print(catn0);%>" target="servicios"><%=catn0%></a><%
                                 servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
                                 servidorpublicador.Publicador port = service.getPublicadorPort();
-                                List<String> listaNivel1 = port.obtenerCategoriasHijas(catn0).getCategorias();                                
+                                List<String> listaNivel1 = port.obtenerCategoriasHijas(catn0).getCategorias();
                                 if (!listaNivel1.isEmpty()) {
                                 %><ul><%
                                     Iterator<String> icatn1 = listaNivel1.iterator();
@@ -78,8 +77,8 @@
                                                     while (icatn3.hasNext()) {
                                                         String catn3 = icatn3.next();
                                                     %><li><a href="ListarServicios.jsp?categoria=<%=catn3%>" target="servicios"><%=catn3%></a><%
-                                                    List<String> listaNivel4 = port.obtenerCategoriasHijas(catn3).getCategorias();
-                                                    if (!listaNivel4.isEmpty()) {
+                                                        List<String> listaNivel4 = port.obtenerCategoriasHijas(catn3).getCategorias();
+                                                        if (!listaNivel4.isEmpty()) {
                                                         %><ul><%
                                                             Iterator<String> icatn4 = listaNivel4.iterator();
                                                             while (icatn4.hasNext()) {
@@ -87,19 +86,19 @@
                                                             %><li><a href="ListarServicios.jsp?categoria=<% out.print(catn4);%>" target="servicios"><%=catn4%></a></li><%
                                                                 }
                                                                 %></ul><%
-                                                            }
+                                                                    }
                                                             %></li><%
-                                                        }
+                                                                }
                                                         %></ul><%
-                                                    }
+                                                            }
                                                     %></li><%
-                                                }
+                                                        }
                                                 %></ul><%
-                                            }
+                                                    }
                                             %></li><%
-                                        }
+                                                }
                                         %></ul><%
-                                    }
+                                            }
                                     %></li>
                         </ul>
                     </div>
