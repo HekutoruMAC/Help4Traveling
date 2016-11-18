@@ -43,7 +43,8 @@
                             </h1>
                         </div>
                         <%
-                            if ((String) session.getAttribute("nickname") != null) {
+                            Boolean esProv = (Boolean) session.getAttribute("esProv");
+                            if (esProv != null && !esProv) {
                                 String nick = (String) session.getAttribute("nickname");
                         %>
                         <span style="float: right"> Bienvenido/a <b><a href="Usuario.jsp"><%=nick%></a></b> </span>
