@@ -15,11 +15,13 @@ public class Conector {
     private static String usuario_original = "root";
     private static String clave_original = "root";
     private static String driver_original = "com.mysql.jdbc.Driver";
+    private static String service_original = "http://localhost:9128/publicador";
 
     private String servidor = servidor_original;
     private String usuario = usuario_original;
     private String clave = clave_original;
     private String driver = driver_original;
+    private String service = service_original;
 
     private Conector() {
     }
@@ -38,23 +40,28 @@ public class Conector {
         this.usuario = usuario_original;
         this.clave = clave_original;
         this.driver = driver_original;
+        this.service = service_original;
     }
 
     // Getters
     public String getServidor() {
-        return servidor;
+        return this.servidor;
     }
 
     public String getUsuario() {
-        return usuario;
+        return this.usuario;
     }
 
     public String getClave() {
-        return clave;
+        return this.clave;
     }
 
     public String getDriver() {
-        return driver;
+        return this.driver;
+    }
+
+    public String getService() {
+        return this.service;
     }
 
     // Setters
@@ -72,5 +79,9 @@ public class Conector {
 
     public void setDriver(String driver) {
         this.driver = driver;
+    }
+
+    public void setService(String service) {
+        this.service = service;
     }
 }

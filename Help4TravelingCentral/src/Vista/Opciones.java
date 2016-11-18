@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Logica.Conector;
@@ -13,7 +8,7 @@ import javax.swing.JOptionPane;
  *
  * @author Hekutoru
  */
-public class Opciones extends javax.swing.JInternalFrame {
+public final class Opciones extends javax.swing.JInternalFrame {
 
     private Conector conector = Conector.getInstance();
     private Conexion conexion = Conexion.getInstance();
@@ -21,10 +16,12 @@ public class Opciones extends javax.swing.JInternalFrame {
     private String usuario;
     private String clave;
     private String driver;
+    private String service;
     private String servidorInicial;
     private String usuarioInicial;
     private String claveInicial;
     private String driverInicial;
+    private String serviceInicial;
 
     /**
      * Creates new form Opciones
@@ -42,6 +39,7 @@ public class Opciones extends javax.swing.JInternalFrame {
         usuario = conector.getUsuario();
         clave = conector.getClave();
         driver = conector.getDriver();
+        service = conector.getService();
     }
 
     public void ponerDatos() {
@@ -49,6 +47,7 @@ public class Opciones extends javax.swing.JInternalFrame {
         Usuario.setText(usuario);
         Clave.setText(clave);
         Driver.setText(driver);
+        Publicador.setText(service);
     }
 
     public void sacarDatos() {
@@ -56,6 +55,7 @@ public class Opciones extends javax.swing.JInternalFrame {
         usuario = Usuario.getText();
         clave = Clave.getText();
         driver = Driver.getText();
+        service = Publicador.getText();
     }
 
     public void guardarDatos() {
@@ -63,6 +63,7 @@ public class Opciones extends javax.swing.JInternalFrame {
         usuarioInicial = Usuario.getText();
         claveInicial = Clave.getText();
         driverInicial = Driver.getText();
+        serviceInicial = Publicador.getText();
     }
 
     public void subirDatos() {
@@ -70,6 +71,7 @@ public class Opciones extends javax.swing.JInternalFrame {
         conector.setUsuario(usuario);
         conector.setClave(clave);
         conector.setDriver(driver);
+        conector.setService(service);
     }
 
     public void recuperarDatos() {
@@ -77,6 +79,7 @@ public class Opciones extends javax.swing.JInternalFrame {
         conector.setUsuario(usuarioInicial);
         conector.setClave(claveInicial);
         conector.setDriver(driverInicial);
+        conector.setService(serviceInicial);
     }
 
     public void imprimirDatos() {
@@ -84,6 +87,7 @@ public class Opciones extends javax.swing.JInternalFrame {
         System.out.println(usuario);
         System.out.println(clave);
         System.out.println(driver);
+        System.out.println(service);
     }
 
     /**
@@ -109,9 +113,12 @@ public class Opciones extends javax.swing.JInternalFrame {
         Clave = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         Driver = new javax.swing.JTextField();
-        Revertir = new javax.swing.JButton();
         Probar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        Publicador = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        Revertir = new javax.swing.JButton();
 
         Aplicar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/edit-icon.png"))); // NOI18N
         Aplicar.setText("Aplicar");
@@ -164,15 +171,6 @@ public class Opciones extends javax.swing.JInternalFrame {
 
         Driver.setText("com.mysql.jdbc.Driver");
 
-        Revertir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/undo-icon.png"))); // NOI18N
-        Revertir.setText("Revertir");
-        Revertir.setToolTipText("");
-        Revertir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RevertirActionPerformed(evt);
-            }
-        });
-
         Probar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/db-icon.png"))); // NOI18N
         Probar.setText("Probar");
         Probar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,9 +199,7 @@ public class Opciones extends javax.swing.JInternalFrame {
                             .addComponent(Clave)
                             .addComponent(Driver, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConexionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Revertir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Probar)))
                 .addContainerGap())
         );
@@ -227,13 +223,52 @@ public class Opciones extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(Driver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(PanelConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Probar)
-                    .addComponent(Revertir))
+                .addComponent(Probar)
                 .addContainerGap())
         );
 
-        Opciones.addTab("Conexión", PanelConexion);
+        Opciones.addTab("Base de Datos", PanelConexion);
+
+        Publicador.setText("http://localhost:9128/publicador");
+        Publicador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PublicadorActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Publicador:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Publicador, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Publicador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(162, Short.MAX_VALUE))
+        );
+
+        Opciones.addTab("Web Services", jPanel1);
+
+        Revertir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/undo-icon.png"))); // NOI18N
+        Revertir.setText("Revertir");
+        Revertir.setToolTipText("");
+        Revertir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RevertirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,6 +281,8 @@ public class Opciones extends javax.swing.JInternalFrame {
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Revertir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Aceptar)))
                 .addContainerGap())
@@ -260,7 +297,8 @@ public class Opciones extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Aceptar)
-                    .addComponent(Cancelar))
+                    .addComponent(Cancelar)
+                    .addComponent(Revertir))
                 .addContainerGap())
         );
 
@@ -309,6 +347,10 @@ public class Opciones extends javax.swing.JInternalFrame {
         //System.out.println("Conexión cerrada.");
     }//GEN-LAST:event_CerrarActionPerformed
 
+    private void PublicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PublicadorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
     private javax.swing.JButton Aplicar;
@@ -319,6 +361,7 @@ public class Opciones extends javax.swing.JInternalFrame {
     public javax.swing.JTabbedPane Opciones;
     private javax.swing.JPanel PanelConexion;
     private javax.swing.JButton Probar;
+    private javax.swing.JTextField Publicador;
     private javax.swing.JButton Revertir;
     private javax.swing.JTextField Servidor;
     private javax.swing.JTextField Usuario;
@@ -326,6 +369,8 @@ public class Opciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
