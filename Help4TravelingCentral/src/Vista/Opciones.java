@@ -2,6 +2,13 @@ package Vista;
 
 import Logica.Conector;
 import Logica.Conexion;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -90,6 +97,12 @@ public final class Opciones extends javax.swing.JInternalFrame {
         System.out.println(service);
     }
 
+    public void salvarConfig() throws IOException {
+        List<String> lines = Arrays.asList(servidor, usuario, clave, driver, service);
+        Path file = Paths.get("central.conf");
+        Files.write(file, lines, Charset.forName("UTF-8"));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,7 +115,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
         Aplicar = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
-        Aceptar = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
         Opciones = new javax.swing.JTabbedPane();
         PanelConexion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -147,11 +160,11 @@ public final class Opciones extends javax.swing.JInternalFrame {
             }
         });
 
-        Aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-icon.png"))); // NOI18N
-        Aceptar.setText("Aceptar");
-        Aceptar.addActionListener(new java.awt.event.ActionListener() {
+        Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-icon.png"))); // NOI18N
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AceptarActionPerformed(evt);
+                GuardarActionPerformed(evt);
             }
         });
 
@@ -284,7 +297,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Revertir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Aceptar)))
+                        .addComponent(Guardar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -296,7 +309,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Aceptar)
+                    .addComponent(Guardar)
                     .addComponent(Cancelar)
                     .addComponent(Revertir))
                 .addContainerGap())
@@ -310,11 +323,15 @@ public final class Opciones extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
-    private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         sacarDatos();
         subirDatos();
+        try {
+            salvarConfig();
+        } catch (IOException ex) {
+        }
         this.dispose();
-    }//GEN-LAST:event_AceptarActionPerformed
+    }//GEN-LAST:event_GuardarActionPerformed
 
     private void ProbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProbarActionPerformed
         sacarDatos();
@@ -352,12 +369,12 @@ public final class Opciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_PublicadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Aceptar;
     private javax.swing.JButton Aplicar;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Cerrar;
     private javax.swing.JPasswordField Clave;
     private javax.swing.JTextField Driver;
+    private javax.swing.JButton Guardar;
     public javax.swing.JTabbedPane Opciones;
     private javax.swing.JPanel PanelConexion;
     private javax.swing.JButton Probar;

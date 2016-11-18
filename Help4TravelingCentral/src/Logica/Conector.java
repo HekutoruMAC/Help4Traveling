@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Logica;
 
-/**
- *
- * @author Hekutoru
- */
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class Conector {
 
     private static String servidor_original = "jdbc:mysql://localhost:3306/help4traveling?maxReconnects=1&autoReconnect=true&useSSL=false";
@@ -41,6 +39,16 @@ public class Conector {
         this.clave = clave_original;
         this.driver = driver_original;
         this.service = service_original;
+    }
+
+    public void cargarConfig() throws IOException {
+        Path conf = Paths.get("central.conf");
+        List<String> valores = Files.readAllLines(conf, Charset.forName("UTF-8"));
+        servidor = valores.get(0);
+        usuario = valores.get(1);
+        clave = valores.get(2);
+        driver = valores.get(3);
+        service = valores.get(4);
     }
 
     // Getters

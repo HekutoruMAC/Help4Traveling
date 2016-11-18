@@ -5,9 +5,10 @@
  */
 package help4traveling;
 
-import Logica.*;
+import Logica.Conector;
 import ServidorPublicador.Publicador;
 import Vista.Principal;
+import java.io.IOException;
 
 public class Help4Traveling {
 
@@ -19,14 +20,19 @@ public class Help4Traveling {
         System.out.println("Bienvenido a la Estación de Trabajo!");
         System.out.println("************************************");
 
-        Fabrica fab = Fabrica.getInstance();
         Principal p = new Principal();
         p.setLocationRelativeTo(null);
         p.setVisible(true);
-        
-        Publicador pub = new Publicador();        
+
+        Conector con = Conector.getInstance();
+        try {
+            con.cargarConfig();
+        } catch (IOException ex) {
+        }
+
+        Publicador pub = new Publicador();
         pub.publicar();
 
-    }    
+    }
 
 }
