@@ -166,4 +166,8 @@ public class ControladorServicio implements IControladorServicio {
     public ArrayList<String> listarServiciosDePromociones(String nombre, String prov) {
         return ManejadorServicio.getInstance().listarServiciosDePromociones(nombre, prov);
     }
+    
+    public String obtenerPrimeraImagenPromocion(String promocion, String proveedor){
+        return ManejadorServicio.getInstance().obtenerPrimeraImagenPromocion(promocion, proveedor);
+    }
 }

@@ -293,4 +293,9 @@ public class Publicador {
         macc.agregarAcceso(IP, URL, Browser, SO, servicio);
 
     }
+    
+    @WebMethod
+    public String obtenerPrimeraImagenPromocion(String promocion,String proveedor){
+        return mser.obtenerPrimeraImagenPromocion(promocion, proveedor);
+    }
 }

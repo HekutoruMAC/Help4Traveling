@@ -15,7 +15,10 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
@@ -121,6 +124,8 @@ public class Filtro implements Filter {
             } else {
                 servicio = request.getParameter("nombre");
             }
+            
+            HttpSession sesion = ((HttpServletRequest)request).getSession();
             System.out.println(servicio);
             String ip = request.getRemoteHost();
 
@@ -153,8 +158,15 @@ public class Filtro implements Filter {
                 os = "Unix";
             } else if (userAgent.toLowerCase().indexOf("android") >= 0) {
                 os = "Android";
+                
+                //sesion.setAttribute("dispositivo", "true");
+                
             } else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
-                os = "IPhone";
+                os = "IPhone"; 
+                
+               
+                //sesion.setAttribute("dispositivo", "true");
+                
             } else {
                 os = "UnKnown, More-Info: " + userAgent;
             }
@@ -182,6 +194,10 @@ public class Filtro implements Filter {
                 browser = "IE";
             } else {
                 browser = "UnKnown, More-Info: " + userAgent;
+                
+                //sesion.setAttribute("dispositivo", "true");
+                
+
             }
             System.out.println("Operating System======>" + os);
             System.out.println("Browser Name==========>" + browser);
@@ -190,8 +206,19 @@ public class Filtro implements Filter {
             System.out.println(ip + "  " + uri + "  " + browser + "   " + os);
 
             port.agregarRegistro(ip, uri, browser, os, servicio);
+            
+            
 
             chain.doFilter(request, response);
+            
+           /* if (sesion.getAttribute("dispositivo")=="true") {
+                System.out.println("Es desde un dispositivo");
+                
+               ((HttpServletResponse)response).sendRedirect("Movil.Signin.jsp");
+               
+
+            }*/
+            
 
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
