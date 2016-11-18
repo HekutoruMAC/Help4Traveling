@@ -69,9 +69,12 @@ public class Validacion extends HttpServlet {
                     //falta terminar la gestion de las cookies
                 }
             }
-            
-           
+            if (esProv){
+                response.sendRedirect("Movil.Promociones.jsp");
+           }else{
+               
             response.sendRedirect("index.jsp");
+            }
         } else {
             sesion.setAttribute("mensaje", "Usuario o contraseña incorrectos");
             response.sendRedirect("InicioSesion.jsp");

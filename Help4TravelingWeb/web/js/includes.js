@@ -55,13 +55,13 @@ $(document).ready(function () {
 
     // Proveedores
     $("#idTabServicios").click(function () {
-        $(location).attr('href', 'Servicios.jsp');
+        $(location).attr('href', 'MovilServiciosProveedor.jsp');
     });
     $("#idTabPromociones").click(function () {
-        $(location).attr('href', 'Promociones.jsp');
+        $(location).attr('href', 'Movil.Promociones.jsp');
     });
     $("#idTabReservas").click(function () {
-        $(location).attr('href', 'ListarReservas.jsp');
+        $(location).attr('href', 'Movil.Reservas.jsp');
     });
 
     //Carrito

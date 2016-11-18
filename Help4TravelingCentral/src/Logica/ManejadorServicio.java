@@ -696,5 +696,21 @@ public class ManejadorServicio {
         }
         return listaServicios;
     }
+    
+    
+        
+    public String obtenerPrimeraImagenPromocion(String promocion, String proveedor){
+        
+        ArrayList<String> servicios = ManejadorServicio.getInstance().listarServiciosDePromociones(promocion, proveedor);
+        DtServicio servicio = ManejadorServicio.getInstance().getDtServicio(servicios.get(0),proveedor);
+        System.out.println("esta es la imagen del primer servicio  "+servicio.getNombre());
+        List<String> imagenes = servicio.getImagenes();
+        String imagen = imagenes.get(0);
+        //String imagen2 = imagenes.get(1);
+        
+        System.out.println("esta es la  imagen del primer servicio  "+imagen);
+        //System.out.println("esta es la segunda imagen del primer servicio  "+imagen);
+        return imagen;
+    }
 
 }

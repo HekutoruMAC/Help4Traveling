@@ -50,4 +50,7 @@ public interface IControladorServicio {
     public String getNkProveedorPromocion(String promocion);
 
     public ArrayList<String> listarServiciosDePromociones(String nombre, String prov);
+    
+        public String obtenerPrimeraImagenPromocion(String promocion, String proveedor);
+
 }
