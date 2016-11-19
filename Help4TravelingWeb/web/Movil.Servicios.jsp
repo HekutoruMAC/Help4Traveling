@@ -35,15 +35,24 @@
         <jsp:include page="WEB-INF/Header.jsp"/>
         <%  servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
             servidorpublicador.Publicador port = service.getPublicadorPort();
-            //String nickname = (String) session.getAttribute("nickname");
-            String nickname = "remus";
-            DtUsuario dtProv = port.getDtProveedor(nickname);            
+            String nickname = (String) session.getAttribute("nickname");
+            //String nickname = "remus";
+            DtUsuario dtProv = port.getDtProveedor(nickname);  
+            String nombre = dtProv.getNombre() + " " + dtProv.getApellido();
             List<DtServicio> servicios = port.listarServiciosProveedor(dtProv).getServiciosProveedor();            
         %>
         <div class="section minimo">
             <div class="container">
                 <!--div class="row"-->
-                <h1>Servicios del Proveedor</h1>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span style="float: left"> Bienvenido/a <b><a href="Usuario.jsp"><%=nombre%></a></b> </span>
+                    </div>
+                </div>
+                <div class="row">    
+                    <h1>Servicios del Proveedor</h1>                    
+                </div>                    
+                <hr>    
                 <%  if (!servicios.isEmpty()) {
                         Iterator<DtServicio> iserv = servicios.iterator();
                         while (iserv.hasNext()) {               

@@ -42,15 +42,16 @@ public class Validacion extends HttpServlet {
 
         System.out.println(nickname + "   " + password + "  " + recordar);
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("nickname", nickname);
-        sesion.setAttribute("password", password);
+        //sesion.setAttribute("nickname", nickname);
+        //sesion.setAttribute("password", password);
         sesion.setAttribute("inicia", "true");
-
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         servidorpublicador.DtUsuario dtu = port.autenticacion(nickname, password);
         if (!dtu.getNickname().equals("null")) {
             sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
+            sesion.setAttribute("nickname", nickname);
+            sesion.setAttribute("password", password);
             sesion.setAttribute("nombre", dtu.getNombre());
             sesion.setAttribute("apellido", dtu.getApellido());
             sesion.setAttribute("email", dtu.getCorreo());
@@ -72,7 +73,7 @@ public class Validacion extends HttpServlet {
             if (esProv){
                 response.sendRedirect("Movil.Promociones.jsp");
            }else{
-               
+                
             response.sendRedirect("index.jsp");
             }
         } else {

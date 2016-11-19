@@ -55,7 +55,7 @@ $(document).ready(function () {
 
     // Proveedores
     $("#idTabServicios").click(function () {
-        $(location).attr('href', 'MovilServiciosProveedor.jsp');
+        $(location).attr('href', 'Movil.Servicios.jsp');
     });
     $("#idTabPromociones").click(function () {
         $(location).attr('href', 'Movil.Promociones.jsp');

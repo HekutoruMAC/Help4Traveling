@@ -33,9 +33,8 @@
 
 
 
-        <%if ((String) session.getAttribute("registra") == "true") {%>;
-
-        <%String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
+        <%if ((String) session.getAttribute("registra") == "true") {
+            String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
             String email = "\"" + session.getAttribute("email").toString() + "\"";%>
             alert("El usuario " + <%=nick%> + " está disponiblie. Complete los campos con sus datos personales");
 

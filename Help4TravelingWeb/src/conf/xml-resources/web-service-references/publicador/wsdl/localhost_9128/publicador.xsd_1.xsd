@@ -275,6 +275,12 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dataServiciosProveedorArrayList">
+<xs:sequence>
+<xs:element name="serviciosProveedor" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dataReservasUsuarioArrayList">
 <xs:sequence>
 <xs:element name="reservasUsuario" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -309,12 +315,6 @@
 
 <xs:complexType name="conexion">
 <xs:sequence></xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dataServiciosProveedorArrayList">
-<xs:sequence>
-<xs:element name="serviciosProveedor" type="tns:dtServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataReservasProveedorArrayList">

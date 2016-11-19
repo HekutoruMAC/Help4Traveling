@@ -37,19 +37,18 @@ public class Comprobacion extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String nickname = request.getParameter("nickname_registro");
         String email = request.getParameter("email_registro");
-        sesion.setAttribute("nickname", nickname);
-        sesion.setAttribute("email", email);
-        sesion.setAttribute("registra", "true");
-        //System.out.println(nickname+ "   "+email);
+        //sesion.setAttribute("nickname", nickname);
+        //sesion.setAttribute("email", email);
+        //sesion.setAttribute("registra", "true");
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         if (port.comprobacion(nickname, email)) {
-
             boolean esProv = port.existeProveedor(nickname);
+            sesion.setAttribute("nickname", nickname);
+            sesion.setAttribute("email", email);
+            sesion.setAttribute("registra", "true");
             sesion.setAttribute("esProv", esProv);
-
             response.sendRedirect("InicioSesion.jsp");
-
         } else {
             sesion.setAttribute("registra", "false");
             response.sendRedirect("InicioSesion.jsp");
