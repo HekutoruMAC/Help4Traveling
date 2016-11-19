@@ -56,8 +56,8 @@
                                 <div class="page-header">
                                     <h1 style="float: left"><span class="logo"><h3><%=promocion%></h3></span></h1>    
                                 </div>
-                                <div class="item active">
-                                    <img src="<%=imagen%>">
+                                <div class="col-xs-12">
+                                    <img src="<% out.print(imagen); %>" class="img-responsive" alt="Imagen responsive">
                                     
                                 </div>
 
