@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : CierreSesion
     Created on : 16-oct-2016, 21:34:39
     Author     : Leonardo
@@ -8,9 +8,14 @@
 <!DOCTYPE html>
 <html>
     <%
-      HttpSession sesion = request.getSession(true);
-      //Cerrar sesion
-      sesion.invalidate();      
-      response.sendRedirect("InicioSesion.jsp");  
+        HttpSession sesion = request.getSession(true);
+        Boolean esProv = (Boolean) session.getAttribute("esProv");
+        //Cerrar sesion
+        sesion.invalidate();
+        if (esProv) {
+            response.sendRedirect("Movil.Signin.jsp");
+        } else {
+            response.sendRedirect("InicioSesion.jsp");
+        }
     %>
 </html>

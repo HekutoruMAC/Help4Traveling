@@ -51,7 +51,10 @@
                     <a href="#" id="idHome"><span class="glyphicon glyphicon-home"></span> Principal<br></a>
                 </li>
 
-                <%  String nicksesion = (String) session.getAttribute("nickname");
+                <%  String nicksesion = null;
+                    if (session.getAttribute("nickname") != null) {
+                        nicksesion = (String) session.getAttribute("nickname");
+                    }
                     Boolean sesioninvitado = true;
                     Boolean sesionproveedor = false;
                     if (nicksesion != null) {
