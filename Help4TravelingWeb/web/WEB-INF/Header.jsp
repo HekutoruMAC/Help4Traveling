@@ -47,7 +47,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active">
+                <li>
                     <a href="#" id="idHome"><span class="glyphicon glyphicon-home"></span> Principal<br></a>
                 </li>
 
