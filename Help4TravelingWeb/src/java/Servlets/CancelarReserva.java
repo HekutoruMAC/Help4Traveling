@@ -40,7 +40,7 @@ public class CancelarReserva extends HttpServlet {
 
         port.actualizarEstadoDeReserva(reserva, "CANCELADA");
 
-        response.sendRedirect("Usuario.jsp");
+        response.sendRedirect("Movil.Reservas.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

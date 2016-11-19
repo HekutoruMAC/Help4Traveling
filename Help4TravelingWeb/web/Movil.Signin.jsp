@@ -26,7 +26,9 @@
         <link href="css\test.css" rel="stylesheet" type="text/css">
         <link href="calendario/calendario_dw/calendario_dw-estilos.css" type="text/css" rel="stylesheet">
     </head>   
-    <% request.setAttribute("dispositivo", "adentro");%>
+    <% 
+        HttpSession sesion = request.getSession();
+        sesion.setAttribute("dispositivo2", "adentro");%>
 
     <body>
 

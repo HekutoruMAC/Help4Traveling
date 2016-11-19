@@ -129,10 +129,10 @@ public class Email extends HttpServlet {
 
                 // Enviar mensaje
                 Transport.send(message);
-                response.sendRedirect("Usuario.jsp");
+                response.sendRedirect("Movil.Reservas.jsp");
                 System.out.println("Mensaje enviado correctamente.");
             } catch (MessagingException mex) {
-                response.sendRedirect("Usuario.jsp");
+                response.sendRedirect("Movil.Reservas.jsp");
                 System.out.println("El mensaje no pudo enviarse.");
             }
         }

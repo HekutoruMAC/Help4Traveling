@@ -41,7 +41,7 @@ public class FacturarReserva extends HttpServlet {
                 FacturarReserva(request, response);
             }
         } catch (SQLException ex) {
-            response.sendRedirect("Usuario.jsp");
+            response.sendRedirect("Movil.Reservas.jsp");
         }
     }
 
@@ -114,7 +114,7 @@ public class FacturarReserva extends HttpServlet {
                 response.sendRedirect("Usuario.jsp");
             }
         } catch (Exception e) {
-            response.sendRedirect("Usuario.jsp");
+            response.sendRedirect("Movil.Reservas.jsp");
         }
     }
     
@@ -128,7 +128,7 @@ public class FacturarReserva extends HttpServlet {
         servidorpublicador.PublicadorService publicador = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = publicador.getPublicadorPort();
         port.facturarItemReserva(reserva, servicio, proveedorServicio, promocion);
-        response.sendRedirect("Usuario.jsp");
+        response.sendRedirect("Movil.Reservas.jsp");
     }
 
 }

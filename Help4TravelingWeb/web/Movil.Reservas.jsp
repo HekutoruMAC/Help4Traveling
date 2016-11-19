@@ -27,8 +27,8 @@
     <%
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
-        //String nick = session.getAttribute("nickname").toString();
-        String nick = "mHooch";
+        String nick = session.getAttribute("nickname").toString();
+        //String nick = "mHooch";
         servidorpublicador.DtUsuario dtProv = null;
 
         dtProv = port.getDtProveedor(nick);%>
@@ -51,7 +51,6 @@
                     <%  DtReserva dtRes = null;
                         List<DtReserva> reservas;
 
-                        //reservas = fab.getIControladorReserva().listarReservasProveedor(nick);
                         reservas = port.listarReservasProveedor(nick).getReservasProveedor();
 
                         Iterator<DtReserva> iter = reservas.iterator();
@@ -60,33 +59,91 @@
                             i++;
                             dtRes = iter.next();
                             Long id = dtRes.getId();
+                            String cliente = dtRes.getCliente();
+                            String total = String.valueOf(dtRes.getTotal());
                             String estado = "";
-                            int itemsNF = port.estadoParcialReserva(id.intValue(), dtRes.getCliente());
                             if (dtRes.getEstado().toString().equals("REGISTRADA")) {
-                                estado = "REGISTRADA";
-                            } else if (dtRes.getEstado().toString().equals("CANCELADA")) {
-                                estado = "CANCELADA";
-                            } else if (dtRes.getEstado().toString().equals("FACTURADA")) {
-                                estado = "FACTURADA";
-                            } else if (dtRes.getEstado().toString().equals("PAGADA")) {
-                                if (itemsNF == 0) {
-                                    estado = "PARCIAL";
-                                } else {
-                                    estado = "PAGADA";
-                                }
-                            }%>
+                                            estado = "REGISTRADA";
+                                        } else if (dtRes.getEstado().toString().equals("CANCELADA")) {
+                                            estado = "CANCELADA";
+                                        } else if (dtRes.getEstado().toString().equals("FACTURADA")) {
+                                            estado = "FACTURADA";
+                                        } else if (dtRes.getEstado().toString().equals("PAGADA")) {
+                                            estado = "PAGADA";
+                                            if (port.estadoParcialReserva(id.intValue(), nick) == 0) {
+                                                estado = "PARCIAL";
+                                            }
+                                        }%>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" >
                             <div class="panel panel-primary">
-                                <div class="panel-heading"> Reserva <%=id%></div>
-
+                                <div class="panel-heading"  ><h3> Reserva <%=id%></h3>                      
+                                
+                                <% if (estado == "FACTURADA") {%>
+                                        <form role="form" action='' method="post">
+                                            <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
+                                            <button type="submit" class="btn btn-info  top"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
+                                        </form>
+                                        <% } else %>
+                                        <% if (estado == "PARCIAL") {%>
+                                        <form role="form" action='' method="">
+                                            <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
+                                            <button type="button" class="btn btn-primary top" style="background-color: background;"><span class="glyphicon glyphicon-check"></span> Parcial</button>
+                                        </form>
+                                        <% } else %>
+                                        <% if (estado == "PAGADA") {%>
+                                        <form role="form" action='FacturarReserva' method="post" >
+                                            <input type='hidden' id='action' name='action' value='Reserva'>
+                                            <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
+                                            <input type='hidden' id='reserva' name='total' value=<%=total%>>
+                                            <input type='hidden' id='servicioProveedor' name='servicioProveedor' value=<%=nick%>>
+                                            <input type='hidden' id='total' name='total' value=<%=total%>>
+                                            <input type='hidden' id='cliente' name='cliente' value=<%=cliente%>>
+                                            <button type="submit" class="btn btn-success top"><span class="glyphicon glyphicon-usd"></span> Facturar</button>
+                                        </form>
+                                        <% } else %>
+                                        <% if (estado == "REGISTRADA") {%>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <form role="form" action='PagarReserva' method="post">
+                                                    <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
+                                                    <button type="submit" class="btn btn-success top" ><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
+                                                </form></div>
+                                            <div class="col-md-4">
+                                                <form role="form" action='Email' method="post">
+                                                    <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
+                                                    <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
+                                                    <input type='hidden' id='reserva' name='total' value=<%=total%>>
+                                                    <button type="submit" class="btn btn-info top" ><span class="glyphicon glyphicon-envelope"></span> Correo</button>
+                                                </form></div>
+                                            <div class="col-md-4">
+                                                <form role="form" action='CancelarReserva' method="post">
+                                                    <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
+                                                    <button type="submit" class="btn btn-danger top" onclick="return confirm('Está seguro de cancelar la reserva?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                                </form></div>
+                                        </div>
+                                                   
+                                        <% } %>
+                                    </div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
 
                                 <%   DataItemsReservasArrayList Items = port.listarItems((int) (long) id);
                                     List<DtItemReserva> listaItems = Items.getItems();
 
                                     DtItemReserva dtItem = null;%>
                                 <div class="panel-body">
+                                    
 
                                     <%Iterator<DtItemReserva> iter2 = listaItems.iterator();
                                         while (iter2.hasNext()) {
@@ -95,7 +152,7 @@
                                             String servicio = dtItem.getOferta().getNombre();%>
                                     <div class="row" >  
 
-                                        <div class="panel panel-warning" ><%=servicio%></div>
+                                        <div class="panel panel-warning" ><h3><%=servicio%></h3></div>
 
 
                                     </div>
@@ -117,3 +174,10 @@
     </body>
 
 </html>
+
+
+
+
+
+
+                                        
