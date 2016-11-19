@@ -1,12 +1,11 @@
 package Logica;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Paths;
+import java.util.Properties;
 
 public class Conector {
 
@@ -23,8 +22,8 @@ public class Conector {
     private String service = service_original;
 
     private String home = System.getProperty("user.home");
-    private String h4t = "/h4t";
-    private String arch = "servidor.properties";
+    private String h4t = "/.help4Traveling/";
+    private String conf = "servidor.properties";
 
     private Conector() {
     }
@@ -47,20 +46,47 @@ public class Conector {
     }
 
     public void cargarConfig() throws IOException {
-        Path ruta = FileSystems.getDefault().getPath(home + h4t, arch);
-        System.out.println(ruta);
+        /*
         List<String> valores = Files.readAllLines(ruta, Charset.forName("UTF-8"));
         servidor = valores.get(0);
         usuario = valores.get(1);
         clave = valores.get(2);
         driver = valores.get(3);
         service = valores.get(4);
+         */
+        File f = Paths.get(home + h4t, conf).toFile();
+        Properties prop = new Properties();
+
+        if (f.exists() && f.canRead() && f.isFile()) {
+            prop.load(new FileReader(f));
+            servidor = prop.getProperty("servidor");
+            usuario = prop.getProperty("usuario");
+            clave = prop.getProperty("clave");
+            driver = prop.getProperty("driver");
+            service = prop.getProperty("service");
+        } else {
+            salvarConfig();
+        }
     }
 
     public void salvarConfig() throws IOException {
+        /*
         List<String> datos = Arrays.asList(servidor, usuario, clave, driver, service);
-        Path ruta = FileSystems.getDefault().getPath(home + h4t, arch);
         Files.write(ruta, datos, Charset.forName("UTF-8"));
+         */
+        File f = new File(Paths.get(home + h4t, conf).toString());
+        f.getParentFile().mkdir();
+        f.createNewFile();
+
+        Properties prop = new Properties();
+        prop.setProperty("servidor", servidor);
+        prop.setProperty("usuario", usuario);
+        prop.setProperty("clave", clave);
+        prop.setProperty("driver", driver);
+        prop.setProperty("service", service);
+
+        prop.store(new FileWriter(f), null);
+
     }
 
     // Getters

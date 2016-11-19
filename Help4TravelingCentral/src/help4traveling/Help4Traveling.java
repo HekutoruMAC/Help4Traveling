@@ -9,6 +9,7 @@ import Logica.Conector;
 import ServidorPublicador.Publicador;
 import Vista.Principal;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 public class Help4Traveling {
 
@@ -28,6 +29,10 @@ public class Help4Traveling {
         try {
             con.cargarConfig();
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "No fue posible cargar la configuración.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex);
         }
 
         Publicador pub = new Publicador();

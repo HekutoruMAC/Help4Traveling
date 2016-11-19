@@ -29,6 +29,14 @@ public final class Opciones extends javax.swing.JInternalFrame {
      */
     public Opciones() {
         initComponents();
+        try {
+            conector.cargarConfig();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "No fue posible cargar la configuración.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex);
+        }
         bajarDatos();
         ponerDatos();
         guardarDatos();
@@ -54,7 +62,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
     public void sacarDatos() {
         servidor = Servidor.getText();
         usuario = Usuario.getText();
-        clave = Clave.getText();
+        clave = String.copyValueOf(Clave.getPassword());
         driver = Driver.getText();
         service = Publicador.getText();
     }
@@ -62,7 +70,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
     public void guardarDatos() {
         servidorInicial = Servidor.getText();
         usuarioInicial = Usuario.getText();
-        claveInicial = Clave.getText();
+        claveInicial = String.copyValueOf(Clave.getPassword());
         driverInicial = Driver.getText();
         serviceInicial = Publicador.getText();
     }
