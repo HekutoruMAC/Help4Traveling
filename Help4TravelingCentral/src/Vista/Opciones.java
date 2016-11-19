@@ -3,12 +3,6 @@ package Vista;
 import Logica.Conector;
 import Logica.Conexion;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -95,12 +89,6 @@ public final class Opciones extends javax.swing.JInternalFrame {
         System.out.println(clave);
         System.out.println(driver);
         System.out.println(service);
-    }
-
-    public void salvarConfig() throws IOException {
-        List<String> lines = Arrays.asList(servidor, usuario, clave, driver, service);
-        Path file = Paths.get("central.conf");
-        Files.write(file, lines, Charset.forName("UTF-8"));
     }
 
     /**
@@ -327,8 +315,12 @@ public final class Opciones extends javax.swing.JInternalFrame {
         sacarDatos();
         subirDatos();
         try {
-            salvarConfig();
+            conector.salvarConfig();
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "No fue posible guardar la configuración.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex);
         }
         this.dispose();
     }//GEN-LAST:event_GuardarActionPerformed

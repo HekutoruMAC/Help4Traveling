@@ -2,9 +2,10 @@ package Logica;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 public class Conector {
@@ -20,6 +21,10 @@ public class Conector {
     private String clave = clave_original;
     private String driver = driver_original;
     private String service = service_original;
+
+    private String home = System.getProperty("user.home");
+    private String h4t = "/h4t";
+    private String arch = "servidor.properties";
 
     private Conector() {
     }
@@ -42,13 +47,20 @@ public class Conector {
     }
 
     public void cargarConfig() throws IOException {
-        Path conf = Paths.get("central.conf");
-        List<String> valores = Files.readAllLines(conf, Charset.forName("UTF-8"));
+        Path ruta = FileSystems.getDefault().getPath(home + h4t, arch);
+        System.out.println(ruta);
+        List<String> valores = Files.readAllLines(ruta, Charset.forName("UTF-8"));
         servidor = valores.get(0);
         usuario = valores.get(1);
         clave = valores.get(2);
         driver = valores.get(3);
         service = valores.get(4);
+    }
+
+    public void salvarConfig() throws IOException {
+        List<String> datos = Arrays.asList(servidor, usuario, clave, driver, service);
+        Path ruta = FileSystems.getDefault().getPath(home + h4t, arch);
+        Files.write(ruta, datos, Charset.forName("UTF-8"));
     }
 
     // Getters
