@@ -670,7 +670,7 @@ public class ManejadorReserva {
         //conexion = new Conexion();
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
-        ResultSet rsId;
+        ResultSet rsId, rsItemsPromo;
         String sid;
 
         /*sql = "INSERT INTO help4traveling.reservas (fecha,total,estado,cliente) "
@@ -704,8 +704,26 @@ public class ManejadorReserva {
                 
                 sql = "INSERT INTO help4traveling.reservasitems (reserva, oferta, proveedorOferta, cantidad, inicio, fin) "
                         + "VALUES (" + sid + ",'" + ofertastr + "','"+proveedorstr+"','" + cantidadstr + "','" + iniciostr + "','" + finstr + "')";
-
                 st.executeUpdate(sql);
+                
+                try {
+                    if (proveedorstr.equals("PROMOCION")) {
+                        sql = "SELECT * FROM promocionesservicios WHERE promocion = '" + ofertastr + "' AND proveedorPromocion = 'PROMOCION'";
+                        st = con.createStatement();
+                        rsItemsPromo = st.executeQuery(sql);
+
+                        while (rsItemsPromo.next()) {
+                            String sServicio = rsItemsPromo.getString("servicio");
+                            String sProveedor = rsItemsPromo.getString("proveedorServicio");
+
+                            sql = "INSERT INTO promocionesservicios (promocion, proveedorPromocion, servicio, proveedorServicio) VALUE ('" + ofertastr + "','" + proveedorstr + "','" + sServicio + "','" + sProveedor + "')";
+                            st = con.createStatement();
+                            st.executeUpdate(sql);                        
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Error al insertar items de la promocion en la reserva");
+                }
 
                 con.close();
                 st.close();
