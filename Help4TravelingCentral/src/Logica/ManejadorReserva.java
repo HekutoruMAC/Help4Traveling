@@ -644,6 +644,7 @@ public class ManejadorReserva {
         return cantidad;
     }
     
+    //Devuelve true en caso de que todos los items de la reserva hayan sido facturados independientemente del proveedor, y false en caso contrario.
     public boolean ItemsFacturados(int reserva) {
         boolean Facturados = false;
         Connection con = Conexion.getInstance().getConnection();
@@ -655,7 +656,7 @@ public class ManejadorReserva {
             SQL = "SELECT oferta FROM reservasitems WHERE reserva = " + reserva + " AND facturada = false LIMIT 1";
             st = con.createStatement();
             rsItemsNF = st.executeQuery(SQL);
-            if (rsItemsNF == null) {
+            if (rsItemsNF.next()) {
                 Facturados = false;
             }else {
                 Facturados = true;
@@ -722,7 +723,6 @@ public class ManejadorReserva {
                         }
                     }
                 } catch (SQLException e) {
-                    System.out.println(sql);
                     System.out.println("Error al insertar items de la promocion en la reserva");
                 }
 

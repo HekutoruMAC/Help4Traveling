@@ -111,7 +111,7 @@ public class FacturarReserva extends HttpServlet {
                 Double total = Double.parseDouble(request.getParameter("total"));
                 response.sendRedirect("Email?reserva=" + reserva.toString() + "&cliente=" + cliente + "&total=" + total.toString());
             }else {
-                response.sendRedirect("Usuario.jsp");
+                response.sendRedirect("Movil.Reservas.jsp");
             }
         } catch (Exception e) {
             response.sendRedirect("Movil.Reservas.jsp");
