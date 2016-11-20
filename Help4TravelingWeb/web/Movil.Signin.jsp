@@ -26,6 +26,20 @@
         <link href="css\test.css" rel="stylesheet" type="text/css">
         <link href="calendario/calendario_dw/calendario_dw-estilos.css" type="text/css" rel="stylesheet">
     </head>   
+    <script type="text/javascript">
+    
+            $(document).ready(function () {
+                
+                
+        <%if ((String) session.getAttribute("error") == "true") {%>
+        <%String mensaje = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
+        
+         alert(<%=mensaje%>);        
+         
+         <%}%>
+            });
+            
+    </script>
     <% 
         HttpSession sesion = request.getSession();
         sesion.setAttribute("dispositivo2", "adentro");%>

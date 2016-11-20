@@ -57,10 +57,20 @@
                     }
                     Boolean sesioninvitado = true;
                     Boolean sesionproveedor = false;
-                    if (nicksesion != null) {
+                    
+                    
+                    /*if ((nicksesion != null)) {
                         sesioninvitado = false;
-                        sesionproveedor = (Boolean) session.getAttribute("esProv");
-                    }
+                        sesionproveedor = (Boolean) session.getAttribute("esProv");*/
+                        if(!(session.getAttribute("error")==null) && (session.getAttribute("error")=="true")){
+                            session.invalidate();
+                        }else if ((nicksesion != null)) {
+                                    sesioninvitado = false;
+                                    sesionproveedor = (Boolean) session.getAttribute("esProv");
+                            /*sesioninvitado = true;
+                            sesionproveedor = false;*/
+                        }
+                    
                 %>
 
                 <!--NAVEGACION de INVITADOS------------------------------------>

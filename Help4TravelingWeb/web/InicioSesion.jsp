@@ -53,7 +53,15 @@
         <%} else if ((String) session.getAttribute("inicia") == "true") {%>;
         <% String mensaje = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
             alert(<%=mensaje%>);
-        <%}%>;
+        
+            <%}else if ((String) session.getAttribute("error") == "true") {%>
+        <%String mensaje2 = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
+        
+         alert(<%=mensaje2%>); 
+         <%session.invalidate();%>
+             
+         
+         <%}%>
 
             setTimeout(function () {
         <%if ((String) session.getAttribute("nickname") != null) {%>

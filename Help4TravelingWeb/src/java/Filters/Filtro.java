@@ -211,7 +211,8 @@ public class Filtro implements Filter {
 
             chain.doFilter(request, response);
             
-            if ((sesion.getAttribute("dispositivo")=="true") && !(sesion.getAttribute("dispositivo2")=="adentro")) {
+            
+            if (!(sesion==null) &&(sesion.getAttribute("dispositivo")=="true") && !(sesion.getAttribute("dispositivo2")=="adentro")) {
                 System.out.println("Es desde un dispositivo");
                 
                ((HttpServletResponse)response).sendRedirect("Movil.Signin.jsp");

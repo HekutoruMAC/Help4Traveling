@@ -70,11 +70,28 @@ public class Validacion extends HttpServlet {
                     //falta terminar la gestion de las cookies
                 }
             }
-            if (esProv){
-                response.sendRedirect("Movil.Promociones.jsp");
+             if (esProv){ 
+                    if (sesion.getAttribute("dispositivo")=="true"){
+                        response.sendRedirect("Movil.Promociones.jsp");
+                    }else{ 
+                            //sesion.invalidate();
+                            
+                            sesion.setAttribute("error","true");
+                            sesion.setAttribute("mensaje", "Ingrese desde un Dispositivo Movil");
+                            response.sendRedirect("InicioSesion.jsp");
+                            System.out.println("Error es "+sesion.getAttribute("error")+" y el mensaje es "+sesion.getAttribute("mensaje"));
+                    }
            }else{
-                
-            response.sendRedirect("index.jsp");
+                if (sesion.getAttribute("dispositivo")=="true"){
+                        //sesion.invalidate();
+                        sesion.setAttribute("error","true");
+                        sesion.setAttribute("mensaje", "Ingrese desde la Web");
+                        response.sendRedirect("Movil.Signin.jsp");
+                    }else{ 
+                        System.out.println("Llegue a este else");    
+                        response.sendRedirect("index.jsp");
+                    }
+               
             }
         } else {
             sesion.setAttribute("mensaje", "Usuario o contraseña incorrectos");
