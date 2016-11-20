@@ -708,7 +708,7 @@ public class ManejadorReserva {
                 
                 try {
                     if (proveedorstr.equals("promocion")) {
-                        sql = "SELECT * FROM promocionesservicios WHERE promocion = '" + ofertastr + "' AND proveedorPromocion = 'PROMOCION'";
+                        sql = "SELECT * FROM promocionesservicios WHERE promocion = '" + ofertastr + "' AND proveedorPromocion = 'promocion'";
                         st = con.createStatement();
                         rsItemsPromo = st.executeQuery(sql);
 
@@ -716,12 +716,13 @@ public class ManejadorReserva {
                             String sServicio = rsItemsPromo.getString("servicio");
                             String sProveedor = rsItemsPromo.getString("proveedorServicio");
 
-                            sql = "INSERT INTO promocionesservicios (promocion, proveedorPromocion, servicio, proveedorServicio) VALUE ('" + ofertastr + "','" + proveedorstr + "','" + sServicio + "','" + sProveedor + "')";
+                            sql = "INSERT INTO reservasitemspromociones (reserva, oferta, proveedorOferta, servicio, proveedorServicio, facturada) VALUE (" + sid + ",'" + ofertastr + "','" + proveedorstr + "','" + sServicio + "','" + sProveedor + "',false)";
                             st = con.createStatement();
                             st.executeUpdate(sql);                        
                         }
                     }
                 } catch (SQLException e) {
+                    System.out.println(sql);
                     System.out.println("Error al insertar items de la promocion en la reserva");
                 }
 
