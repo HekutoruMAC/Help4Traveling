@@ -104,7 +104,7 @@
                                         </form>
                                         <% } else %>
                                         <% if (estado == "REGISTRADA") {%>
-                                        <div class="row">
+                                        <%--div class="row">
                                             <div class="col-md-4">
                                                 <form role="form" action='PagarReserva' method="post">
                                                     <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
@@ -122,7 +122,7 @@
                                                     <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
                                                     <button type="submit" class="btn btn-danger top" onclick="return confirm('Está seguro de cancelar la reserva?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                                                 </form></div>
-                                        </div>
+                                        </div--%>
                                                    
                                         <% } %>
                                     </div>
