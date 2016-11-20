@@ -2,7 +2,9 @@ package Vista;
 
 import Logica.Conector;
 import Logica.Conexion;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URL;
 import javax.swing.JOptionPane;
 
 /**
@@ -126,6 +128,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         Publicador = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        Visitar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         Revertir = new javax.swing.JButton();
 
@@ -247,15 +250,28 @@ public final class Opciones extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Publicador:");
 
+        Visitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/globe-icon.png"))); // NOI18N
+        Visitar.setText("Visitar");
+        Visitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisitarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Publicador, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Publicador, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Visitar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -265,7 +281,9 @@ public final class Opciones extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Publicador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Visitar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Opciones.addTab("Web Services", jPanel1);
@@ -368,6 +386,17 @@ public final class Opciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PublicadorActionPerformed
 
+    private void VisitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitarActionPerformed
+        try {
+            Desktop.getDesktop().browse(new URL(service + "?wsdl").toURI());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "No fue posible desplegar el vínculo.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_VisitarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aplicar;
     private javax.swing.JButton Cancelar;
@@ -382,6 +411,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton Revertir;
     private javax.swing.JTextField Servidor;
     private javax.swing.JTextField Usuario;
+    private javax.swing.JButton Visitar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
