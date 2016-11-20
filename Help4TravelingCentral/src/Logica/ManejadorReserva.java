@@ -707,7 +707,7 @@ public class ManejadorReserva {
                 st.executeUpdate(sql);
                 
                 try {
-                    if (proveedorstr.equals("PROMOCION")) {
+                    if (proveedorstr.equals("promocion")) {
                         sql = "SELECT * FROM promocionesservicios WHERE promocion = '" + ofertastr + "' AND proveedorPromocion = 'PROMOCION'";
                         st = con.createStatement();
                         rsItemsPromo = st.executeQuery(sql);
