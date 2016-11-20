@@ -145,10 +145,10 @@
                             </div>
                             <div class="col-md-6">
                                 <h1><%=nombre%></h1>
-                                <h3><% servidorpublicador.DtUsuario prov = port.getDtProveedor(proveedor);
+                                <h3><%-- servidorpublicador.DtUsuario prov = port.getDtProveedor(proveedor);
                                     out.print(prov.getNombre());
                                     out.print(" ");
-                                    out.print(prov.getApellido()); %></h3>
+                                    out.print(prov.getApellido()); --%></h3>
                                 <hr>
                                 <%  float descuento = Float.parseFloat(dtProm.getPrecio());
                                     if (descuento > 0) {%>

@@ -383,7 +383,7 @@ public class ManejadorServicio {
         DtPromocion nuevo = null;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
-        sql = "SELECT * FROM help4traveling.promociones WHERE nombre='" + nombre + "' and proveedor='" + Proevedor + "'";
+        sql = "SELECT * FROM help4traveling.promociones WHERE nombre='" + nombre + "'"; // and proveedor='" + Proevedor + "'";
         try {
             st = con.createStatement();
             rsPromociones = st.executeQuery(sql);
@@ -678,7 +678,7 @@ public class ManejadorServicio {
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
-        String sql = "SELECT * FROM help4traveling.promocionesservicios WHERE promocion='" + nombre + "' AND proveedorPromocion='" + prov + "'";
+        String sql = "SELECT * FROM help4traveling.promocionesservicios WHERE promocion='" + nombre + "'"; // AND proveedorPromocion='" + prov + "'";
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
