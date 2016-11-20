@@ -447,7 +447,7 @@ public class ManejadorReserva {
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
-        sql = "SELECT * FROM help4traveling.reservas WHERE numero IN (SELECT reserva FROM help4traveling.reservasitems WHERE proveedorOferta ='" + prov + "')";
+        sql = "SELECT * FROM help4traveling.reservas WHERE numero IN (SELECT reserva FROM help4traveling.reservasitems WHERE proveedorOferta ='" + prov + "' or numero IN (SELECT reserva FROM help4traveling.reservasitemspromociones WHERE proveedorServicio ='" + prov + "'))";
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
