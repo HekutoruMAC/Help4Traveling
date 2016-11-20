@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : MovilServiciosProveedor
     Created on : 18-nov-2016, 11:22:45
     Author     : Leonardo
@@ -37,44 +37,39 @@
             servidorpublicador.Publicador port = service.getPublicadorPort();
             String nickname = (String) session.getAttribute("nickname");
             //String nickname = "remus";
-            DtUsuario dtProv = port.getDtProveedor(nickname);  
+            DtUsuario dtProv = port.getDtProveedor(nickname);
             String nombre = dtProv.getNombre() + " " + dtProv.getApellido();
-            List<DtServicio> servicios = port.listarServiciosProveedor(dtProv).getServiciosProveedor();            
+            List<DtServicio> servicios = port.listarServiciosProveedor(dtProv).getServiciosProveedor();
         %>
         <div class="section minimo">
             <div class="container">
-                <!--div class="row"-->
                 <div class="row">
-                    <div class="col-xs-12">
-                        <span style="float: left"> Bienvenido/a <b><a href="Usuario.jsp"><%=nombre%></a></b> </span>
-                    </div>
+                    <h1>Servicios del Proveedor</h1>
                 </div>
-                <div class="row">    
-                    <h1>Servicios del Proveedor</h1>                    
-                </div>                    
-                <hr>    
+                <hr>
                 <%  if (!servicios.isEmpty()) {
                         Iterator<DtServicio> iserv = servicios.iterator();
-                        while (iserv.hasNext()) {               
+                        while (iserv.hasNext()) {
                             DtServicio dtServ = iserv.next();
                             String servicio = dtServ.getNombre();
                             String descripcion = dtServ.getDescripcion();
                             String imagen = dtServ.getImagenes().get(0); %>
-                            <div class="row">
-                            <div class="col-xs-12"><img src="<% out.print(imagen); %>" class="img-responsive" alt="Imagen responsive"></div>                             
-                            <div class="col-xs-12"><h3><%=servicio%></h3></div> 
-                            <div class="col-xs-12"><%=descripcion%></div>
-                            </div>
-                    <%  } 
-                    } 
-                    else { %>
-                        <div class="row">
-                        <div class="col-xs-12"><b>El proveedor seleccionado no tiene servicios asociados.</b></div>
-                        </div>
-                 <% } %>
-                <!--/div-->        
+                <div class="row">
+                    <div class="col-xs-12"><img src="<% out.print(imagen);%>" class="img-responsive" alt="Imagen responsive"></div>
+                    <div class="col-xs-12"><h3><%=servicio%></h3></div>
+                    <div class="col-xs-12"><%=descripcion%></div>
+                    <hr>&nbsp;
+                </div>
+
+                <%  }
+                } else { %>
+                <div class="row">
+                    <div class="col-xs-12"><b>El proveedor seleccionado no tiene servicios asociados.</b></div>
+                </div>
+                <% }%>
+                <!--/div-->
             </div>
-        </div>        
-        <jsp:include page="WEB-INF/Footer.jsp"/>        
+        </div>
+        <jsp:include page="WEB-INF/Footer.jsp"/>
     </body>
 </html>

@@ -389,7 +389,11 @@ public final class Opciones extends javax.swing.JInternalFrame {
     private void VisitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitarActionPerformed
         try {
             Desktop.getDesktop().browse(new URL(service + "?wsdl").toURI());
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "No fue posible desplegar el vínculo.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+            System.out.println(ex);
         }
     }//GEN-LAST:event_VisitarActionPerformed
 

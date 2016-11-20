@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : Promociones
     Created on : 17/11/2016, 07:20:38 PM
     Author     : yaman
@@ -37,9 +37,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-header">
-                            <h1 style="float: left"><span class="logo"><h2>Listado de Promociones</h2></span></h1>    
+                            <h1 style="float: left"><span class="logo"><h2>Listado de Promociones</h2></span></h1>
                         </div>
-                        <span style="float: right"> Bienvenido/a <b><a href="Usuario.jsp"><%=nick%></a></b> </span>
                     </div>
                 </div>
                 <%   if (!promociones.isEmpty()) {
@@ -54,11 +53,11 @@
                         <div id="fullcarousel-example" data-interval="false" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="page-header">
-                                    <h1 style="float: left"><span class="logo"><h3><%=promocion%></h3></span></h1>    
+                                    <h1 style="float: left"><span class="logo"><h3><%=promocion%></h3></span></h1>
                                 </div>
                                 <div class="col-xs-12">
                                     <img src="<% out.print(imagen); %>" class="img-responsive" alt="Imagen responsive">
-                                    
+
                                 </div>
 
                             </div>
