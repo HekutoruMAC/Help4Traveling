@@ -286,7 +286,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Opciones.addTab("Web Services", jPanel1);
+        Opciones.addTab("Servicios Web", jPanel1);
 
         Revertir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/undo-icon.png"))); // NOI18N
         Revertir.setText("Revertir");
