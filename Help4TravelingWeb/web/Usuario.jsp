@@ -303,8 +303,13 @@
                                     <td class="default" align="center" width="100" id="total" style="vertical-align: middle"><%=total%></td>
                                     <td class="default" align="center" width="200">
                                         <% if (estado == "FACTURADA") {%>
-                                        <form role="form" action='' method="post">
+                                        <form role="form" action='PDF' method="post">
+                                            
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
+                                            <input type='hidden' id='cliente' name='cliente' value=<%=cliente%>>
+                                            <input type='hidden' id='total' name='total' value=<%=total%>>
+                                            
+                                            
                                             <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
                                         </form>
                                         <% } else %>
@@ -327,19 +332,19 @@
                                         <% } else %>
                                         <% if ((estado == "REGISTRADA") && !(esProv)) {%>
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <form role="form" action='PagarReserva' method="post">
                                                     <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
                                                 </form></div>
-                                            <div class="col-md-4">
+                                                    <%-- <div class="col-md-4">
                                                 <form role="form" action='Email' method="post">
                                                     <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                                     <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
                                                     <input type='hidden' id='reserva' name='total' value=<%=total%>>
                                                     <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-envelope"></span> Correo</button>
-                                                </form></div>
-                                            <div class="col-md-4">
+                                                </form></div>--%>
+                                            <div class="col-md-6">
                                                 <form role="form" action='CancelarReserva' method="post">
                                                     <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Está seguro de cancelar la reserva?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>

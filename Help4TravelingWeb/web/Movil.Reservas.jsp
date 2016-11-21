@@ -81,9 +81,19 @@
                                 <div class="panel-heading"  ><h3> Reserva <%=id%></h3>                      
                                 
                                 <% if (estado == "FACTURADA") {%>
-                                        <form role="form" action='' method="post">
+                                        <form role="form" action='PDF' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
+                                            <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
+                                            <input type='hidden' id='reserva' name='total' value=<%=total%>>                                            
+                                            
+                                            
                                             <button type="submit" class="btn btn-info  top"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
+                                        
+                                        
+                                            
+
+                                            
+                                        
                                         </form>
                                         <% } else %>
                                         <% if (estado == "PARCIAL") {%>
