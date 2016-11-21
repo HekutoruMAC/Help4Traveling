@@ -287,7 +287,8 @@ public class ManejadorProveedor {
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
         ResultSet rs;
-        sql = "SELECT * FROM help4traveling.promociones WHERE proveedor= '" + prov + "'";
+        sql = "SELECT * FROM help4traveling.promociones WHERE nombre in (SELECT promocion FROM help4traveling.promocionesservicios WHERE proveedorServicio = '" + prov + "')";
+        //sql = "SELECT * FROM help4traveling.promociones WHERE proveedor= '" + prov + "'";
         ArrayList<DtPromocion> promociones = new ArrayList<DtPromocion>();
         try {
             st = con.createStatement();
