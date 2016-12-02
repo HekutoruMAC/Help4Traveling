@@ -54,6 +54,9 @@ $(document).ready(function () {
     $("#idReservas").hide();
 
     // Proveedores
+    $("#idIniciarProveedor").click(function () {
+        $(location).attr('href', 'Movil.Signin.jsp');
+    });
     $("#idTabServicios").click(function () {
         $(location).attr('href', 'Movil.Servicios.jsp');
     });

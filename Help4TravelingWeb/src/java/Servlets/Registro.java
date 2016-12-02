@@ -36,8 +36,10 @@ public class Registro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession sesion = request.getSession();
 
-        String nickname = (String) sesion.getAttribute("nickname");
-        String mail = (String) sesion.getAttribute("email");
+        //String nickname = (String) sesion.getAttribute("nickname");
+        //String mail = (String) sesion.getAttribute("email");
+        String nickname = (String) sesion.getAttribute("posnickname");
+        String mail = (String) sesion.getAttribute("posemail");
         String nombre = request.getParameter("nombre_in");
         String apellido = request.getParameter("apellido_in");
         String fecha = request.getParameter("fecha");
@@ -48,6 +50,8 @@ public class Registro extends HttpServlet {
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         if (port.registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
+            sesion.setAttribute("nickname", nickname);
+            sesion.setAttribute("email", mail);
             sesion.setAttribute("nombre", nombre);
             sesion.setAttribute("email", mail);
             sesion.setAttribute("apellido", apellido);

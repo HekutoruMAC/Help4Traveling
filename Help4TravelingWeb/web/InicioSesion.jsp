@@ -30,14 +30,12 @@
 
         $(document).ready(function () {
             $("#registro_completo_form").hide();
-
-
-
-        <%if ((String) session.getAttribute("registra") == "true") {
-            String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
-            String email = "\"" + session.getAttribute("email").toString() + "\"";%>
+        <%  boolean mostrar = false;
+            if ((String) session.getAttribute("registra") == "true") {
+            String nick = "\"" + session.getAttribute("posnickname").toString() + "\"";
+            String email = "\"" + session.getAttribute("posemail").toString() + "\"";
+            mostrar = true; %>
             alert("El usuario " + <%=nick%> + " está disponiblie. Complete los campos con sus datos personales");
-
             $("#registro_completo_form").show();
             $("#ingreso_usuario").hide();
             $("#registrar_bn").hide();
@@ -45,23 +43,24 @@
             $("#nickname_registro").attr("readonly", true);
             $("#email_in").val(<%=email%>);
             $("#email_in").attr("readonly", true);
-            //$("#fecha").datepicker();
             $("#fecha").calendarioDW('option', {dateFormat: 'yy/mm/dd'});
             $("#startDate").datepicker({dateFormat: 'yy/mm/dd'});
-        <%} else if ((String) session.getAttribute("registra") == "false") {%>;
-            alert("Lo siento. El usuario o el email ya han sido registrados");
-        <%} else if ((String) session.getAttribute("inicia") == "true") {%>;
-        <% String mensaje = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
+        <%} else if ((String) session.getAttribute("inicia") == "true") {
+            String mensaje = "\"" + session.getAttribute("mensaje").toString() + "\"";
+            mostrar = false; %>
             alert(<%=mensaje%>);
-        
-            <%}else if ((String) session.getAttribute("error") == "true") {%>
-        <%String mensaje2 = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
-        
-         alert(<%=mensaje2%>); 
-         <%session.invalidate();%>
-             
-         
-         <%}%>
+            $("#registro_completo_form").hide();
+        <%} else if ((String) session.getAttribute("registra") == "false") {
+            mostrar = false; %>;
+            alert("Lo siento. El usuario o el email ya han sido registrados");
+            $("#registro_completo_form").hide();        
+        <%} else if ((String) session.getAttribute("error") == "true") {%>
+        <%  String mensaje2 = "\"" + session.getAttribute("mensaje").toString() + "\"";
+            mostrar = false; %>
+            alert(<%=mensaje2%>); 
+            $("#registro_completo_form").hide();
+            <%session.invalidate();%>      
+        <%}%>
 
             setTimeout(function () {
         <%if ((String) session.getAttribute("nickname") != null) {%>
@@ -158,7 +157,7 @@
                         </div>
                         <button type="submit" class="btn btn-default" id="registrar_bn">Registrar</button>
                     </form>
-
+                    <% if (mostrar) { %>
                     <form role="form"  class="form"  action="Registro" method="post" id="registro_completo_form" >
                         <div class="form-group">
                             <label class="control-label" for="password_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -192,8 +191,8 @@
                         </div>
                         <button type="submit" class="btn btn-default" id="registrar_completo_bn">Registrar</button>
                         <button type="submit" class="btn btn-default" id="cancelar_registro">Cancelar</button>
-
                     </form>
+                    <% } %>
                 </div>
             </div>
         </div>

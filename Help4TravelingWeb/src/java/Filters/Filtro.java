@@ -152,23 +152,21 @@ public class Filtro implements Filter {
             //=================OS=======================
             if (userAgent.toLowerCase().indexOf("windows") >= 0) {
                 os = "Windows";
+                sesion.setAttribute("dispositivo", "false");
             } else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
                 os = "Mac";
+                sesion.setAttribute("dispositivo", "false");
             } else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
                 os = "Unix";
             } else if (userAgent.toLowerCase().indexOf("android") >= 0) {
-                os = "Android";
-                
-                sesion.setAttribute("dispositivo", "true");
-                
+                os = "Android";                
+                sesion.setAttribute("dispositivo", "true");                
             } else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
-                os = "IPhone"; 
-                
-               
-                sesion.setAttribute("dispositivo", "true");
-                
+                os = "IPhone";                
+                sesion.setAttribute("dispositivo", "true");                
             } else {
                 os = "UnKnown, More-Info: " + userAgent;
+                sesion.setAttribute("dispositivo", "true");
             }
             //===============Browser===========================
             if (user.contains("msie")) {
@@ -193,33 +191,22 @@ public class Filtro implements Filter {
             } else if (user.contains("rv")) {
                 browser = "IE";
             } else {
-                browser = "UnKnown, More-Info: " + userAgent;
-                
+                browser = "UnKnown, More-Info: " + userAgent;                
                 sesion.setAttribute("dispositivo", "true");
-                
-
             }
             System.out.println("Operating System======>" + os);
             System.out.println("Browser Name==========>" + browser);
-
             //System.out.println("Url1 "+url1+" Url2 "+url2+" Url4 "+ url4+ " Url5"+ url5+ " Url6 "+url6+ " Url7 "+url7+" Url8 "+url8+ " Browser "+userAgent);
             System.out.println(ip + "  " + uri + "  " + browser + "   " + os);
+            
+            port.agregarRegistro(ip, uri, browser, os, servicio);       
 
-            port.agregarRegistro(ip, uri, browser, os, servicio);
-            
-            
-
-            chain.doFilter(request, response);
-            
+            chain.doFilter(request, response);            
             
             if (!(sesion==null) &&(sesion.getAttribute("dispositivo")=="true") && !(sesion.getAttribute("dispositivo2")=="adentro")) {
-                System.out.println("Es desde un dispositivo");
-                
+                System.out.println("Es desde un dispositivo");                
                ((HttpServletResponse)response).sendRedirect("Movil.Signin.jsp");
-               
-
-            }
-            
+            }            
 
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,

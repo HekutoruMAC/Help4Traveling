@@ -39,13 +39,13 @@ public class Comprobacion extends HttpServlet {
         String email = request.getParameter("email_registro");
         //sesion.setAttribute("nickname", nickname);
         //sesion.setAttribute("email", email);
-        //sesion.setAttribute("registra", "true");
+        sesion.setAttribute("inicia", "false");
         servidorpublicador.PublicadorService service = new servidorpublicador.PublicadorService();
         servidorpublicador.Publicador port = service.getPublicadorPort();
         if (port.comprobacion(nickname, email)) {
             boolean esProv = port.existeProveedor(nickname);
-            sesion.setAttribute("nickname", nickname);
-            sesion.setAttribute("email", email);
+            sesion.setAttribute("posnickname", nickname);
+            sesion.setAttribute("posemail", email);
             sesion.setAttribute("registra", "true");
             sesion.setAttribute("esProv", esProv);
             response.sendRedirect("InicioSesion.jsp");

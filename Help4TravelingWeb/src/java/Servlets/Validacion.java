@@ -70,7 +70,7 @@ public class Validacion extends HttpServlet {
                     //falta terminar la gestion de las cookies
                 }
             }
-             if (esProv){ 
+             if (esProv) { 
                     if (sesion.getAttribute("dispositivo")=="true"){
                         response.sendRedirect("Movil.Promociones.jsp");
                     }else{ 
