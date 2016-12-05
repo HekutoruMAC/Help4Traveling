@@ -7,7 +7,7 @@
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
---SET FOREIGN_KEY_CHECKS=0;
+SET FOREIGN_KEY_CHECKS=0;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `help4traveling`
 --
+DROP DATABASE `help4traveling`;
 CREATE DATABASE IF NOT EXISTS `help4traveling` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `help4traveling`;
 
@@ -221,21 +222,21 @@ INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('TAM-FC', 'adippet');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Casa para p4 BsAs', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Coche-Miami', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Luxury south beach corner apartment ', 'mHooch');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Miami-Viaje', 'mHooch');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Sudamerica-Casas', 'mHooch');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Miami-Viaje', 'promocion');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Sudamerica-Casas', 'promocion');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Car-1', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Car-2', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Car-3', 'moody');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-E-F', 'moody');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-E-S', 'moody');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-S-F', 'moody');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-E-F', 'promocion');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-E-S', 'promocion');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-S-F', 'promocion');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Floripa G. House', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelo-FC', 'remus');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelo-LC', 'remus');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelo-S', 'remus');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelos-LC-FC', 'remus');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelos-S-FC', 'remus');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelos-S-LC', 'remus');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelos-LC-FC', 'promocion');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelos-S-FC', 'promocion');
+INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelos-S-LC', 'promocion');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Air-France-FC', 'tCook');
 
 -- --------------------------------------------------------
@@ -295,14 +296,14 @@ CREATE TABLE `promociones` (
 -- Volcado de datos para la tabla `promociones`
 --
 
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Cars-E-F', 'moody', 30, 420);
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Cars-E-S', 'moody', 30, 420);
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Cars-S-F', 'moody', 30, 420);
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Vuelos-LC-FC', 'remus', 40, 1290);
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Vuelos-S-FC', 'remus', 40, 1440);
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Vuelos-S-LC', 'remus', 40, 1170);
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Miami-Viaje', 'mHooch', 30, 462);
-INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Sudamerica-Casas', 'mHooch', 50, 135);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Cars-E-F', 'promocion', 30, 420);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Cars-E-S', 'promocion', 30, 420);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Cars-S-F', 'promocion', 30, 420);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Vuelos-LC-FC', 'promocion', 40, 1290);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Vuelos-S-FC', 'promocion', 40, 1440);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Euro-Vuelos-S-LC', 'promocion', 40, 1170);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Miami-Viaje', 'promocion', 30, 462);
+INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('Sudamerica-Casas', 'promocion', 50, 135);
 
 -- --------------------------------------------------------
 
@@ -334,22 +335,22 @@ CREATE TABLE `promocionesservicios` (
 -- Volcado de datos para la tabla `promocionesservicios`
 --
 
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-F', 'moody', 'Euro-Car-1', 'moody');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-F', 'moody', 'Euro-Car-3', 'moody');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-S', 'moody', 'Euro-Car-1', 'moody');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-S', 'moody', 'Euro-Car-2', 'moody');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-S-F', 'moody', 'Euro-Car-2', 'moody');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-S-F', 'moody', 'Euro-Car-3', 'moody');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-LC-FC', 'remus', 'Euro-Vuelo-FC', 'remus');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-LC-FC', 'remus', 'Euro-Vuelo-LC', 'remus');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-FC', 'remus', 'Euro-Vuelo-FC', 'remus');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-FC', 'remus', 'Euro-Vuelo-S', 'remus');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-LC', 'remus', 'Euro-Vuelo-LC', 'remus');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-LC', 'remus', 'Euro-Vuelo-S', 'remus');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Miami-Viaje', 'mHooch', 'Coche-Miami', 'mHooch');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Miami-Viaje', 'mHooch', 'Luxury south beach corner apartment', 'mHooch');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Sudamerica-Casas', 'mHooch', 'Casa para p4 BsAs', 'mHooch');
-INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Sudamerica-Casas', 'mHooch', 'Floripa G. House', 'mHooch');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-F', 'promocion', 'Euro-Car-1', 'moody');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-F', 'promocion', 'Euro-Car-3', 'moody');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-S', 'promocion', 'Euro-Car-1', 'moody');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-E-S', 'promocion', 'Euro-Car-2', 'moody');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-S-F', 'promocion', 'Euro-Car-2', 'moody');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Cars-S-F', 'promocion', 'Euro-Car-3', 'moody');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-LC-FC', 'promocion', 'Euro-Vuelo-FC', 'remus');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-LC-FC', 'promocion', 'Euro-Vuelo-LC', 'remus');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-FC', 'promocion', 'Euro-Vuelo-FC', 'remus');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-FC', 'promocion', 'Euro-Vuelo-S', 'remus');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-LC', 'promocion', 'Euro-Vuelo-LC', 'remus');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Euro-Vuelos-S-LC', 'promocion', 'Euro-Vuelo-S', 'remus');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Miami-Viaje', 'promocion', 'Coche-Miami', 'mHooch');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Miami-Viaje', 'promocion', 'Luxury south beach corner apartment', 'mHooch');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Sudamerica-Casas', 'promocion', 'Casa para p4 BsAs', 'mHooch');
+INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio`, `proveedorServicio`) VALUES('Sudamerica-Casas', 'promocion', 'Floripa G. House', 'mHooch');
 
 -- --------------------------------------------------------
 
@@ -447,12 +448,12 @@ CREATE TABLE `reservasitems` (
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(1, 'Euro-Vuelo-S', 'remus', 1, '2015-01-01', '2015-01-01', 1);
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(2, 'Euro-Vuelo-S', 'remus', 2, '2015-01-01', '2015-01-01', 0);
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(2, 'Euro-Vuelo-LC', 'remus', 1, '2015-01-01', '2015-01-01', 0);
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'mHooch', 1, '2015-03-05', '2015-04-02', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'promocion', 1, '2015-03-05', '2015-04-02', 0);
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(4, 'Euro-Car-2', 'moody', 1, '2015-05-08', '2015-05-12', 0);
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(4, 'Euro-Car-3', 'moody', 1, '2015-05-08', '2015-05-12', 0);
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(5, 'Air-France-FC', 'tCook', 2, '2015-08-07', '2015-08-10', 0);
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(6, 'Casa para p4 BsAs', 'mHooch', 1, '2015-08-07', '2015-08-14', 0);
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(6, 'Miami-Viaje', 'mHooch', 1, '2015-08-14', '2015-08-21', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(6, 'Miami-Viaje', 'promocion', 1, '2015-08-14', '2015-08-21', 0);
 INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(7, 'Euro-Vuelo-LC', 'remus', 2, '2015-08-07', '2015-08-07', 0);
 
 -- --------------------------------------------------------
@@ -475,10 +476,10 @@ CREATE TABLE `reservasitemspromociones` (
 -- Volcado de datos para la tabla `reservasitemspromociones`
 --
 
-INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'mHooch', 'Casa para p4 BsAs', 'mHooch', 0);
-INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'mHooch', 'Floripa G. House', 'mHooch', 0);
-INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(6, 'Miami-Viaje', 'mHooch', 'Coche-Miami', 'mHooch', 0);
-INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(6, 'Miami-Viaje', 'mHooch', 'Luxury south beach corner apartment', 'mHooch', 0);
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'promocion', 'Casa para p4 BsAs', 'mHooch', 0);
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'promocion', 'Floripa G. House', 'mHooch', 0);
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(6, 'Miami-Viaje', 'promocion', 'Coche-Miami', 'mHooch', 0);
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(6, 'Miami-Viaje', 'promocion', 'Luxury south beach corner apartment', 'mHooch', 0);
 
 
 --
@@ -565,7 +566,7 @@ INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`,
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-1', 'moody', 'Economico', 'Tarifa');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-2', 'moody', 'Auto', 'Tipo vehiculo');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-2', 'moody', 'Chevrolet', 'Marca');
-INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-2', 'moody', 'Standar', 'Tarifa');
+INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-2', 'moody', 'Standard', 'Tarifa');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-3', 'moody', 'Camioneta', 'Tipo vehiculo');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-3', 'moody', 'Chevrolet', 'Marca');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Car-3', 'moody', 'Full', 'Tarifa');
@@ -574,7 +575,7 @@ INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`,
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Vuelo-LC', 'remus', 'Iberia', 'Empresas');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Vuelo-LC', 'remus', 'LowCost', 'Tipo vuelo');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Vuelo-S', 'remus', 'Iberia', 'Empresas');
-INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Vuelo-S', 'remus', 'Standar', 'Tipo vuelo');
+INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Euro-Vuelo-S', 'remus', 'Standard', 'Tipo vuelo');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Floripa G. House', 'mHooch', '2 dormitorios', 'Habitaciones');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Floripa G. House', 'mHooch', 'Casa', 'Tipo alojamiento');
 INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`, `categoriaPadre`) VALUES('Luxury south beach corner apartment', 'mHooch', '2 dormitorios', 'Habitaciones');
