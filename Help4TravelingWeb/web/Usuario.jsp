@@ -304,7 +304,7 @@
                                     <td class="default" align="center" width="200">
                                         <% if (estado == "FACTURADA") {%>
                                         <form role="form" action='PDF' method="post">
-                                            
+                                            <input type='hidden' id='dispositivo' name='dispositivo' value='false'>
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <input type='hidden' id='cliente' name='cliente' value=<%=cliente%>>
                                             <input type='hidden' id='total' name='total' value=<%=total%>>

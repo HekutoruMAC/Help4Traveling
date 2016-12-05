@@ -7,7 +7,7 @@
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
-SET FOREIGN_KEY_CHECKS=0;
+--SET FOREIGN_KEY_CHECKS=0;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,9 +27,24 @@ USE `help4traveling`;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `accesos`
+--
+
+DROP TABLE IF EXISTS `accesos`;
+CREATE TABLE `accesos` (
+  `#` int(11) NOT NULL,
+  `IP` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `URL` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `Browser` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `SO` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `servicio` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
 -- Estructura de tabla para la tabla `categorias`
 --
 
+DROP TABLE IF EXISTS `categorias`;
 CREATE TABLE `categorias` (
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `padre` varchar(50) COLLATE utf8_spanish_ci NOT NULL DEFAULT ''
@@ -56,8 +71,6 @@ INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Automoviles', 'Categorias')
 INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Camion', 'Tipo vehiculo');
 INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Camioneta', 'Tipo vehiculo');
 INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Caribe', 'Cruceros');
-INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Caribe Sudamerica', 'Caribe Sur');
-INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Caribe Sur', 'Cruceros');
 INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Casa', 'Tipo alojamiento');
 INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Chevrolet', 'Marca');
 INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Cruceros', 'Categorias');
@@ -99,6 +112,7 @@ INSERT INTO `categorias` (`nombre`, `padre`) VALUES('Vuelos', 'Categorias');
 -- Estructura de tabla para la tabla `ciudades`
 --
 
+DROP TABLE IF EXISTS `ciudades`;
 CREATE TABLE `ciudades` (
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `pais` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
@@ -135,6 +149,7 @@ INSERT INTO `ciudades` (`nombre`, `pais`) VALUES('Montevideo', 'Uruguay');
 -- Estructura de tabla para la tabla `clientes`
 --
 
+DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE `clientes` (
   `nickname` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -160,6 +175,7 @@ INSERT INTO `clientes` (`nickname`) VALUES('oWood');
 -- Estructura de tabla para la tabla `comentarios`
 --
 
+DROP TABLE IF EXISTS `comentarios`;
 CREATE TABLE `comentarios` (
   `servicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `proveedorServicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -185,6 +201,7 @@ CREATE TABLE `comentarios` (
 -- Estructura de tabla para la tabla `ofertas`
 --
 
+DROP TABLE IF EXISTS `ofertas`;
 CREATE TABLE `ofertas` (
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `proveedor` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
@@ -200,15 +217,12 @@ CREATE TABLE `ofertas` (
 -- Volcado de datos para la tabla `ofertas`
 --
 
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Servicio de Turismo Interno', 'adippet');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('TAM-FC', 'adippet');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Alas U', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Casa para p4 BsAs', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Coche-Miami', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Luxury south beach corner apartment ', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Miami-Viaje', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Sudamerica-Casas', 'mHooch');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Ultimo Dia', 'mHooch');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Car-1', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Car-2', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Car-3', 'moody');
@@ -216,9 +230,6 @@ INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-E-F', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-E-S', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Cars-S-F', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Floripa G. House', 'moody');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Hostel de la Rua', 'moody');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('mmmmmmmmm', 'moody');
-INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('ooooooo', 'moody');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelo-FC', 'remus');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelo-LC', 'remus');
 INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Euro-Vuelo-S', 'remus');
@@ -233,6 +244,7 @@ INSERT INTO `ofertas` (`nombre`, `proveedor`) VALUES('Air-France-FC', 'tCook');
 -- Estructura de tabla para la tabla `paises`
 --
 
+DROP TABLE IF EXISTS `paises`;
 CREATE TABLE `paises` (
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -263,6 +275,7 @@ INSERT INTO `paises` (`nombre`) VALUES('Uruguay');
 -- Estructura de tabla para la tabla `promociones`
 --
 
+DROP TABLE IF EXISTS `promociones`;
 CREATE TABLE `promociones` (
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `proveedor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -297,6 +310,7 @@ INSERT INTO `promociones` (`nombre`, `proveedor`, `descuento`, `total`) VALUES('
 -- Estructura de tabla para la tabla `promocionesservicios`
 --
 
+DROP TABLE IF EXISTS `promocionesservicios`;
 CREATE TABLE `promocionesservicios` (
   `promocion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `proveedorPromocion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -343,6 +357,7 @@ INSERT INTO `promocionesservicios` (`promocion`, `proveedorPromocion`, `servicio
 -- Estructura de tabla para la tabla `proveedores`
 --
 
+DROP TABLE IF EXISTS `proveedores`;
 CREATE TABLE `proveedores` (
   `nickname` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `empresa` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -371,6 +386,7 @@ INSERT INTO `proveedores` (`nickname`, `empresa`, `link`) VALUES('tCook', 'AirFr
 -- Estructura de tabla para la tabla `reservas`
 --
 
+DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE `reservas` (
   `numero` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
@@ -389,13 +405,13 @@ CREATE TABLE `reservas` (
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(17, '2015-01-01', 1100, 'FACTURADA', 'oWood');
-INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(18, '2015-01-01', 3050, 'CANCELADA', 'eWatson');
-INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(19, '2015-03-05', 80, 'PAGADA', 'BruceS');
-INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(20, '2015-05-08', 600, 'PAGADA', 'jeffW');
-INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(21, '2015-08-07', 200, 'REGISTRADA', 'oWood');
-INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(22, '2015-08-07', 270, 'REGISTRADA', 'eWatson');
-INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(23, '2015-08-07', 1700, 'REGISTRADA', 'BruceS');
+INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(1, '2015-01-01', 1100, 'FACTURADA', 'oWood');
+INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(2, '2015-01-01', 3050, 'CANCELADA', 'eWatson');
+INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(3, '2015-03-05', 80, 'PAGADA', 'BruceS');
+INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(4, '2015-05-08', 600, 'PAGADA', 'jeffW');
+INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(5, '2015-08-07', 200, 'REGISTRADA', 'oWood');
+INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(6, '2015-08-07', 270, 'REGISTRADA', 'eWatson');
+INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(7, '2015-08-07', 1700, 'REGISTRADA', 'BruceS');
 
 -- --------------------------------------------------------
 
@@ -403,13 +419,15 @@ INSERT INTO `reservas` (`numero`, `fecha`, `total`, `estado`, `cliente`) VALUES(
 -- Estructura de tabla para la tabla `reservasitems`
 --
 
+DROP TABLE IF EXISTS `reservasitems`;
 CREATE TABLE `reservasitems` (
   `reserva` int(11) NOT NULL,
   `oferta` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `proveedorOferta` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `inicio` date DEFAULT NULL,
-  `fin` date DEFAULT NULL
+  `fin` date DEFAULT NULL,
+  `facturada` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -426,23 +444,48 @@ CREATE TABLE `reservasitems` (
 -- Volcado de datos para la tabla `reservasitems`
 --
 
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(17, 'Euro-Vuelo-S', 'remus', 1, '2015-01-01', '2015-01-01');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(18, 'Euro-Vuelo-LC', 'remus', 1, '2015-01-01', '2015-01-01');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(18, 'Euro-Vuelo-S', 'remus', 2, '2015-01-01', '2015-01-01');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(19, 'Sudamerica-Casas', 'mHooch', 1, '2015-03-05', '2015-04-02');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(20, 'Euro-Car-2', 'moody', 1, '2015-05-08', '2015-05-12');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(20, 'Euro-Car-3', 'moody', 1, '2015-05-08', '2015-05-12');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(21, 'Air-France-FC', 'tCook', 2, '2015-08-07', '2015-08-10');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(22, 'Casa para p4 BsAs', 'mHooch', 1, '2015-08-07', '2015-08-14');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(22, 'Miami-Viaje', 'mHooch', 1, '2015-08-14', '2015-08-21');
-INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`) VALUES(23, 'Euro-Vuelo-LC', 'remus', 2, '2015-08-07', '2015-08-07');
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(1, 'Euro-Vuelo-S', 'remus', 1, '2015-01-01', '2015-01-01', 1);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(2, 'Euro-Vuelo-S', 'remus', 2, '2015-01-01', '2015-01-01', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(2, 'Euro-Vuelo-LC', 'remus', 1, '2015-01-01', '2015-01-01', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'mHooch', 1, '2015-03-05', '2015-04-02', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(4, 'Euro-Car-2', 'moody', 1, '2015-05-08', '2015-05-12', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(4, 'Euro-Car-3', 'moody', 1, '2015-05-08', '2015-05-12', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(5, 'Air-France-FC', 'tCook', 2, '2015-08-07', '2015-08-10', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(6, 'Casa para p4 BsAs', 'mHooch', 1, '2015-08-07', '2015-08-14', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(6, 'Miami-Viaje', 'mHooch', 1, '2015-08-14', '2015-08-21', 0);
+INSERT INTO `reservasitems` (`reserva`, `oferta`, `proveedorOferta`, `cantidad`, `inicio`, `fin`, `facturada`) VALUES(7, 'Euro-Vuelo-LC', 'remus', 2, '2015-08-07', '2015-08-07', 0);
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reservasitemspromociones`
+--
+
+DROP TABLE IF EXISTS `reservasitemspromociones`;
+CREATE TABLE `reservasitemspromociones` (
+  `reserva` int(11) NOT NULL,
+  `oferta` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `proveedorOferta` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `servicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `proveedorServicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `facturada` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `reservasitemspromociones`
+--
+
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'mHooch', 'Casa para p4 BsAs', 'mHooch', 0);
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(3, 'Sudamerica-Casas', 'mHooch', 'Floripa G. House', 'mHooch', 0);
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(6, 'Miami-Viaje', 'mHooch', 'Coche-Miami', 'mHooch', 0);
+INSERT INTO `reservasitemspromociones` (`reserva`, `oferta`, `proveedorOferta`, `servicio`, `proveedorServicio`, `facturada`) VALUES(6, 'Miami-Viaje', 'mHooch', 'Luxury south beach corner apartment', 'mHooch', 0);
+
 
 --
 -- Estructura de tabla para la tabla `servicios`
 --
 
+DROP TABLE IF EXISTS `servicios`;
 CREATE TABLE `servicios` (
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `proveedor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -487,6 +530,7 @@ INSERT INTO `servicios` (`nombre`, `proveedor`, `descripcion`, `precio`, `origen
 -- Estructura de tabla para la tabla `servicioscategorias`
 --
 
+DROP TABLE IF EXISTS `servicioscategorias`;
 CREATE TABLE `servicioscategorias` (
   `servicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `proveedorServicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -545,6 +589,7 @@ INSERT INTO `servicioscategorias` (`servicio`, `proveedorServicio`, `categoria`,
 -- Estructura de tabla para la tabla `serviciosimagenes`
 --
 
+DROP TABLE IF EXISTS `serviciosimagenes`;
 CREATE TABLE `serviciosimagenes` (
   `servicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `imagen` varchar(150) COLLATE utf8_spanish_ci NOT NULL
@@ -585,6 +630,7 @@ INSERT INTO `serviciosimagenes` (`servicio`, `imagen`) VALUES('TAM-FC', 'http://
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `nickname` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -619,6 +665,7 @@ INSERT INTO `usuarios` (`nickname`, `nombre`, `apellido`, `password`, `email`, `
 -- Estructura de tabla para la tabla `usuariosimagenes`
 --
 
+DROP TABLE IF EXISTS `usuariosimagenes`;
 CREATE TABLE `usuariosimagenes` (
   `usuario` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `imagen` varchar(150) COLLATE utf8_spanish_ci NOT NULL
@@ -645,6 +692,12 @@ INSERT INTO `usuariosimagenes` (`usuario`, `imagen`) VALUES('tCook', 'http://bit
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `accesos`
+--
+ALTER TABLE `accesos`
+  ADD KEY `#` (`#`);
 
 --
 -- Indices de la tabla `categorias`
@@ -677,8 +730,7 @@ ALTER TABLE `comentarios`
 -- Indices de la tabla `ofertas`
 --
 ALTER TABLE `ofertas`
-  ADD PRIMARY KEY (`nombre`),
-  ADD KEY `proveedor` (`proveedor`);
+  ADD PRIMARY KEY (`nombre`);
 
 --
 -- Indices de la tabla `paises`
@@ -690,8 +742,7 @@ ALTER TABLE `paises`
 -- Indices de la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  ADD PRIMARY KEY (`nombre`,`proveedor`),
-  ADD KEY `proveedor` (`proveedor`);
+  ADD PRIMARY KEY (`nombre`,`proveedor`);
 
 --
 -- Indices de la tabla `promocionesservicios`
@@ -720,6 +771,16 @@ ALTER TABLE `reservasitems`
   ADD PRIMARY KEY (`reserva`,`oferta`,`proveedorOferta`),
   ADD KEY `oferta` (`oferta`),
   ADD KEY `proveedorOferta` (`proveedorOferta`);
+
+--
+-- Indices de la tabla `reservasitemspromociones`
+--
+ALTER TABLE `reservasitemspromociones`
+  ADD PRIMARY KEY (`reserva`,`oferta`,`proveedorOferta`,`servicio`,`proveedorServicio`),
+  ADD KEY `oferta` (`oferta`),
+  ADD KEY `proveedorOferta` (`proveedorOferta`),
+  ADD KEY `servicio` (`servicio`),
+  ADD KEY `proveedorServicio` (`proveedorServicio`);
 
 --
 -- Indices de la tabla `servicios`
@@ -760,10 +821,16 @@ ALTER TABLE `usuariosimagenes`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `accesos`
+--
+ALTER TABLE `accesos`
+  MODIFY `#` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -788,23 +855,16 @@ ALTER TABLE `comentarios`
   ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`servicio`,`proveedorServicio`) REFERENCES `servicios` (`nombre`, `proveedor`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `ofertas`
---
-ALTER TABLE `ofertas`
-  ADD CONSTRAINT `ofertas_ibfk_1` FOREIGN KEY (`proveedor`) REFERENCES `proveedores` (`nickname`) ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  ADD CONSTRAINT `promociones_ibfk_1` FOREIGN KEY (`nombre`) REFERENCES `ofertas` (`nombre`),
-  ADD CONSTRAINT `promociones_ibfk_2` FOREIGN KEY (`proveedor`) REFERENCES `ofertas` (`proveedor`);
+  ADD CONSTRAINT `promociones_ibfk_1` FOREIGN KEY (`nombre`) REFERENCES `ofertas` (`nombre`);
 
 --
 -- Filtros para la tabla `promocionesservicios`
 --
 ALTER TABLE `promocionesservicios`
-  ADD CONSTRAINT `promocionesservicios_ibfk_1` FOREIGN KEY (`promocion`,`proveedorPromocion`) REFERENCES `promociones` (`nombre`, `proveedor`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `promocionesservicios_ibfk_1` FOREIGN KEY (`promocion`) REFERENCES `promociones` (`nombre`) ON UPDATE CASCADE,
   ADD CONSTRAINT `promocionesservicios_ibfk_2` FOREIGN KEY (`servicio`,`proveedorServicio`) REFERENCES `servicios` (`nombre`, `proveedor`) ON UPDATE CASCADE;
 
 --
@@ -824,8 +884,16 @@ ALTER TABLE `reservas`
 --
 ALTER TABLE `reservasitems`
   ADD CONSTRAINT `reservasitems_ibfk_1` FOREIGN KEY (`reserva`) REFERENCES `reservas` (`numero`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservasitems_ibfk_2` FOREIGN KEY (`oferta`) REFERENCES `ofertas` (`nombre`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservasitems_ibfk_3` FOREIGN KEY (`proveedorOferta`) REFERENCES `ofertas` (`proveedor`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `reservasitems_ibfk_2` FOREIGN KEY (`oferta`) REFERENCES `ofertas` (`nombre`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `reservasitemspromociones`
+--
+ALTER TABLE `reservasitemspromociones`
+  ADD CONSTRAINT `reservasitemspromociones_ibfk_1` FOREIGN KEY (`reserva`) REFERENCES `reservas` (`numero`),
+  ADD CONSTRAINT `reservasitemspromociones_ibfk_2` FOREIGN KEY (`oferta`) REFERENCES `ofertas` (`nombre`),
+  ADD CONSTRAINT `reservasitemspromociones_ibfk_4` FOREIGN KEY (`servicio`) REFERENCES `servicios` (`nombre`),
+  ADD CONSTRAINT `reservasitemspromociones_ibfk_5` FOREIGN KEY (`proveedorServicio`) REFERENCES `servicios` (`proveedor`);
 
 --
 -- Filtros para la tabla `servicios`
@@ -833,109 +901,27 @@ ALTER TABLE `reservasitems`
 ALTER TABLE `servicios`
   ADD CONSTRAINT `servicios_ibfk_2` FOREIGN KEY (`origen`) REFERENCES `ciudades` (`nombre`) ON UPDATE CASCADE,
   ADD CONSTRAINT `servicios_ibfk_3` FOREIGN KEY (`destino`) REFERENCES `ciudades` (`nombre`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `servicios_ibfk_4` FOREIGN KEY (`nombre`) REFERENCES `ofertas` (`nombre`),
-  ADD CONSTRAINT `servicios_ibfk_5` FOREIGN KEY (`proveedor`) REFERENCES `ofertas` (`proveedor`);
+  ADD CONSTRAINT `servicios_ibfk_4` FOREIGN KEY (`nombre`) REFERENCES `ofertas` (`nombre`);
 
 --
 -- Filtros para la tabla `servicioscategorias`
 --
-ALTER TABLE `servicioscategorias`
-  ADD CONSTRAINT `servicioscategorias_ibfk_1` FOREIGN KEY (`categoria`,`categoriaPadre`) REFERENCES `categorias` (`nombre`, `padre`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `servicioscategorias_ibfk_2` FOREIGN KEY (`servicio`,`proveedorServicio`) REFERENCES `servicios` (`nombre`, `proveedor`) ON UPDATE CASCADE;
+--ALTER TABLE `servicioscategorias`
+--  ADD CONSTRAINT `servicioscategorias_ibfk_1` FOREIGN KEY (`categoria`,`categoriaPadre`) REFERENCES `categorias` (`nombre`, `padre`) ON UPDATE CASCADE,
+--  ADD CONSTRAINT `servicioscategorias_ibfk_2` FOREIGN KEY (`servicio`,`proveedorServicio`) REFERENCES `servicios` (`nombre`, `proveedor`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `serviciosimagenes`
 --
-ALTER TABLE `serviciosimagenes`
-  ADD CONSTRAINT `serviciosimagenes_ibfk_1` FOREIGN KEY (`servicio`) REFERENCES `servicios` (`nombre`) ON UPDATE CASCADE;
+--ALTER TABLE `serviciosimagenes`
+--  ADD CONSTRAINT `serviciosimagenes_ibfk_1` FOREIGN KEY (`servicio`) REFERENCES `servicios` (`nombre`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuariosimagenes`
 --
-ALTER TABLE `usuariosimagenes`
-  ADD CONSTRAINT `usuariosimagenes_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`nickname`) ON UPDATE CASCADE;
+--ALTER TABLE `usuariosimagenes`
+--  ADD CONSTRAINT `usuariosimagenes_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`nickname`) ON UPDATE CASCADE;
 
-
---
--- Metadatos
---
-USE `phpmyadmin`;
-
---
--- Metadatos para categorias
---
-
---
--- Metadatos para ciudades
---
-
---
--- Metadatos para clientes
---
-
---
--- Metadatos para comentarios
---
-
---
--- Metadatos para ofertas
---
-
---
--- Metadatos para paises
---
-
---
--- Metadatos para promociones
---
-
---
--- Metadatos para promocionesservicios
---
-
---
--- Metadatos para proveedores
---
-
---
--- Metadatos para reservas
---
-
---
--- Metadatos para reservasitems
---
-
---
--- Metadatos para servicios
---
-
---
--- Metadatos para servicioscategorias
---
-
---
--- Metadatos para serviciosimagenes
---
-
---
--- Metadatos para usuarios
---
-
---
--- Volcado de datos para la tabla `pma__table_uiprefs`
---
-
-INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES('root', 'help4traveling', 'usuarios', '{"sorted_col":"`nickname` ASC"}', '2016-10-17 11:46:29');
-
---
--- Metadatos para usuariosimagenes
---
-
---
--- Metadatos para help4traveling
---
-
-SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -90,14 +90,15 @@ public class PDF extends HttpServlet {
             // Agregar marcador inicial
             
             // Crear y agregar párrafo simple
-            Paragraph paragraph1 = new Paragraph();
-             Image imagen= Image.getInstance("http://localhost:8084/Help4TravelingWeb/img/logo-icon2.png");
+            /*Paragraph paragraph1 = new Paragraph();
+            Image imagen= Image.getInstance("http://localhost:8084/Help4TravelingWeb/img/logo-icon2.png");
+            //Image imagen= Image.getInstance("../img/logo-icon2.png");
             imagen.scaleAbsolute(200f, 200f); 
             
             imagen.setAbsolutePosition(10, 650);
             imagen.setSpacingAfter(20);
             paragraph1.add(imagen);
-            document.add(paragraph1);
+            document.add(paragraph1);*/
             //fecha
             Paragraph fecha1 =new Paragraph(fecha);
             
@@ -157,9 +158,7 @@ public class PDF extends HttpServlet {
             document.add(dircliente);
             document.add(rutcli);
 
-            //.setSpacingBefore(0);
-           // paragraph1.add(anchorTarget);
-           PdfPTable tabla = new PdfPTable(4);
+            PdfPTable tabla = new PdfPTable(4);
             tabla.setSpacingBefore(25);
             tabla.setSpacingAfter(25);
             
@@ -187,7 +186,7 @@ public class PDF extends HttpServlet {
             
             //obtengo datos de la reserva para imprimir las distintas rows
             
-                while (iter.hasNext()) {
+            while (iter.hasNext()) {
                 dtItem = iter.next();
                 Integer cantidad = dtItem.getCantidad();
                 String oferta = dtItem.getOferta().getNombre();
@@ -207,34 +206,29 @@ public class PDF extends HttpServlet {
                         + " - $:<em>" + precio + "</em>"
                         + " - Proveedor: <em>" + proveedor + "</em></li>";*/
                             //creo encabezado de tabla
-            PdfPCell iproveedor = new PdfPCell(new Phrase(proveedor.toUpperCase()));
+                PdfPCell iproveedor = new PdfPCell(new Phrase(proveedor.toUpperCase()));
             
-            PdfPCell icantidad = new PdfPCell(new Phrase(cantidad.toString()));
-            PdfPCell iprecio = new PdfPCell(new Phrase(precio.toUpperCase()));
+                PdfPCell icantidad = new PdfPCell(new Phrase(cantidad.toString()));
+                PdfPCell iprecio = new PdfPCell(new Phrase(precio.toUpperCase()));
             
-            tabla.setHeaderRows(1);
+                tabla.setHeaderRows(1);
             
-            //alineamos las frases del cabezal
-            iproveedor.setHorizontalAlignment(Element.ALIGN_CENTER);
-            
-            icantidad.setHorizontalAlignment(Element.ALIGN_CENTER);
-            iprecio.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tabla.addCell(iproveedor);
+                //alineamos las frases del cabezal
+                iproveedor.setHorizontalAlignment(Element.ALIGN_CENTER);
+                icantidad.setHorizontalAlignment(Element.ALIGN_CENTER);
+                iprecio.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tabla.addCell(iproveedor);
                 if (existeServicio(oferta)) {
-                   // servicios += item;
                     PdfPCell idescripcion = new PdfPCell(new Phrase("servicio: "+oferta));
                     idescripcion.setHorizontalAlignment(Element.ALIGN_CENTER);
                     tabla.addCell(idescripcion);
-
-
                 } else {
-                    //promos += item;
                     PdfPCell idescripcion = new PdfPCell(new Phrase("Promo: "+oferta));
                     idescripcion.setHorizontalAlignment(Element.ALIGN_CENTER);
                     tabla.addCell(idescripcion);
                 }
-            tabla.addCell(icantidad);
-            tabla.addCell(iprecio);
+                tabla.addCell(icantidad);
+                tabla.addCell(iprecio);
             }
             
       /*      // las distintas rows de los articulos
@@ -258,113 +252,10 @@ public class PDF extends HttpServlet {
             tabla.addCell(celdaTotal);
             tabla.addCell(celdaPrecioTotal);
             document.add(tabla);
-        //PdfContentByte cb = writer.getDirectContent();
-        
-       /*
-        BarcodeEAN codeEAN = new BarcodeEAN();
-        codeEAN.setCode("4512345678906");
-
-        // CODE 128
-        Barcode128 code128 = new Barcode128();
-        code128.setCode("0123456789 hello");
-        document.add(code128.createImageWithBarcode(cb, null, null));
-        code128.setCode("0123456789\uffffMy Raw Barcode (0 - 9)");
-        code128.setCodeType(Barcode.CODE128_RAW);
-        document.add(code128.createImageWithBarcode(cb, null, null));
-        
-                Barcode128 uccEan128 = new Barcode128();
-        uccEan128.setCodeType(Barcode.CODE128_UCC);
-        uccEan128.setCode("(01)00000090311314(10)ABC123(15)060916");
-        document.add(uccEan128.createImageWithBarcode(cb, BaseColor.BLUE,
-                BaseColor.BLACK));
-        uccEan128.setCode("0191234567890121310100035510ABC123");
-        document.add(uccEan128.createImageWithBarcode(cb, BaseColor.BLUE,
-                BaseColor.RED));
-        uccEan128.setCode("(01)28880123456788");
-        document.add(uccEan128.createImageWithBarcode(cb, BaseColor.BLUE,
-                BaseColor.BLACK));
- 
-        
-           
- 
-
-        document.add(new Paragraph("Barcode QRCode"));
-        BarcodeQRCode qrcode = new BarcodeQRCode("Help 4 Travelling", 100, 100, null);
-        Image qr = qrcode.getImage();
-        qr.setAbsolutePosition(300, 50);
-      
-        document.add(qr);
-       
-       
-            // Agregar nuevo párrafo formateado
-            document.add(new Paragraph("Texto alternativo con otro formato.",
-                    FontFactory.getFont(FontFactory.COURIER, 14, Font.BOLD,
-                            new CMYKColor(255, 0, 255, 0))));
-
-            // Agregar nuevo capítulo
-            Paragraph title1 = new Paragraph("Chapter 1",
-                    FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLDITALIC,
-                            new CMYKColor(0, 255, 255, 17)));
-            Chapter chapter1 = new Chapter(title1, 1);
-            chapter1.setNumberDepth(0);
-
-            // Agregar nueva sección
-            Paragraph title11 = new Paragraph("Sección 1 en Capítulo 1", FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, new CMYKColor(0, 255, 255, 0)));
-            Section section1 = chapter1.addSection(title11);
-
-            Paragraph someSectionText = new Paragraph("Texto correspondiente a la Sección 1 del Capítulo 1.");
-            section1.add(someSectionText);
-            someSectionText = new Paragraph("A continuación una tabla de 3 X 2.");
-            section1.add(someSectionText);
-
-            // Crear tabla manualmente
-            PdfPTable t = new PdfPTable(3);
-            t.setSpacingBefore(25);
-            t.setSpacingAfter(25);
-            PdfPCell c1 = new PdfPCell(new Phrase("cantidad"));
-            t.addCell(c1);
-            PdfPCell c2 = new PdfPCell(new Phrase("oferta"));
-            t.addCell(c2);
-            PdfPCell c3 = new PdfPCell(new Phrase("precio"));
-            t.addCell(c3);
-            t.addCell("1.1");
-            t.addCell("1.2");
-            t.addCell("1.3");
-            section1.add(t);
-
-            // Crear lista manualmente
-            List l = new List(true, false, 10);
-            l.add(new ListItem("Primer item de la lista"));
-            l.add(new ListItem("Segundo item de la lista"));
-            section1.add(l);
-
-            // Agregar imagen
-   /*         Image image2 = Image.getInstance("img/logo.png");
-            image2.scaleAbsolute(120f, 120f);
- img/logo.png           section1.add(image2);
-*/         
-            
-            // Agregar marcador final
-         /*   Paragraph title2 = new Paragraph("Usando marcador",
-                    FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD,
-                            new CMYKColor(0, 255, 0, 0)));
-            section1.add(title2);
-            title2.setSpacingBefore(5000);
-            Anchor anchor2 = new Anchor("Volver al inicio");
-            anchor2.setReference("#BackToTop");
-            section1.add(anchor2);*/
-
-            // Agregar capítulo y cerrar documento
-            //document.add(chapter1);
             document.close();
-           
-            
-           /* if (rtipo.compareTo("proveedor")==0){
-            response.sendRedirect("Movil.Reservas.jsp");
-            }
-            else{
-               response.sendRedirect("Usuario.jsp");
-            }*/
+            if (request.getParameter("dispositivo").equals("true"))
+                response.sendRedirect("Movil.Reservas.jsp");
+            else response.sendRedirect("Usuario.jsp");
         }
         catch(DocumentException e){
             e.printStackTrace();

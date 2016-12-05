@@ -82,6 +82,7 @@
                                 
                                 <% if (estado == "FACTURADA") {%>
                                         <form role="form" action='PDF' method="post">
+                                            <input type='hidden' id='dispositivo' name='dispositivo' value='true'>
                                             <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
                                             <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
                                             <input type='hidden' id='reserva' name='total' value=<%=total%>>                                            

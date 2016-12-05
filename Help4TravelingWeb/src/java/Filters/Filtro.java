@@ -158,6 +158,7 @@ public class Filtro implements Filter {
                 sesion.setAttribute("dispositivo", "false");
             } else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
                 os = "Unix";
+                sesion.setAttribute("dispositivo", "false");
             } else if (userAgent.toLowerCase().indexOf("android") >= 0) {
                 os = "Android";                
                 sesion.setAttribute("dispositivo", "true");                
