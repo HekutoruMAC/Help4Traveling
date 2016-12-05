@@ -198,7 +198,7 @@ public class PDF extends HttpServlet {
                 } else {
                     proveedor = getNkProveedorPromocion(oferta);
                     DtPromocion dtp = getDTPromocion(oferta, proveedor);
-                    precio = dtp.getPrecio();
+                    precio = dtp.getDescuento();
                 }
               /*  String item = "<li>Nombre: <em>" + oferta + "</em>"
                         + " - Cantidad: <em>" + cantidad + "</em>"

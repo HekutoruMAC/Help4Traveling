@@ -30,7 +30,6 @@
         String nick = session.getAttribute("nickname").toString();
         //String nick = "mHooch";
         servidorpublicador.DtUsuario dtProv = null;
-
         dtProv = port.getDtProveedor(nick);%>
     <body>
         <jsp:include page="WEB-INF/Header.jsp"/>
@@ -86,15 +85,7 @@
                                             <input type='hidden' id='reserva' name='reserva' value=<%=id%>>
                                             <input type='hidden' id='reserva' name='cliente' value=<%=cliente%>>
                                             <input type='hidden' id='reserva' name='total' value=<%=total%>>                                            
-                                            
-                                            
-                                            <button type="submit" class="btn btn-info  top"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
-                                        
-                                        
-                                            
-
-                                            
-                                        
+                                            <button type="submit" class="btn btn-info  top"><span class="glyphicon glyphicon-download-alt"></span> Descargar Factura</button>                                   
                                         </form>
                                         <% } else %>
                                         <% if (estado == "PARCIAL") {%>

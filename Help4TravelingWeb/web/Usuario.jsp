@@ -307,10 +307,8 @@
                                             <input type='hidden' id='dispositivo' name='dispositivo' value='false'>
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <input type='hidden' id='cliente' name='cliente' value=<%=cliente%>>
-                                            <input type='hidden' id='total' name='total' value=<%=total%>>
-                                            
-                                            
-                                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
+                                            <input type='hidden' id='total' name='total' value=<%=total%>>                                      
+                                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Descargar Factura</button>
                                         </form>
                                         <% } else %>
                                         <% if ((estado == "PARCIAL") && (esProv)) {%>
