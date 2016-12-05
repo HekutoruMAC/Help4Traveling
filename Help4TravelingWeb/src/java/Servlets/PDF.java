@@ -90,15 +90,14 @@ public class PDF extends HttpServlet {
             // Agregar marcador inicial
             
             // Crear y agregar párrafo simple
-            /*Paragraph paragraph1 = new Paragraph();
+            Paragraph paragraph1 = new Paragraph();
             Image imagen= Image.getInstance("http://localhost:8084/Help4TravelingWeb/img/logo-icon2.png");
-            //Image imagen= Image.getInstance("../img/logo-icon2.png");
             imagen.scaleAbsolute(200f, 200f); 
             
             imagen.setAbsolutePosition(10, 650);
             imagen.setSpacingAfter(20);
             paragraph1.add(imagen);
-            document.add(paragraph1);*/
+            document.add(paragraph1);
             //fecha
             Paragraph fecha1 =new Paragraph(fecha);
             
