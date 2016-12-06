@@ -2,6 +2,7 @@ package Vista;
 
 import Logica.Conector;
 import Logica.Conexion;
+import ServidorPublicador.Publicador;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
@@ -58,7 +59,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
         Usuario.setText(usuario);
         Clave.setText(clave);
         Driver.setText(driver);
-        Publicador.setText(service);
+        PublicadorT.setText(service);
     }
 
     public void sacarDatos() {
@@ -66,7 +67,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
         usuario = Usuario.getText();
         clave = String.copyValueOf(Clave.getPassword());
         driver = Driver.getText();
-        service = Publicador.getText();
+        service = PublicadorT.getText();
     }
 
     public void guardarDatos() {
@@ -74,7 +75,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
         usuarioInicial = Usuario.getText();
         claveInicial = String.copyValueOf(Clave.getPassword());
         driverInicial = Driver.getText();
-        serviceInicial = Publicador.getText();
+        serviceInicial = PublicadorT.getText();
     }
 
     public void subirDatos() {
@@ -126,7 +127,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
         Driver = new javax.swing.JTextField();
         Probar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        Publicador = new javax.swing.JTextField();
+        PublicadorT = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         Visitar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -241,10 +242,10 @@ public final class Opciones extends javax.swing.JInternalFrame {
 
         Opciones.addTab("Base de Datos", PanelConexion);
 
-        Publicador.setText("http://localhost:9128/publicador");
-        Publicador.addActionListener(new java.awt.event.ActionListener() {
+        PublicadorT.setText("http://localhost:9128/publicador");
+        PublicadorT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PublicadorActionPerformed(evt);
+                PublicadorTActionPerformed(evt);
             }
         });
 
@@ -268,7 +269,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Publicador, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
+                        .addComponent(PublicadorT, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Visitar)))
@@ -279,7 +280,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Publicador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PublicadorT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Visitar)
@@ -342,6 +343,8 @@ public final class Opciones extends javax.swing.JInternalFrame {
         subirDatos();
         try {
             conector.salvarConfig();
+            Publicador.getInstance().despublicar();
+            Publicador.getInstance().publicar();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
                     "No fue posible guardar la configuración.",
@@ -382,13 +385,13 @@ public final class Opciones extends javax.swing.JInternalFrame {
         //System.out.println("Conexión cerrada.");
     }//GEN-LAST:event_CerrarActionPerformed
 
-    private void PublicadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicadorActionPerformed
+    private void PublicadorTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicadorTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PublicadorActionPerformed
+    }//GEN-LAST:event_PublicadorTActionPerformed
 
     private void VisitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitarActionPerformed
         try {
-            Desktop.getDesktop().browse(new URL(service + "?wsdl").toURI());
+            Desktop.getDesktop().browse(new URL(PublicadorT.getText() + "?wsdl").toURI());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
                     "No fue posible desplegar el vínculo.",
@@ -407,7 +410,7 @@ public final class Opciones extends javax.swing.JInternalFrame {
     public javax.swing.JTabbedPane Opciones;
     private javax.swing.JPanel PanelConexion;
     private javax.swing.JButton Probar;
-    private javax.swing.JTextField Publicador;
+    private javax.swing.JTextField PublicadorT;
     private javax.swing.JButton Revertir;
     private javax.swing.JTextField Servidor;
     private javax.swing.JTextField Usuario;

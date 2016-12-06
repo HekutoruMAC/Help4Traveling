@@ -30,7 +30,16 @@ public class Publicador {
     private Endpoint endpoint = null;
 
     //Constructor
-    public Publicador() {
+    private Publicador() {
+    }
+
+    public static Publicador getInstance() {
+        return PublicadorHolder.INSTANCE;
+    }
+
+    private static class PublicadorHolder {
+
+        private static final Publicador INSTANCE = new Publicador();
     }
 
     //Operaciones las cuales quiero publicar
@@ -38,6 +47,11 @@ public class Publicador {
     public void publicar() {
         String url = conector.getService();
         endpoint = Endpoint.publish(url, this);
+    }
+
+    @WebMethod(exclude = true)
+    public void despublicar() {
+        endpoint.stop();
     }
 
     @WebMethod(exclude = true)
@@ -293,9 +307,9 @@ public class Publicador {
         macc.agregarAcceso(IP, URL, Browser, SO, servicio);
 
     }
-    
+
     @WebMethod
-    public String obtenerPrimeraImagenPromocion(String promocion,String proveedor){
+    public String obtenerPrimeraImagenPromocion(String promocion, String proveedor) {
         return mser.obtenerPrimeraImagenPromocion(promocion, proveedor);
     }
 }

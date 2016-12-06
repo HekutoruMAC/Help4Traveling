@@ -34,9 +34,7 @@ public class Help4Traveling {
                     "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(ex);
         }
-
-        Publicador pub = new Publicador();
-        pub.publicar();
+        Publicador.getInstance().publicar();
 
     }
 
